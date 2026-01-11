@@ -1,0 +1,20 @@
+# Development stack configuration
+config:
+  gcp:project: aura-stylist-dev
+  gcp:region: us-central1
+
+  # Pipeline settings (smaller for dev)
+  aura-pipeline-infra:pipelineCpu: "1"
+  aura-pipeline-infra:pipelineMemory: 2Gi
+  aura-pipeline-infra:pipelineTimeout: 7200  # 2 hours
+
+  # API settings
+  aura-pipeline-infra:apiCpu: "1"
+  aura-pipeline-infra:apiMemory: 512Mi
+  aura-pipeline-infra:apiMaxInstances: 2
+
+  # Redis settings (smaller for dev)
+  aura-pipeline-infra:redisMemory: 1
+
+  # Alerts (optional for dev)
+  aura-pipeline-infra:alertEmail: ""

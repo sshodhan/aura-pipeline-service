@@ -1,0 +1,11 @@
+name: aura-pipeline-infra
+runtime:
+  name: nodejs
+  options:
+    typescript: true
+description: AURA Stylist Pipeline Infrastructure on GCP
+config:
+  gcp:project:
+    description: GCP Project ID
+  gcp:region:
+    default: us-central1

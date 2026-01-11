@@ -1,0 +1,24 @@
+{
+  "name": "aura-pipeline-infra",
+  "version": "1.0.0",
+  "description": "Pulumi infrastructure for AURA Pipeline Service on GCP",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "preview": "pulumi preview",
+    "up": "pulumi up",
+    "destroy": "pulumi destroy",
+    "up:dev": "pulumi up --stack dev",
+    "up:prod": "pulumi up --stack prod"
+  },
+  "dependencies": {
+    "@pulumi/pulumi": "^3.100.0",
+    "@pulumi/gcp": "^7.0.0",
+    "@pulumi/docker": "^4.5.0",
+    "@pulumi/random": "^4.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}

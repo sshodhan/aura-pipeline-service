@@ -1,0 +1,22 @@
+# Production stack configuration
+config:
+  gcp:project: aura-stylist-prod
+  gcp:region: us-central1
+
+  # Pipeline settings (full resources for prod)
+  aura-pipeline-infra:pipelineCpu: "2"
+  aura-pipeline-infra:pipelineMemory: 4Gi
+  aura-pipeline-infra:pipelineTimeout: 14400  # 4 hours
+  aura-pipeline-infra:maxInstances: 10
+
+  # API settings (production-ready)
+  aura-pipeline-infra:apiCpu: "1"
+  aura-pipeline-infra:apiMemory: 1Gi
+  aura-pipeline-infra:apiMaxInstances: 20
+
+  # Redis settings (HA for prod)
+  aura-pipeline-infra:redisMemory: 2
+
+  # Alerts (required for prod)
+  aura-pipeline-infra:alertEmail: alerts@your-domain.com
+  # Set via: pulumi config set --secret slackWebhook "https://hooks.slack.com/..."
