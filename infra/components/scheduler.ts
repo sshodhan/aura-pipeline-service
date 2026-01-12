@@ -17,7 +17,7 @@ export function createScheduler(args: SchedulerArgs) {
   const schedulerServiceAccount = new gcp.serviceaccount.Account(
     `${args.name}-sa`,
     {
-      accountId: `${args.name}-scheduler`,
+      accountId: `${args.name}-sa`.substring(0, 30),
       displayName: "AURA Pipeline Scheduler Service Account",
     }
   );
