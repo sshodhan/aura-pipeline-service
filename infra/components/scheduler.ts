@@ -10,7 +10,8 @@ interface SchedulerArgs {
 }
 
 export function createScheduler(args: SchedulerArgs) {
-  const project = gcp.organizations.getProjectOutput({});
+  const gcpConfig = new pulumi.Config("gcp");
+  const projectId = gcpConfig.require("project");
 
   // Create service account for scheduler
   const schedulerServiceAccount = new gcp.serviceaccount.Account(
@@ -25,7 +26,7 @@ export function createScheduler(args: SchedulerArgs) {
   const invokerRole = new gcp.projects.IAMMember(
     `${args.name}-invoker-role`,
     {
-      project: project.projectId,
+      project: projectId,
       role: "roles/run.invoker",
       member: pulumi.interpolate`serviceAccount:${schedulerServiceAccount.email}`,
     }
@@ -35,7 +36,7 @@ export function createScheduler(args: SchedulerArgs) {
   const jobRunRole = new gcp.projects.IAMMember(
     `${args.name}-job-run-role`,
     {
-      project: project.projectId,
+      project: projectId,
       role: "roles/run.developer",
       member: pulumi.interpolate`serviceAccount:${schedulerServiceAccount.email}`,
     }
@@ -55,7 +56,7 @@ export function createScheduler(args: SchedulerArgs) {
 
       // HTTP target to trigger Cloud Run Job
       httpTarget: {
-        uri: pulumi.interpolate`https://${args.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${project.projectId}/jobs/${args.pipelineJobName}:run`,
+        uri: pulumi.interpolate`https://${args.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${projectId}/jobs/${args.pipelineJobName}:run`,
         httpMethod: "POST",
         oauthToken: {
           serviceAccountEmail: schedulerServiceAccount.email,
@@ -90,7 +91,7 @@ export function createScheduler(args: SchedulerArgs) {
       timeZone: "UTC",
 
       httpTarget: {
-        uri: pulumi.interpolate`https://${args.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${project.projectId}/jobs/${args.pipelineJobName}:run`,
+        uri: pulumi.interpolate`https://${args.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${projectId}/jobs/${args.pipelineJobName}:run`,
         httpMethod: "POST",
         body: Buffer.from(
           JSON.stringify({
