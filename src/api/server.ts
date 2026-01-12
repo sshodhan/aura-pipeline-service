@@ -17,6 +17,7 @@ import { closeRedisConnection } from "../services/redis";
 import { outfitsRouter } from "./routes/outfits";
 import { citiesRouter } from "./routes/cities";
 import { healthRouter } from "./routes/health";
+import { pipelineRouter } from "./routes/pipeline";
 
 // =============================================================================
 // Express App Setup
@@ -63,6 +64,7 @@ app.use("/", healthRouter);
 // API routes
 app.use("/outfits", outfitsRouter);
 app.use("/cities", citiesRouter);
+app.use("/pipeline", pipelineRouter);
 
 // 404 handler
 app.use((_req, res) => {
