@@ -70,7 +70,6 @@ export function createCloudRunApi(args: CloudRunApiArgs) {
             // Environment variables and secrets
             envs: [
               { name: "NODE_ENV", value: "production" },
-              { name: "PORT", value: "8080" },
               { name: "REDIS_HOST", value: args.redisHost },
               {
                 name: "REDIS_PORT",
@@ -178,8 +177,8 @@ interface CloudRunPipelineArgs {
 export function createCloudRunPipeline(args: CloudRunPipelineArgs) {
   const project = gcp.organizations.getProjectOutput({});
 
-  // Image URL
-  const imageUrl = pulumi.interpolate`${args.region}-docker.pkg.dev/${project.projectId}/${args.repository.repositoryId}/pipeline:latest`;
+  // Image URL - use same image as API (same codebase, different command)
+  const imageUrl = pulumi.interpolate`${args.region}-docker.pkg.dev/${project.projectId}/${args.repository.repositoryId}/api:latest`;
 
   // Create Cloud Run Job (not Service - for batch processing)
   const job = new gcp.cloudrunv2.Job(
