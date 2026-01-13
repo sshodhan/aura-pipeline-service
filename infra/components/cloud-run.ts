@@ -85,6 +85,15 @@ export function createCloudRunApi(args: CloudRunApiArgs) {
                   },
                 },
               },
+              {
+                name: "WEATHER_API_KEY",
+                valueSource: {
+                  secretKeyRef: {
+                    secret: args.secrets.weatherApiKey.secretId,
+                    version: "latest",
+                  },
+                },
+              },
             ],
 
             // Health check
