@@ -23,6 +23,7 @@ const enabledApis = [
   "artifactregistry.googleapis.com",
   "cloudbuild.googleapis.com",
   "monitoring.googleapis.com",
+  "servicenetworking.googleapis.com",
 ].map(
   (api) =>
     new gcp.projects.Service(`enable-${api.split(".")[0]}`, {
@@ -59,7 +60,7 @@ const redis = createRedis({
   region: config.gcpRegion,
   network: networking.network,
   config: config.redisConfig,
-  dependsOn: [networking.network, ...enabledApis],
+  dependsOn: [networking.network, networking.privateConnection, ...enabledApis],
 });
 
 // -----------------------------------------------------------------------------

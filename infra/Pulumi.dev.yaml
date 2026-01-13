@@ -1,6 +1,6 @@
 # Development stack configuration
 config:
-  gcp:project: aura-stylist-dev
+  gcp:project: gen-lang-client-0108375776
   gcp:region: us-central1
 
   # Pipeline settings (smaller for dev)
