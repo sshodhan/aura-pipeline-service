@@ -38,3 +38,4 @@ infra/bin/
 # Misc
 *.tgz
 .cache/
+google-cloud-sdk/
