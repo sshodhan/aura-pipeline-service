@@ -42,7 +42,7 @@ export const apiConfig = {
 
 // Redis Settings
 export const redisConfig = {
-  tier: (isProduction ? "STANDARD_HA" : "BASIC") as "BASIC" | "STANDARD_HA",
+  tier: isProduction ? "STANDARD_HA" : "BASIC",
   memorySizeGb: config.getNumber("redisMemory") || (isProduction ? 2 : 1),
   version: "REDIS_7_0",
 };

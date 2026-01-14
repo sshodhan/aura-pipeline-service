@@ -10,14 +10,13 @@ interface SchedulerArgs {
 }
 
 export function createScheduler(args: SchedulerArgs) {
-  const gcpConfig = new pulumi.Config("gcp");
-  const projectId = gcpConfig.require("project");
+  const project = gcp.organizations.getProjectOutput({});
 
   // Create service account for scheduler
   const schedulerServiceAccount = new gcp.serviceaccount.Account(
     `${args.name}-sa`,
     {
-      accountId: `${args.name}-sa`.substring(0, 30),
+      accountId: `${args.name}-scheduler`,
       displayName: "AURA Pipeline Scheduler Service Account",
     }
   );
@@ -26,7 +25,7 @@ export function createScheduler(args: SchedulerArgs) {
   const invokerRole = new gcp.projects.IAMMember(
     `${args.name}-invoker-role`,
     {
-      project: projectId,
+      project: project.projectId,
       role: "roles/run.invoker",
       member: pulumi.interpolate`serviceAccount:${schedulerServiceAccount.email}`,
     }
@@ -36,7 +35,7 @@ export function createScheduler(args: SchedulerArgs) {
   const jobRunRole = new gcp.projects.IAMMember(
     `${args.name}-job-run-role`,
     {
-      project: projectId,
+      project: project.projectId,
       role: "roles/run.developer",
       member: pulumi.interpolate`serviceAccount:${schedulerServiceAccount.email}`,
     }
@@ -56,7 +55,7 @@ export function createScheduler(args: SchedulerArgs) {
 
       // HTTP target to trigger Cloud Run Job
       httpTarget: {
-        uri: pulumi.interpolate`https://${args.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${projectId}/jobs/${args.pipelineJobName}:run`,
+        uri: pulumi.interpolate`https://${args.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${project.projectId}/jobs/${args.pipelineJobName}:run`,
         httpMethod: "POST",
         oauthToken: {
           serviceAccountEmail: schedulerServiceAccount.email,
@@ -91,7 +90,7 @@ export function createScheduler(args: SchedulerArgs) {
       timeZone: "UTC",
 
       httpTarget: {
-        uri: pulumi.interpolate`https://${args.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${projectId}/jobs/${args.pipelineJobName}:run`,
+        uri: pulumi.interpolate`https://${args.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${project.projectId}/jobs/${args.pipelineJobName}:run`,
         httpMethod: "POST",
         body: Buffer.from(
           JSON.stringify({

@@ -67,29 +67,32 @@ export function createCloudRunApi(args: CloudRunApiArgs) {
               cpuIdle: true, // Allow CPU throttling when idle
             },
 
-            // Environment variables and secrets
+            // Environment variables
             envs: [
               { name: "NODE_ENV", value: "production" },
+              { name: "PORT", value: "8080" },
               { name: "REDIS_HOST", value: args.redisHost },
               {
                 name: "REDIS_PORT",
                 value: pulumi.interpolate`${args.redisPort}`,
               },
               { name: "LOG_LEVEL", value: "info" },
+            ],
+
+            // Secrets from Secret Manager
+            envs: [
+              { name: "NODE_ENV", value: "production" },
+              { name: "PORT", value: "8080" },
+              { name: "REDIS_HOST", value: args.redisHost },
+              {
+                name: "REDIS_PORT",
+                value: pulumi.interpolate`${args.redisPort}`,
+              },
               {
                 name: "GEMINI_API_KEY",
                 valueSource: {
                   secretKeyRef: {
                     secret: args.secrets.geminiApiKey.secretId,
-                    version: "latest",
-                  },
-                },
-              },
-              {
-                name: "WEATHER_API_KEY",
-                valueSource: {
-                  secretKeyRef: {
-                    secret: args.secrets.weatherApiKey.secretId,
                     version: "latest",
                   },
                 },
@@ -186,8 +189,8 @@ interface CloudRunPipelineArgs {
 export function createCloudRunPipeline(args: CloudRunPipelineArgs) {
   const project = gcp.organizations.getProjectOutput({});
 
-  // Image URL - use same image as API (same codebase, different command)
-  const imageUrl = pulumi.interpolate`${args.region}-docker.pkg.dev/${project.projectId}/${args.repository.repositoryId}/api:latest`;
+  // Image URL
+  const imageUrl = pulumi.interpolate`${args.region}-docker.pkg.dev/${project.projectId}/${args.repository.repositoryId}/pipeline:latest`;
 
   // Create Cloud Run Job (not Service - for batch processing)
   const job = new gcp.cloudrunv2.Job(
@@ -221,7 +224,7 @@ export function createCloudRunPipeline(args: CloudRunPipelineArgs) {
                 },
               },
 
-              // Environment variables and secrets
+              // Environment variables
               envs: [
                 { name: "NODE_ENV", value: "production" },
                 { name: "REDIS_HOST", value: args.redisHost },
@@ -231,6 +234,7 @@ export function createCloudRunPipeline(args: CloudRunPipelineArgs) {
                 },
                 { name: "LOG_LEVEL", value: "info" },
                 { name: "PIPELINE_MODE", value: "full" },
+                // Pass city configuration
                 {
                   name: "CITIES_CONFIG",
                   value: JSON.stringify([
@@ -247,6 +251,17 @@ export function createCloudRunPipeline(args: CloudRunPipelineArgs) {
                     { id: "atlanta-ga", tier: 3 },
                     { id: "portland-or", tier: 3 },
                   ]),
+                },
+              ],
+
+              // Secrets from Secret Manager
+              envs: [
+                { name: "NODE_ENV", value: "production" },
+                { name: "PIPELINE_MODE", value: "full" },
+                { name: "REDIS_HOST", value: args.redisHost },
+                {
+                  name: "REDIS_PORT",
+                  value: pulumi.interpolate`${args.redisPort}`,
                 },
                 {
                   name: "GEMINI_API_KEY",
