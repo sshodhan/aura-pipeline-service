@@ -8,6 +8,7 @@ import { pipelineLogger as logger } from "../../utils/logger";
 import type { PrecomputedOutfitBundle, QualityMetrics } from "../../models/outfit";
 import { calculateOverallConfidence } from "../../models/outfit";
 import { OCCASION_DESCRIPTIONS } from "../../models/signals";
+import { mlClient } from "../../services/ml-client";
 
 // =============================================================================
 // Stage Implementation
@@ -18,12 +19,16 @@ export async function runQualityScoring(
 ): Promise<PrecomputedOutfitBundle[]> {
   logger.info({ bundleCount: bundles.length }, "Stage 5: Starting quality scoring");
 
+  // Step 1: Compute rule-based scores for all bundles
   const scoredBundles: PrecomputedOutfitBundle[] = [];
 
   for (const bundle of bundles) {
     const scoredBundle = scoreBundle(bundle);
     scoredBundles.push(scoredBundle);
   }
+
+  // Step 2: Enhance with ML scores (graceful fallback if ML service is down)
+  await enhanceWithMLScores(scoredBundles);
 
   // Calculate statistics
   const avgConfidence =
@@ -210,4 +215,73 @@ function calculateOccasionMatch(bundle: PrecomputedOutfitBundle): number {
   }
 
   return Math.min(100, score);
+}
+
+// =============================================================================
+// ML-Enhanced Scoring
+// =============================================================================
+
+/**
+ * Enhance rule-based scores with ML predictions.
+ * Falls back gracefully if the ML service is unavailable.
+ *
+ * Blending: 70% ML score + 30% rule-based score (configurable via env).
+ */
+async function enhanceWithMLScores(
+  bundles: PrecomputedOutfitBundle[]
+): Promise<void> {
+  try {
+    // Check if ML service is available
+    const mlAvailable = await mlClient.healthCheck();
+    if (!mlAvailable) {
+      logger.info("ML service unavailable — using rule-based scores only");
+      return;
+    }
+
+    // Build rule-based score map for blending
+    const ruleBasedScores: Record<string, number> = {};
+    for (const bundle of bundles) {
+      ruleBasedScores[bundle.bundleId] = bundle.qualityMetrics.confidenceScore;
+    }
+
+    // Process in batches of 100
+    const batchSize = 100;
+    let mlEnhancedCount = 0;
+
+    for (let i = 0; i < bundles.length; i += batchSize) {
+      const batch = bundles.slice(i, i + batchSize);
+      const batchScoreMap: Record<string, number> = {};
+      for (const b of batch) {
+        batchScoreMap[b.bundleId] = b.qualityMetrics.confidenceScore;
+      }
+
+      const result = await mlClient.batchScoreQuality(
+        batch as unknown as Record<string, unknown>[],
+        batchScoreMap
+      );
+
+      if (result) {
+        // Apply blended scores back to bundles
+        for (const bundle of batch) {
+          const mlResult = result.scores[bundle.bundleId];
+          if (mlResult) {
+            bundle.qualityMetrics.confidenceScore = mlResult.blendedScore;
+            mlEnhancedCount++;
+          }
+        }
+      }
+    }
+
+    if (mlEnhancedCount > 0) {
+      logger.info(
+        { mlEnhancedCount, totalBundles: bundles.length },
+        "ML-enhanced quality scores applied"
+      );
+    }
+  } catch (error) {
+    logger.warn(
+      { error: (error as Error).message },
+      "ML scoring enhancement failed — continuing with rule-based scores"
+    );
+  }
 }

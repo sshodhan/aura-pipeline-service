@@ -21,10 +21,73 @@ services:
       - REDIS_PORT=6379
       - GEMINI_API_KEY=${GEMINI_API_KEY}
       - WEATHER_API_KEY=${WEATHER_API_KEY}
+      - ML_SERVICE_URL=http://ml-service:8000
       - LOG_LEVEL=debug
     depends_on:
       redis:
         condition: service_healthy
+      ml-service:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - aura-network
+
+  # ---------------------------------------------------------------------------
+  # ML Service (Python/FastAPI)
+  # ---------------------------------------------------------------------------
+  ml-service:
+    build:
+      context: ./ml-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=aura
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-aura_dev}
+      - POSTGRES_DB=aura
+      - LOG_LEVEL=info
+      - MODEL_DIR=/app/models
+      - NODE_ENV=development
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ml-models:/app/models
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 30s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - aura-network
+
+  # ---------------------------------------------------------------------------
+  # PostgreSQL (user feedback & model artifacts)
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: aura
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-aura_dev}
+      POSTGRES_DB: aura
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./ml-service/migrations/001_init.sql:/docker-entrypoint-initdb.d/001_init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aura"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     restart: unless-stopped
     networks:
       - aura-network
@@ -44,6 +107,7 @@ services:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
       - WEATHER_API_KEY=${WEATHER_API_KEY}
       - PIPELINE_MODE=full
+      - ML_SERVICE_URL=http://ml-service:8000
       - LOG_LEVEL=info
     depends_on:
       redis:
@@ -94,3 +158,5 @@ networks:
 
 volumes:
   redis-data:
+  postgres-data:
+  ml-models:

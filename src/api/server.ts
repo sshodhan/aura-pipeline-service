@@ -18,6 +18,8 @@ import { outfitsRouter } from "./routes/outfits";
 import { citiesRouter } from "./routes/cities";
 import { healthRouter } from "./routes/health";
 import { pipelineRouter } from "./routes/pipeline";
+import { feedbackRouter } from "./routes/feedback";
+import { userProfileRouter } from "./routes/user-profile";
 
 // =============================================================================
 // Express App Setup
@@ -65,6 +67,10 @@ app.use("/", healthRouter);
 app.use("/outfits", outfitsRouter);
 app.use("/cities", citiesRouter);
 app.use("/pipeline", pipelineRouter);
+
+// ML-powered routes
+app.use("/feedback", feedbackRouter);
+app.use("/users", userProfileRouter);
 
 // 404 handler
 app.use((_req, res) => {
