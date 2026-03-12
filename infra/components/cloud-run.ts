@@ -67,7 +67,7 @@ export function createCloudRunApi(args: CloudRunApiArgs) {
               cpuIdle: true, // Allow CPU throttling when idle
             },
 
-            // Environment variables
+            // Environment variables and secrets
             envs: [
               { name: "NODE_ENV", value: "production" },
               { name: "PORT", value: "8080" },
@@ -77,17 +77,6 @@ export function createCloudRunApi(args: CloudRunApiArgs) {
                 value: pulumi.interpolate`${args.redisPort}`,
               },
               { name: "LOG_LEVEL", value: "info" },
-            ],
-
-            // Secrets from Secret Manager
-            envs: [
-              { name: "NODE_ENV", value: "production" },
-              { name: "PORT", value: "8080" },
-              { name: "REDIS_HOST", value: args.redisHost },
-              {
-                name: "REDIS_PORT",
-                value: pulumi.interpolate`${args.redisPort}`,
-              },
               {
                 name: "GEMINI_API_KEY",
                 valueSource: {
@@ -224,7 +213,7 @@ export function createCloudRunPipeline(args: CloudRunPipelineArgs) {
                 },
               },
 
-              // Environment variables
+              // Environment variables and secrets
               envs: [
                 { name: "NODE_ENV", value: "production" },
                 { name: "REDIS_HOST", value: args.redisHost },
@@ -251,17 +240,6 @@ export function createCloudRunPipeline(args: CloudRunPipelineArgs) {
                     { id: "atlanta-ga", tier: 3 },
                     { id: "portland-or", tier: 3 },
                   ]),
-                },
-              ],
-
-              // Secrets from Secret Manager
-              envs: [
-                { name: "NODE_ENV", value: "production" },
-                { name: "PIPELINE_MODE", value: "full" },
-                { name: "REDIS_HOST", value: args.redisHost },
-                {
-                  name: "REDIS_PORT",
-                  value: pulumi.interpolate`${args.redisPort}`,
                 },
                 {
                   name: "GEMINI_API_KEY",
