@@ -17,7 +17,7 @@ caching or API shapes:
    data models differ, and what a future service response must contain.
 3. [`docs/RECOMMENDATION_OWNERSHIP.md`](docs/RECOMMENDATION_OWNERSHIP.md): which
    system owns each capability, and the dependency rules between them.
-4. [`docs/FASHION_INTELLIGENCE_PLAN.md`](docs/FASHION_INTELLIGENCE_PLAN.md): the
+4. [`docs/FASHION_INTELLIGENCE_DESIGN.md`](docs/FASHION_INTELLIGENCE_DESIGN.md): the
    proposed phased plan. It is a proposal; confirm a phase is approved before
    building it.
 
