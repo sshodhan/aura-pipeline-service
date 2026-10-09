@@ -67,3 +67,143 @@ Compare direct Gemini (A), existing pipeline (B) and redesigned service (C) on e
 - The pipeline currently pins `gemini-2.0-flash` and the consumer uses a newer Gemini family. Verify provider availability, record model versions, and do not present a cross-model comparison as controlled.
 - Existing contract drift and cache-key defects are prerequisites to integration, but should be documented rather than repaired in the behavior-preserving baseline phase.
 - The service's Redis/mass precomputation objective is an optimization phase, not the product-quality criterion.
+
+---
+
+## Appendix: Reference contracts from the design brief
+
+These interfaces come from the original design brief. They are **Planned**:
+none of them exist in code yet, except that the Phase 0 fixtures use
+`RecommendationContext` as their input shape. Later phases should implement
+them, or document any deviation.
+
+```ts
+interface FashionEvidence {
+  id: string;
+  type: "timeless_principle" | "contemporary_observation" | "regional_influence" | "aesthetic_reference";
+  summary: string;
+  aesthetics: string[];
+  garmentCategories: string[];
+  silhouettes: string[];
+  materials: string[];
+  regions: string[];
+  relevantSeasons: string[];
+  provenance: { sourceId: string; sourceUrl?: string; publishedAt?: string; reviewedAt: string }[];
+  editorialStatus: "verified" | "provisional" | "historical";
+  validFrom?: string;
+  validUntil?: string;
+  knowledgeVersion: string;
+}
+
+interface RecommendationContext {
+  requestId: string;
+  city: string;
+  occasion: string;
+  lifestyle: string;
+  weather: { temperatureC: number; condition: string; precipitationLikely?: boolean };
+  demographics?: { genderExpression?: string; ageRange?: string };
+  preferences?: {
+    preferredColors?: string[];
+    avoidedColors?: string[];
+    fit?: string;
+    comfortPriority?: string;
+    preferredAesthetics?: string[];
+  };
+}
+
+interface InterpretedContext {
+  hardConstraints: string[];
+  explicitPreferences: string[];
+  inferredOpportunities: string[];
+  unknowns: string[];
+  relevantEvidenceIds: string[];
+}
+
+interface StyleConcept {
+  id: string;
+  role: "best_bet" | "adjacent" | "exploration";
+  title: string;
+  aestheticThesis: string;
+  silhouetteDirection: string;
+  paletteDirection: string;
+  materialDirection: string;
+  definingDetails: string[];
+  contextRationale: string;
+  evidenceIds: string[];
+  knowledgeVersion: string;
+}
+
+interface QualityAssessment {
+  candidateId: string;
+  hardChecks: { passed: boolean; violations: string[] };
+  editorialAssessment: {
+    composition: number;          // rubric score, not a probability of user satisfaction
+    distinctiveness: number;
+    contextualRelevance: number;
+    visualPotential: number;
+    rationale: string;
+  };
+  decision: "accept" | "revise" | "reject";
+  revisionInstructions?: string[];
+  evaluatorVersion: string;
+}
+
+interface RecommendationStore {
+  get(key: string): Promise<RecommendationCollection | null>;
+  put(key: string, collection: RecommendationCollection, ttlSeconds?: number): Promise<void>;
+}
+```
+
+### Illustrative API exchange (`POST /v1/recommendations`)
+
+```json
+{
+  "schemaVersion": "1.0",
+  "requestId": "demo-nyc-001",
+  "context": {
+    "city": "New York",
+    "occasion": "casual afternoon",
+    "lifestyle": "comfort",
+    "weather": { "temperatureC": 14, "condition": "cloudy" },
+    "demographics": { "genderExpression": "female", "ageRange": "36-45" }
+  },
+  "collection": { "targetCount": 3 }
+}
+```
+
+A response carries:
+
+- `schemaVersion`, `collectionId`, `recommendationVersion` and
+  `knowledgeVersion`
+- `status`
+- three `recommendations`, each with `id`, `role`, `title`, `aesthetic`, the
+  garment specification, `stylingRationale` and `evidenceIds`
+- `diagnostics` (`generationMode`, `cacheHit`, `modelCalls`)
+
+Responses never expose internal prompts or raw source material.
+
+### Operational requirements carried from the brief
+
+- **Standalone invocation.** Run one JSON fixture through the engine locally,
+  without Redis or the consumer app.
+- **Cost controls.** Every run reports model calls, token use when available,
+  elapsed time, retries and estimated provider cost. Budgets are configurable
+  per request and per batch. When a budget is reached, return the strongest
+  valid results instead of looping.
+- **Release criterion.** Promote a new engine version only when it improves
+  human-reviewed quality across representative scenarios, without
+  unacceptable regressions in weather feasibility, latency, cost or
+  reliability. The 20-scenario suite is a development benchmark, not proof of
+  a statistically robust product improvement.
+- **Non-goals for the redesign:**
+  - consumer integration
+  - image-generation UI
+  - Aisle carousel changes
+  - new onboarding questions
+  - social or behavioral preference learning
+  - large-scale daily precomputation
+  - production ML retraining
+  - rewriting infrastructure without evidence of need
+- **Per-phase delivery.** Each phase delivers implementation changes, tests and
+  results, representative input/output examples, measured model calls and
+  latency where applicable, known limitations, and next-phase prerequisites.
