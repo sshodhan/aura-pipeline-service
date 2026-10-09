@@ -86,6 +86,17 @@ export function createCloudRunApi(args: CloudRunApiArgs) {
                   },
                 },
               },
+              // Required by src/utils/config.ts; POST /pipeline/trigger runs the
+              // pipeline in-process, which fetches weather from OpenWeatherMap.
+              {
+                name: "WEATHER_API_KEY",
+                valueSource: {
+                  secretKeyRef: {
+                    secret: args.secrets.weatherApiKey.secretId,
+                    version: "latest",
+                  },
+                },
+              },
             ],
 
             // Health check
