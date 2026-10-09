@@ -1,10 +1,17 @@
+import "dotenv/config";
 import pino from "pino";
-import { config } from "./config";
+
+// Logging reads its two settings straight from the environment instead of
+// importing ./config, so modules that only log can be loaded without the API
+// keys config requires (e.g. by the Phase 0 fixture runner). Defaults match
+// ./config; entry points still validate the full environment via config.
+const nodeEnv = process.env.NODE_ENV ?? "development";
+const logLevel = process.env.LOG_LEVEL ?? "info";
 
 // Create pino logger instance
 export const logger = pino({
-  level: config.logging.level,
-  transport: config.isDevelopment
+  level: logLevel,
+  transport: nodeEnv === "development"
     ? {
         target: "pino-pretty",
         options: {
@@ -16,7 +23,7 @@ export const logger = pino({
     : undefined,
   base: {
     service: "aura-pipeline",
-    env: config.env,
+    env: nodeEnv,
   },
   formatters: {
     level: (label) => ({ level: label }),
