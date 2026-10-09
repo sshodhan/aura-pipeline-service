@@ -1,0 +1,487 @@
+[
+  {
+    "id": "tp-volume-balance",
+    "type": "timeless_principle",
+    "title": "Balance volume across the body",
+    "summary": "Pair a fuller piece with a closer-fitting one so the outfit has a clear shape: wide or relaxed trousers with a neat or tucked top, or a voluminous top with a slimmer bottom. Two oversized halves read as accidental unless the whole look is deliberately built around volume.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "top",
+      "bottom"
+    ],
+    "silhouettes": [
+      "wide-leg trouser",
+      "relaxed trouser",
+      "fitted top",
+      "oversized top"
+    ],
+    "materials": [],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-jacket-trouser-length",
+    "type": "timeless_principle",
+    "title": "Relate jacket length to the trouser line",
+    "summary": "A shorter or cropped jacket lengthens the leg line and suits higher-rise or fuller trousers. A longer coat forms a column and works best over straight or slimmer legs with footwear that continues the line. A hem that lands at the widest point of the hip tends to shorten the figure.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "outerwear",
+      "bottom"
+    ],
+    "silhouettes": [
+      "cropped jacket",
+      "longline coat",
+      "high-rise trouser",
+      "straight leg"
+    ],
+    "materials": [],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-vertical-line",
+    "type": "timeless_principle",
+    "title": "Keep a clear vertical line",
+    "summary": "Tonal or matching top and bottom, an open long layer, or a continuous column of one color reads longer and more composed. Strong horizontal breaks such as contrasting belts or mid-calf hems shorten the line, so place them on purpose.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear"
+    ],
+    "silhouettes": [
+      "column",
+      "longline"
+    ],
+    "materials": [],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-neutral-base-one-accent",
+    "type": "timeless_principle",
+    "title": "Neutral base with one deliberate accent",
+    "summary": "Build most of the outfit from one coherent neutral or tonal family and introduce a single accent color or texture in one or two places, such as footwear, a knit or a bag. One accent reads intentional; several unrelated accents compete for attention.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "footwear",
+      "accessory"
+    ],
+    "silhouettes": [],
+    "materials": [],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-color-temperature",
+    "type": "timeless_principle",
+    "title": "Keep color temperature consistent",
+    "summary": "Warm neutrals (camel, cream, chocolate, olive) and cool neutrals (charcoal, navy, grey, optic white) each hold together. Mixing the two families works best when one clearly leads and the other appears as a single accent.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [],
+    "silhouettes": [],
+    "materials": [],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-texture-contrast",
+    "type": "timeless_principle",
+    "title": "Contrast textures within a restrained palette",
+    "summary": "When the palette is restrained, interest comes from texture: smooth with nubby, matte with sheen, crisp with soft, for example a fine-gauge knit under a textured wool jacket or leather with a soft knit. Tonal outfits without texture contrast can look flat.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "top",
+      "outerwear"
+    ],
+    "silhouettes": [],
+    "materials": [
+      "fine-gauge knit",
+      "boucle",
+      "tweed",
+      "leather",
+      "suede",
+      "silk"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-layer-light-to-heavy",
+    "type": "timeless_principle",
+    "title": "Layer from light to heavy",
+    "summary": "Layers should get heavier and slightly longer or more structured from the inside out: a thin base, a mid-weight knit or shirt, then the outer layer. Each layer needs room to sit without bunching, so size outerwear to go over what is beneath it.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "top",
+      "outerwear"
+    ],
+    "silhouettes": [
+      "layered"
+    ],
+    "materials": [
+      "cotton",
+      "merino",
+      "wool"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-removable-layers",
+    "type": "timeless_principle",
+    "title": "Plan for the day's temperature swing",
+    "summary": "When temperatures change through the day or between indoors and outdoors, use removable layers such as an open cardigan, overshirt or light jacket rather than one heavy piece, and make sure the outfit still looks complete when the outer layer comes off.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "top",
+      "outerwear"
+    ],
+    "silhouettes": [
+      "layered"
+    ],
+    "materials": [],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-footwear-register",
+    "type": "timeless_principle",
+    "title": "Footwear sets the register",
+    "summary": "Shoes signal formality and purpose more than any other piece: the same trousers and knit read relaxed with sneakers, polished with loafers and rugged with boots. Choose footwear for the occasion and for the day's walking and weather, and match its visual weight to the trouser hem.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "footwear"
+    ],
+    "silhouettes": [],
+    "materials": [
+      "leather",
+      "suede",
+      "rubber"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-fit-shoulder-rise-first",
+    "type": "timeless_principle",
+    "title": "Get shoulders and rise right first",
+    "summary": "Shoulder fit on jackets and coats and the rise of trousers are the most visible fit points and the hardest to alter; sleeve and hem length come next. A well-fitted relaxed garment looks intentional, while a poorly fitted one looks careless at any price.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "outerwear",
+      "bottom",
+      "top"
+    ],
+    "silhouettes": [],
+    "materials": [],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-pattern-scale",
+    "type": "timeless_principle",
+    "title": "Vary pattern scale when mixing",
+    "summary": "When combining patterns, vary their scale, such as a large check with a fine stripe, and share at least one color between them while keeping the other pieces solid. Patterns of the same scale and density tend to clash.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear"
+    ],
+    "silhouettes": [],
+    "materials": [],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-formality-one-notch",
+    "type": "timeless_principle",
+    "title": "Meet the occasion, then shift one element",
+    "summary": "Establish the formality the occasion expects, then express personal style by moving one element up or down a notch, such as sneakers with tailoring or a sharp coat over denim. Moving several elements in different directions makes the look read confused.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "footwear"
+    ],
+    "silhouettes": [],
+    "materials": [],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "tp-fabric-for-weather",
+    "type": "timeless_principle",
+    "title": "Choose fabric weight for the weather",
+    "summary": "Breathable natural fibers such as linen, cotton and light wool suit heat; wool, cashmere, fleece and down suit cold; water-resistant shells and leather or treated footwear suit rain and snow. Fabric weight and finish affect comfort as much as garment type.",
+    "basis": "editorial_judgment",
+    "aesthetics": [],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "footwear"
+    ],
+    "silhouettes": [],
+    "materials": [
+      "linen",
+      "cotton",
+      "wool",
+      "cashmere",
+      "down",
+      "waxed cotton"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  }
+]
