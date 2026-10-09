@@ -30,6 +30,17 @@ const envSchema = z.object({
     .default("full"),
   PIPELINE_CITY: z.string().optional(), // For single-city mode
 
+  // Shared secret for POST /pipeline/trigger (sent as "Authorization: Bearer <token>").
+  // When unset, the route is disabled in production and open elsewhere.
+  // An empty string counts as unset so `PIPELINE_TRIGGER_TOKEN=` doesn't crash startup.
+  PIPELINE_TRIGGER_TOKEN: z.preprocess(
+    (value) => (value === "" ? undefined : value),
+    z
+      .string()
+      .min(32, "PIPELINE_TRIGGER_TOKEN must be at least 32 characters")
+      .optional()
+  ),
+
   // Logging
   LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("info"),
 
@@ -85,6 +96,7 @@ export const config = {
   pipeline: {
     mode: env.PIPELINE_MODE,
     singleCity: env.PIPELINE_CITY,
+    triggerToken: env.PIPELINE_TRIGGER_TOKEN,
     batchSize: 10, // Process 10 combinations at a time
     maxRetries: 3,
     retryDelay: 1000, // 1 second

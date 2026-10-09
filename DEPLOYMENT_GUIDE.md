@@ -159,8 +159,12 @@ curl $API_URL/health
 # Test cities
 curl $API_URL/cities
 
-# Trigger pipeline manually (first run)
-curl -X POST $API_URL/pipeline/trigger
+# Trigger pipeline manually (first run) by executing the Cloud Run Job
+gcloud run jobs execute $(pulumi stack output pipelineJobName) --region us-central1
+
+# POST /pipeline/trigger is disabled in production unless PIPELINE_TRIGGER_TOKEN
+# is set on the API service; if it is, send it as a bearer token:
+# curl -X POST -H "Authorization: Bearer $PIPELINE_TRIGGER_TOKEN" $API_URL/pipeline/trigger
 
 # Check status
 curl $API_URL/pipeline/status
@@ -187,6 +191,7 @@ curl $API_URL/pipeline/status
 | `PORT` | Server port | `3000` |
 | `LOG_LEVEL` | Logging level | `info` |
 | `PIPELINE_MODE` | Pipeline mode | `full` |
+| `PIPELINE_TRIGGER_TOKEN` | Bearer token required by `POST /pipeline/trigger` (min 32 chars, e.g. `openssl rand -hex 32`). If unset, the route is disabled when `NODE_ENV=production` and open otherwise | unset |
 
 ---
 
@@ -219,7 +224,7 @@ Query params for `/outfits`:
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/pipeline/trigger` | POST | Manually trigger pipeline run |
+| `/pipeline/trigger` | POST | Manually trigger pipeline run (requires `Authorization: Bearer $PIPELINE_TRIGGER_TOKEN`; disabled in production when unset) |
 | `/pipeline/status` | GET | Get current pipeline status |
 
 ---
