@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "atlanta-work-storm",
+  "title": "Man, 46-55, client meetings during thunderstorms in Atlanta",
+  "context": {
+    "requestId": "atlanta-work-storm",
+    "city": "Atlanta",
+    "occasion": "client meetings",
+    "lifestyle": "professional",
+    "weather": {
+      "temperatureC": 24,
+      "condition": "Thunderstorms",
+      "precipitationLikely": true
+    },
+    "demographics": {
+      "genderExpression": "male",
+      "ageRange": "46-55"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 88,
+    "windKph": 22
+  },
+  "baselineMapping": {
+    "cityId": "atlanta-ga",
+    "persona": "professional",
+    "occasion": "work",
+    "vibe": "minimal",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "thunderstorm",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Rain protection",
+    "Business-appropriate formality",
+    "Breathable for 24°C humidity",
+    "Garments consistent with the stated gender expression (male) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Gender expression and age range are not passed to generation",
+    "Retrieved only through the fuzzy KEYS scan"
+  ]
+}

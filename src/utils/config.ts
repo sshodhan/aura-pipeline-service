@@ -1,5 +1,6 @@
 import { z } from "zod";
 import dotenv from "dotenv";
+import { PIPELINE_TEXT_MODEL } from "./models";
 
 // Load environment variables
 dotenv.config();
@@ -74,7 +75,7 @@ export const config = {
 
   gemini: {
     apiKey: env.GEMINI_API_KEY,
-    model: "gemini-2.0-flash",
+    model: PIPELINE_TEXT_MODEL,
   },
 
   weather: {

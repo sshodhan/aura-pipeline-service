@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "london-work-drizzle",
+  "title": "Woman, 36-45, office day in London drizzle",
+  "context": {
+    "requestId": "london-work-drizzle",
+    "city": "London",
+    "occasion": "office workday",
+    "lifestyle": "business casual",
+    "weather": {
+      "temperatureC": 11,
+      "condition": "Light Rain",
+      "precipitationLikely": true
+    },
+    "demographics": {
+      "genderExpression": "female",
+      "ageRange": "36-45"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 85,
+    "windKph": 18
+  },
+  "baselineMapping": {
+    "cityId": null,
+    "persona": "business-casual",
+    "occasion": "work",
+    "vibe": "minimal",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "light_rain",
+    "notes": "London is not a pipeline city; signals are mapped for completeness only."
+  },
+  "expectedConstraints": [
+    "Rain-ready office outfit",
+    "Layers for 11°C",
+    "Garments consistent with the stated gender expression (female) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "London is not one of the pipeline's 12 US cities"
+  ]
+}

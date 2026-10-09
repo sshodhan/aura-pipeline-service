@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "nyc-work-cold-rain",
+  "title": "Man, 26-35, office day in cold light rain in New York",
+  "context": {
+    "requestId": "nyc-work-cold-rain",
+    "city": "New York City",
+    "occasion": "office workday",
+    "lifestyle": "professional",
+    "weather": {
+      "temperatureC": 3,
+      "condition": "Light Rain",
+      "precipitationLikely": true
+    },
+    "demographics": {
+      "genderExpression": "male",
+      "ageRange": "26-35"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 85,
+    "windKph": 20,
+    "feelsLikeC": -1
+  },
+  "baselineMapping": {
+    "cityId": "new-york-ny",
+    "persona": "professional",
+    "occasion": "work",
+    "vibe": "minimal",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "light_rain",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Water-resistant outer layer for light rain",
+    "Warm enough for 3°C",
+    "Office-appropriate formality",
+    "Garments consistent with the stated gender expression (male) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Retrieved only through the fuzzy KEYS scan, because the exact-match path hard-codes mild/clear weather",
+    "Six color-energy bundles share one Redis key, so the served palette is whichever was written last",
+    "Gender expression and age range are not passed to generation"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "boston-dinner-cold",
+  "title": "Woman, 56+, cold-night dinner in Boston, structured fit",
+  "context": {
+    "requestId": "boston-dinner-cold",
+    "city": "Boston",
+    "occasion": "dinner with friends",
+    "lifestyle": "professional",
+    "weather": {
+      "temperatureC": 2,
+      "condition": "Clear",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "female",
+      "ageRange": "56+"
+    },
+    "preferences": {
+      "fit": "structured"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 55,
+    "windKph": 16,
+    "feelsLikeC": -2
+  },
+  "baselineMapping": {
+    "cityId": "boston-ma",
+    "persona": "professional",
+    "occasion": "dinner",
+    "vibe": "polished",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "clear",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Warm outerwear for 2°C",
+    "Dinner-appropriate polish",
+    "Structured fit honored",
+    "Garments consistent with the stated gender expression (female) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Fit preference is dropped",
+    "Gender expression and age range are not passed to generation",
+    "Retrieved only through the fuzzy KEYS scan (cold, not mild)"
+  ]
+}

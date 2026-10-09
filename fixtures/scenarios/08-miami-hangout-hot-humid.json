@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "miami-hangout-hot-humid",
+  "title": "Woman, 25-35, hot and humid hangout in Miami, likes coral and white",
+  "context": {
+    "requestId": "miami-hangout-hot-humid",
+    "city": "Miami",
+    "occasion": "beach-town hangout",
+    "lifestyle": "street style",
+    "weather": {
+      "temperatureC": 33,
+      "condition": "Clear",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "female",
+      "ageRange": "25-35"
+    },
+    "preferences": {
+      "preferredColors": [
+        "coral",
+        "white"
+      ]
+    }
+  },
+  "weatherFixture": {
+    "humidity": 78,
+    "windKph": 14
+  },
+  "baselineMapping": {
+    "cityId": "miami-fl",
+    "persona": "street-style",
+    "occasion": "hangout",
+    "vibe": "laid_back",
+    "colorEnergy": "bold_vibrant",
+    "weatherCondition": "clear",
+    "notes": "No aesthetic preference, so vibe is the first vibe allowed for hangout; preferred colors coral and white are approximated by bold_vibrant."
+  },
+  "expectedConstraints": [
+    "Breathable fabrics for 33°C and 78% humidity",
+    "Sun-appropriate",
+    "Uses coral or white",
+    "Garments consistent with the stated gender expression (female) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Preferred colors are reduced to a generic palette; the colors themselves never reach the prompt",
+    "Gender expression and age range are not passed to generation"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "paris-dinner-mild",
+  "title": "Man, 26-35, polished dinner in Paris",
+  "context": {
+    "requestId": "paris-dinner-mild",
+    "city": "Paris",
+    "occasion": "dinner out",
+    "lifestyle": "elevated casual",
+    "weather": {
+      "temperatureC": 16,
+      "condition": "Clear",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "male",
+      "ageRange": "26-35"
+    },
+    "preferences": {
+      "preferredAesthetics": [
+        "polished",
+        "minimal"
+      ]
+    }
+  },
+  "weatherFixture": {
+    "humidity": 60,
+    "windKph": 10
+  },
+  "baselineMapping": {
+    "cityId": null,
+    "persona": "elevated-casual",
+    "occasion": "dinner",
+    "vibe": "polished",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "clear",
+    "notes": "Paris is not a pipeline city; the first preferred aesthetic maps to the polished vibe and the second cannot be expressed."
+  },
+  "expectedConstraints": [
+    "Dinner-appropriate polish",
+    "Light layer for 16°C",
+    "Garments consistent with the stated gender expression (male) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Paris is not one of the pipeline's 12 US cities",
+    "Only one of the two preferred aesthetics could be represented"
+  ]
+}

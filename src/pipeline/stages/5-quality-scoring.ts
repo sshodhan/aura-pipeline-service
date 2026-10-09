@@ -64,7 +64,7 @@ export async function runQualityScoring(
 // Scoring Logic
 // =============================================================================
 
-function scoreBundle(bundle: PrecomputedOutfitBundle): PrecomputedOutfitBundle {
+export function scoreBundle(bundle: PrecomputedOutfitBundle): PrecomputedOutfitBundle {
   const signalConsistency = calculateSignalConsistency(bundle);
   const weatherAppropriateness = calculateWeatherAppropriateness(bundle);
   const occasionMatch = calculateOccasionMatch(bundle);
