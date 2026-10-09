@@ -11,7 +11,7 @@ what the independent fashion intelligence service is responsible for.
   app collects and renders today, and what a future service response must contain.
 - [`RECOMMENDATION_OWNERSHIP.md`](./RECOMMENDATION_OWNERSHIP.md): which system owns
   each capability.
-- [`FASHION_INTELLIGENCE_PLAN.md`](./FASHION_INTELLIGENCE_PLAN.md): proposed phased plan.
+- [`FASHION_INTELLIGENCE_DESIGN.md`](./FASHION_INTELLIGENCE_DESIGN.md): proposed phased plan.
 
 > **How to read this document.** Sections 1–10 state product intent. They describe
 > what the service *should* do, not what it does today. Section 11 describes the
@@ -206,4 +206,16 @@ consistently excellent fashion recommendations.
 
 ## 11. The consumer experience today
 
-<!-- CONSUMER_EXPERIENCE_TODAY -->
+**Verified (consumer commit `64cd967`; implementation is subject to change):**
+
+- Context selection uses free-text city geocoding, Open-Meteo weather, persona/lifestyle, occasion, optional vibe and color energy, gender (default female), and age range (default 25–35). Explicit colors and silhouette preferences enter the current recommendation path; comfort and secondary persona are collected but not used there.
+- The canonical Gemini recommendation uses a structured JSON schema and produces four garment descriptions alongside `proTip`, `styleReasoning`, `weatherStory`, `activity`, `coffeeSpot`, `storeType`, and `lookTitle`; optional `*Why` and accessory fields supplement these.
+- The Aisle currently contains an initial recommendation and up to two additional alternatives, with fixed persona-specific style directions. Its generation is sequential and initiated by a user action; a diversity rule checks at least two changed garments. The collection and asset associations are managed inside the consumer app, not the service.
+- Refine provides changes such as casual/dressier and mood direction. Visualize generates further imagery; Save and Share are consumer actions.
+- Consumer `main` does **not** integrate this pipeline service. No recommendation request is currently sent to its API. The consumer and service also have schema and taxonomy drift.
+
+**Planned:** The redesigned service returns a stable three-direction collection with garment-level specifications, which a future consumer adapter can map to the existing `OutfitSuggestion` while the consumer retains the Aisle and image lifecycle.
+
+**Assumption to validate before future integration:** A single versioned service response can cover the complete consumer flow without an additional on-demand garment-generation step. Demonstrate this with fixtures and contract tests before modifying the app.
+
+For expanded details see [Consumer Integration Contract](./CONSUMER_INTEGRATION_CONTRACT.md) and [Recommendation Ownership](./RECOMMENDATION_OWNERSHIP.md).
