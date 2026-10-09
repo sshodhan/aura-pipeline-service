@@ -20,6 +20,9 @@ caching or API shapes:
 4. [`docs/FASHION_INTELLIGENCE_DESIGN.md`](docs/FASHION_INTELLIGENCE_DESIGN.md): the
    proposed phased plan. It is a proposal; confirm a phase is approved before
    building it.
+5. [`docs/PHASE_0_BASELINE.md`](docs/PHASE_0_BASELINE.md): what the current
+   pipeline actually does (coverage, input loss, call volume, verified defects)
+   and how to run the fixture baseline.
 
 Core principle: **Aura should be a compelling stylist before it becomes a
 personalized stylist.** Optimize for first-session recommendation quality, not
@@ -60,15 +63,18 @@ Keep doing this.
 
 ## Local checks
 
-Run these from the repo root. Their status was verified at commit `24f7672`:
+Run these from the repo root. No API keys, Redis or network are needed:
 
 | Command | Status |
 |---|---|
 | `npm ci && npm run typecheck` | Passes |
-| `npm test` | Exits 1: "No test files found". There are no TypeScript tests yet. |
+| `npm test` | Passes. Unit tests live in `tests/unit/`; the stage-4 prompt is snapshot-guarded, so update the snapshot deliberately |
+| `npm run baseline` | Runs the 20 fixtures through the current pipeline with a mock model and writes to `baselines/local/` (git-ignored) |
+| `npm run baseline:volume` | Replays the nightly matrix (call volume, cache-key collisions) |
 | `npm run lint` | Fails: there is no ESLint config in the repo |
 | `cd ml-service && pytest` | Python tests for the ML service (`ml-service/tests/`) |
 
-`src/utils/config.ts` exits the process if `GEMINI_API_KEY` or
-`WEATHER_API_KEY` is unset. Tests and local harnesses must stub configuration
-rather than need real keys.
+`src/utils/config.ts` exits the process when `GEMINI_API_KEY` or
+`WEATHER_API_KEY` is unset. Code meant to run without keys belongs in
+`src/pipeline/core/` or `src/baseline/` and must not import `config`, directly
+or indirectly. `src/utils/logger.ts` is safe to import.

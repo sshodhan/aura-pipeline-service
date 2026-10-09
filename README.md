@@ -838,6 +838,7 @@ aura-pipeline-service/
 - [Consumer integration contract](./docs/CONSUMER_INTEGRATION_CONTRACT.md)
 - [Recommendation ownership](./docs/RECOMMENDATION_OWNERSHIP.md)
 - [Fashion intelligence design](./docs/FASHION_INTELLIGENCE_DESIGN.md)
+- [Phase 0 baseline](./docs/PHASE_0_BASELINE.md)
 
 - [SIGNAL_CONTRACT.md](./SIGNAL_CONTRACT.md) - Client-service signal agreement
 - [SIGNAL_ARCHITECTURE_ROADMAP.md](./SIGNAL_ARCHITECTURE_ROADMAP.md) - Full architecture vision
