@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "denver-home-snow",
+  "title": "Man, 36-45, working from home on a snowy Denver day",
+  "context": {
+    "requestId": "denver-home-snow",
+    "city": "Denver",
+    "occasion": "working from home",
+    "lifestyle": "casual",
+    "weather": {
+      "temperatureC": -3,
+      "condition": "Snow",
+      "precipitationLikely": true
+    },
+    "demographics": {
+      "genderExpression": "male",
+      "ageRange": "36-45"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 65,
+    "windKph": 12,
+    "morningTempC": -8,
+    "afternoonTempC": 4
+  },
+  "baselineMapping": {
+    "cityId": "denver-co",
+    "persona": "casual",
+    "occasion": "home",
+    "vibe": "laid_back",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "snow",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Comfortable indoor layers",
+    "Video-call-presentable top",
+    "Garments consistent with the stated gender expression (male) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "No city's matrix includes the home occasion, so this request is never cached",
+    "Gender expression and age range are not passed to generation"
+  ]
+}
