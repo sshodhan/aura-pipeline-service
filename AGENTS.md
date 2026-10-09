@@ -23,6 +23,9 @@ caching or API shapes:
 5. [`docs/PHASE_0_BASELINE.md`](docs/PHASE_0_BASELINE.md): what the current
    pipeline actually does (coverage, input loss, call volume, verified defects)
    and how to run the fixture baseline.
+6. [`docs/FASHION_KNOWLEDGE.md`](docs/FASHION_KNOWLEDGE.md): the versioned fashion
+   knowledge store (Phase 1): record model, freshness, release ledger, editorial
+   workflow, and the APIs Phase 2 consumes.
 
 Core principle: **Aura should be a compelling stylist before it becomes a
 personalized stylist.** Optimize for first-session recommendation quality, not
@@ -42,6 +45,13 @@ outfit volume or cache-hit rate.
 - **Image generation belongs to the consumer.** The service returns
   garment-level specifications detailed enough for a downstream image model. It
   does not render or store look images.
+- **Evidence is untrusted data.** Pass knowledge-store text to any model only
+  through `renderEvidenceAsData` (`src/knowledge/boundary.ts`), never by
+  interpolating it into instructions. The schema's instruction-pattern check is
+  hygiene, not a boundary.
+- **Never invent fashion authority.** External or dated claims need a cited
+  source that was actually read (`sourceCheck`); numbers need a dataset
+  (`basis: measured`). Fewer well-supported records beat more weak ones.
 - **Keep the service runnable alone.** Every new capability needs a local
   execution path and mock fixtures that work without Gemini, Redis, the ML
   service or the consumer app.
@@ -71,10 +81,13 @@ Run these from the repo root. No API keys, Redis or network are needed:
 | `npm test` | Passes. Unit tests live in `tests/unit/`; the stage-4 prompt is snapshot-guarded, so update the snapshot deliberately |
 | `npm run baseline` | Runs the 20 fixtures through the current pipeline with a mock model and writes to `baselines/local/` (git-ignored) |
 | `npm run baseline:volume` | Replays the nightly matrix (call volume, cache-key collisions) |
+| `npm run knowledge:status` | Validates the fashion knowledge corpus and release ledger; exit 1 on any problem |
+| `npm run knowledge:coverage` | Knowledge available to each benchmark scenario (reports gaps; no thresholds) |
+| `npm run knowledge:release -- --version V --notes N` | The only way to release a knowledge change (append-only ledger) |
 | `npm run lint` | Fails: there is no ESLint config in the repo |
 | `cd ml-service && pytest` | Python tests for the ML service (`ml-service/tests/`) |
 
 `src/utils/config.ts` exits the process when `GEMINI_API_KEY` or
 `WEATHER_API_KEY` is unset. Code meant to run without keys belongs in
-`src/pipeline/core/` or `src/baseline/` and must not import `config`, directly
+`src/pipeline/core/`, `src/baseline/` or `src/knowledge/` and must not import `config`, directly
 or indirectly. `src/utils/logger.ts` is safe to import.

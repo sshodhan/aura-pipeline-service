@@ -839,6 +839,7 @@ aura-pipeline-service/
 - [Recommendation ownership](./docs/RECOMMENDATION_OWNERSHIP.md)
 - [Fashion intelligence design](./docs/FASHION_INTELLIGENCE_DESIGN.md)
 - [Phase 0 baseline](./docs/PHASE_0_BASELINE.md)
+- [Fashion knowledge store (Phase 1)](./docs/FASHION_KNOWLEDGE.md)
 
 - [SIGNAL_CONTRACT.md](./SIGNAL_CONTRACT.md) - Client-service signal agreement
 - [SIGNAL_ARCHITECTURE_ROADMAP.md](./SIGNAL_ARCHITECTURE_ROADMAP.md) - Full architecture vision
