@@ -157,6 +157,37 @@ export const measurementSchema = z
   })
   .strict();
 
+/** Temperature bands used by aesthetic profiles (bounds in src/engine/context.ts). */
+export const CLIMATE_BANDS = ["cold", "cool", "mild", "warm", "hot"] as const;
+export type ClimateBand = (typeof CLIMATE_BANDS)[number];
+
+/**
+ * Formality scale for aesthetic profiles:
+ * 1 athletic or lounge · 2 casual · 3 smart casual · 4 business or dressy · 5 formal.
+ */
+const formalityLevel = z.number().int().min(1).max(5);
+
+/**
+ * Editorial attributes an aesthetic reference needs for direction planning
+ * (Phase 2). Optional so older records stay valid; the planner skips
+ * aesthetics without one.
+ */
+export const aestheticProfileSchema = z
+  .object({
+    /** Lowest and highest formality the aesthetic dresses for without losing its identity. */
+    formality: z.tuple([formalityLevel, formalityLevel]).refine(([lo, hi]) => lo <= hi, "formality must be [min, max]"),
+    /** Temperature bands it suits without major adaptation. */
+    climates: z.array(z.enum(CLIMATE_BANDS)).min(1),
+    /** 1 restrained … 5 statement. Used to measure how different two directions feel. */
+    expressiveness: formalityLevel,
+    /** Core colors, used to compose palettes and to respect avoided colors. */
+    palette: z.array(term).min(2).max(8),
+    /** Words people use for this aesthetic; matched against stated aesthetic preferences and lifestyle. */
+    preferenceTerms: z.array(term).max(12),
+  })
+  .strict();
+export type AestheticProfile = z.infer<typeof aestheticProfileSchema>;
+
 const daysBetween = (from: string, to: string) =>
   (Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000;
 
@@ -180,6 +211,8 @@ export const evidenceSchema = z
     validFrom: isoDate.optional(),
     validUntil: isoDate.optional(),
     measurement: measurementSchema.optional(),
+    /** Planning attributes; aesthetic references only. */
+    profile: aestheticProfileSchema.optional(),
     /** Release in which this record was added or last changed (see snapshot releases). */
     knowledgeVersion: z.string().min(1),
   })
@@ -224,6 +257,7 @@ export const evidenceSchema = z
     // Scope.
     if (e.type === "regional_influence" && e.regions.includes(GLOBAL_REGION)) issue("regional influences must name specific regions", "regions");
     if (e.type === "aesthetic_reference" && e.aesthetics.length !== 1) issue("an aesthetic reference defines exactly one aesthetic", "aesthetics");
+    if (e.profile && e.type !== "aesthetic_reference") issue("only aesthetic references carry a profile", "profile");
   });
 export type FashionEvidence = z.infer<typeof evidenceSchema>;
 
