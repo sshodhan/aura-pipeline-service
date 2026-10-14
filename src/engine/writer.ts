@@ -74,7 +74,7 @@ const WEATHER_REMEDY: Partial<Record<ConstraintCode, string>> = {
   snow_protection: "an insulated, water-resistant outer layer with lug-soled boots for grip",
   rain_protection: "a water-resistant outer layer and treated or rubber-soled footwear",
   insulation: "insulating wool or quilted layers under a warm coat",
-  warm_layer: "a warm mid-weight knit or overshirt layer",
+  warm_layer: "a warm mid-weight layer such as a fine wool knit or jacket",
   light_layer: "a light removable layer such as a jacket or cardigan",
   breathable: "breathable, lightweight fabrics such as linen and cotton",
   wind_protection: "a closed, wind-resistant outer layer",
