@@ -72,10 +72,18 @@ Compare direct Gemini (A), existing pipeline (B) and redesigned service (C) on e
 
 ## Appendix: Reference contracts from the design brief
 
-These interfaces come from the original design brief. They are **Planned**:
-none of them exist in code yet, except that the Phase 0 fixtures use
-`RecommendationContext` as their input shape. Later phases should implement
-them, or document any deviation.
+These interfaces come from the original design brief.
+
+- **Implemented:**
+  - `RecommendationContext`: the input shape of the Phase 0 fixtures and the
+    Phase 2 engine.
+  - `FashionEvidence`: Phase 1, with deviations in
+    [`FASHION_KNOWLEDGE.md`](./FASHION_KNOWLEDGE.md).
+  - `InterpretedContext` and `StyleConcept`: Phase 2, in
+    `src/engine/types.ts`, with additions in
+    [`STYLE_DIRECTIONS.md`](./STYLE_DIRECTIONS.md) §2.
+- **Planned:** the rest. Later phases should implement them, or document any
+  deviation.
 
 ```ts
 interface FashionEvidence {
