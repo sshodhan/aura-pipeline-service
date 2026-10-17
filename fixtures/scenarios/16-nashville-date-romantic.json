@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "nashville-date-romantic",
+  "title": "Woman, 25-35, romantic date night in Nashville",
+  "context": {
+    "requestId": "nashville-date-romantic",
+    "city": "Nashville",
+    "occasion": "date night",
+    "lifestyle": "elevated casual",
+    "weather": {
+      "temperatureC": 20,
+      "condition": "Clear",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "female",
+      "ageRange": "25-35"
+    },
+    "preferences": {
+      "preferredAesthetics": [
+        "romantic"
+      ]
+    }
+  },
+  "weatherFixture": {
+    "humidity": 50,
+    "windKph": 6,
+    "eveningTempC": 16
+  },
+  "baselineMapping": {
+    "cityId": "nashville-tn",
+    "persona": "elevated-casual",
+    "occasion": "date",
+    "vibe": "romantic",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "clear",
+    "notes": "Preferred aesthetic 'romantic' maps to the romantic vibe; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Romantic details",
+    "Date-appropriate polish",
+    "Light layer for a cooling evening",
+    "Garments consistent with the stated gender expression (female) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Nashville's matrix has no romantic vibe, so this request is never cached",
+    "Gender expression and age range are not passed to generation"
+  ]
+}

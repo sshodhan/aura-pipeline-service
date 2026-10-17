@@ -7,8 +7,9 @@
 import { config } from "../utils/config";
 import { weatherLogger as logger } from "../utils/logger";
 import type { WeatherContext, WeatherPeriod } from "../models/outfit";
-import type { WeatherCondition, TemperatureRange } from "../models/signals";
+import type { WeatherCondition } from "../models/signals";
 import { getCityById } from "../models/city";
+import { buildStylingImplications } from "../pipeline/core/weather-styling";
 
 // =============================================================================
 // Types
@@ -77,47 +78,6 @@ function mapWeatherCondition(weatherId: number): WeatherCondition {
   return "clear";
 }
 
-function mapTemperatureRange(tempF: number): TemperatureRange {
-  if (tempF < 40) return "cold";
-  if (tempF < 55) return "cool";
-  if (tempF < 70) return "mild";
-  if (tempF < 85) return "warm";
-  return "hot";
-}
-
-function getFabricRecommendations(
-  tempRange: TemperatureRange,
-  condition: WeatherCondition
-): string[] {
-  const fabrics: string[] = [];
-
-  // Temperature-based
-  switch (tempRange) {
-    case "cold":
-      fabrics.push("wool", "fleece", "down", "cashmere");
-      break;
-    case "cool":
-      fabrics.push("cotton blend", "light wool", "denim");
-      break;
-    case "mild":
-      fabrics.push("cotton", "linen blend", "lightweight knit");
-      break;
-    case "warm":
-      fabrics.push("linen", "cotton", "breathable synthetics");
-      break;
-    case "hot":
-      fabrics.push("linen", "lightweight cotton", "moisture-wicking");
-      break;
-  }
-
-  // Weather condition-based
-  if (["rain", "heavy_rain", "light_rain", "thunderstorm"].includes(condition)) {
-    fabrics.push("water-resistant", "quick-dry");
-  }
-
-  return fabrics;
-}
-
 // =============================================================================
 // API Functions
 // =============================================================================
@@ -181,7 +141,6 @@ export async function getWeatherForCity(cityId: string): Promise<WeatherContext>
 
   const today = new Date().toISOString().split("T")[0]!;
   const currentCondition = mapWeatherCondition(current.weather[0]?.id || 800);
-  const temperatureRange = mapTemperatureRange(current.main.temp);
 
   // Extract forecast periods (morning, afternoon, evening)
   const forecastPeriods = extractForecastPeriods(forecast, city.timezone);
@@ -202,14 +161,12 @@ export async function getWeatherForCity(cityId: string): Promise<WeatherContext>
 
     forecast: forecastPeriods,
 
-    stylingImplications: {
-      layeringRequired:
-        Math.abs(forecastPeriods.morning.temperature - forecastPeriods.afternoon.temperature) > 15,
-      rainProtection: ["rain", "heavy_rain", "light_rain", "thunderstorm"].includes(currentCondition),
-      sunProtection: currentCondition === "clear" && temperatureRange !== "cold",
-      temperatureRange,
-      fabricRecommendations: getFabricRecommendations(temperatureRange, currentCondition),
-    },
+    stylingImplications: buildStylingImplications({
+      currentTempF: current.main.temp,
+      condition: currentCondition,
+      morningTempF: forecastPeriods.morning.temperature,
+      afternoonTempF: forecastPeriods.afternoon.temperature,
+    }),
   };
 
   logger.info(

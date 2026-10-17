@@ -39,3 +39,6 @@ infra/bin/
 *.tgz
 .cache/
 google-cloud-sdk/
+
+# Baseline runs (mock and ad-hoc); commit only curated real baselines
+baselines/local/

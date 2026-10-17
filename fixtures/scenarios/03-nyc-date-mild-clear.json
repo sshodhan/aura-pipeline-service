@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "nyc-date-mild-clear",
+  "title": "Non-binary, 25-35, bold evening date in New York",
+  "context": {
+    "requestId": "nyc-date-mild-clear",
+    "city": "New York City",
+    "occasion": "evening date",
+    "lifestyle": "street style",
+    "weather": {
+      "temperatureC": 19,
+      "condition": "Clear",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "non-binary",
+      "ageRange": "25-35"
+    },
+    "preferences": {
+      "preferredAesthetics": [
+        "bold"
+      ]
+    }
+  },
+  "weatherFixture": {
+    "humidity": 55,
+    "windKph": 8
+  },
+  "baselineMapping": {
+    "cityId": "new-york-ny",
+    "persona": "street-style",
+    "occasion": "date",
+    "vibe": "bold",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "clear",
+    "notes": "Preferred aesthetic 'bold' maps directly to the bold vibe; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Expressive, confident styling for a date",
+    "Light layer for a 19°C evening",
+    "Garments consistent with the stated gender expression (non-binary) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Gender expression and age range are not passed to generation",
+    "Color energy must be invented"
+  ]
+}

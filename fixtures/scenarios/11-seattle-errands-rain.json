@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "seattle-errands-rain",
+  "title": "Woman, 46-55, rainy weekend errands in Seattle, comfort first",
+  "context": {
+    "requestId": "seattle-errands-rain",
+    "city": "Seattle",
+    "occasion": "weekend errands",
+    "lifestyle": "casual",
+    "weather": {
+      "temperatureC": 10,
+      "condition": "Rainy",
+      "precipitationLikely": true
+    },
+    "demographics": {
+      "genderExpression": "female",
+      "ageRange": "46-55"
+    },
+    "preferences": {
+      "comfortPriority": "comfort first"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 92,
+    "windKph": 15
+  },
+  "baselineMapping": {
+    "cityId": "seattle-wa",
+    "persona": "casual",
+    "occasion": "errands",
+    "vibe": "laid_back",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "rain",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Waterproof outer layer and footwear",
+    "Comfortable for walking",
+    "Warm enough for 10°C",
+    "Garments consistent with the stated gender expression (female) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Comfort priority is dropped",
+    "Gender expression and age range are not passed to generation",
+    "Retrieved only through the fuzzy KEYS scan"
+  ]
+}

@@ -12,6 +12,7 @@ import type { StyleMatrix } from "../../models/outfit";
 import type { PrecomputedOutfitBundle, WeatherContext } from "../../models/outfit";
 import type { CollectedData } from "./1-data-collection";
 import { config } from "../../utils/config";
+import { buildOutfitBundle } from "../core/bundle";
 
 // =============================================================================
 // Stage Implementation
@@ -112,37 +113,12 @@ async function processBatch(
         return null;
       }
 
-      const bundle: PrecomputedOutfitBundle = {
-        bundleId: `bundle-${citySignal.cityId}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-        generatedAt: new Date(),
-        expiresAt: new Date(Date.now() + config.cache.ttl.outfit * 1000),
-
-        context: {
-          cityId: citySignal.cityId,
-          date: new Date().toISOString().split("T")[0]!,
-          weatherCondition: entry.signals.weatherCondition,
-          temperatureRange: entry.signals.temperatureRange,
-          persona: entry.signals.persona,
-          occasion: entry.signals.occasion,
-          vibes: [entry.signals.vibe],
-          colorEnergy: entry.signals.colorEnergy,
-        },
-
+      const bundle = buildOutfitBundle(
+        entry,
+        citySignal.cityId,
         outfits,
-
-        qualityMetrics: {
-          confidenceScore: entry.confidence,
-          signalConsistency: 0, // Will be calculated in Stage 5
-          weatherAppropriateness: 0,
-          occasionMatch: 0,
-          regionalRelevance: entry.regionalBoost,
-        },
-
-        fallback: {
-          useRealTimeGeneration: false,
-          similarBundles: [],
-        },
-      };
+        config.cache.ttl.outfit
+      );
 
       return bundle;
     } catch (error) {

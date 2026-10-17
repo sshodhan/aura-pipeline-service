@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "chicago-hangout-windy",
+  "title": "Man, 18-25, windy hangout in Chicago",
+  "context": {
+    "requestId": "chicago-hangout-windy",
+    "city": "Chicago",
+    "occasion": "hanging out with friends",
+    "lifestyle": "casual",
+    "weather": {
+      "temperatureC": 8,
+      "condition": "Windy",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "male",
+      "ageRange": "18-25"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 50,
+    "windKph": 40
+  },
+  "baselineMapping": {
+    "cityId": "chicago-il",
+    "persona": "casual",
+    "occasion": "hangout",
+    "vibe": "laid_back",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "windy",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Wind-resistant outer layer",
+    "Casual formality",
+    "Garments consistent with the stated gender expression (male) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Chicago's matrix has no hangout occasion, so this request is never cached",
+    "Gender expression and age range are not passed to generation"
+  ]
+}
