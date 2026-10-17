@@ -202,6 +202,18 @@ To capture the real Variant B baseline:
    this section with per-call latency (p50/p95), tokens, retries, failures and
    cost.
 
+The summary reports latency two ways:
+
+- **Per-call model latency** counts every attempt in every scenario that
+  called the model, including failed ones. A retried scenario contributes
+  each attempt separately.
+- **End-to-end per scenario** is wall-clock time from the first call to a
+  usable result or final failure, including retries and the pipeline's
+  1 s / 2 s backoff. This is the time to the first candidate.
+
+The per-scenario table's "Model ms" column is the sum of that scenario's
+attempts.
+
 Runner limitations to keep in mind when reading the results:
 
 - Scenarios run **sequentially**; the nightly pipeline runs batches of 10
