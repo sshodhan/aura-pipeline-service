@@ -237,6 +237,12 @@ function buildDiagnostics(
 // Batch execution and summary
 // =============================================================================
 
+export interface LatencyStats {
+  p50: number | null;
+  p95: number | null;
+  max: number | null;
+}
+
 export interface BaselineSummary {
   resultSchemaVersion: number;
   variant: "B-current-pipeline";
@@ -256,7 +262,10 @@ export interface BaselineSummary {
   publishable: number;
   modelCalls: number;
   retries: number;
-  latencyMs: { p50: number | null; p95: number | null; max: number | null };
+  /** Per model call: every attempt in every scenario that called the model, failed ones included. */
+  latencyMs: LatencyStats & { calls: number };
+  /** Per scenario that called the model: wall clock to its first usable result or final failure, including retries and backoff. */
+  endToEndMs: LatencyStats & { scenarios: number };
   tokens: { prompt: number; output: number; total: number } | null;
   estimatedCostUsd: number | null;
   inputLoss: { scenariosDroppingInputs: number; droppedFieldCounts: Record<string, number> };
@@ -277,6 +286,11 @@ function percentile(sorted: number[], p: number): number | null {
   return sorted[Math.max(0, idx)]!;
 }
 
+function latencyStats(values: number[]): LatencyStats {
+  const sorted = [...values].sort((a, b) => a - b);
+  return { p50: percentile(sorted, 50), p95: percentile(sorted, 95), max: sorted.length ? sorted[sorted.length - 1]! : null };
+}
+
 export function summarize(results: ScenarioResult[], options: RunOptions): BaselineSummary {
   const reasons: Record<string, number> = {};
   const droppedFieldCounts: Record<string, number> = {};
@@ -285,10 +299,9 @@ export function summarize(results: ScenarioResult[], options: RunOptions): Basel
     for (const field of r.inputLoss.dropped) droppedFieldCounts[field] = (droppedFieldCounts[field] ?? 0) + 1;
   }
 
-  const latencies = results
-    .filter((r) => r.generation.status === "ok")
-    .map((r) => r.diagnostics.modelLatencyMs)
-    .sort((a, b) => a - b);
+  // Per call, not per scenario: a retried scenario contributes each attempt, and failed scenarios still count.
+  const callLatencies = results.flatMap((r) => r.diagnostics.attempts.map((a) => a.latencyMs));
+  const endToEnd = results.filter((r) => r.diagnostics.modelCalls > 0).map((r) => r.diagnostics.wallClockMs);
   const withTokens = results.filter((r) => r.diagnostics.tokens);
   const tokens =
     withTokens.length > 0
@@ -331,11 +344,8 @@ export function summarize(results: ScenarioResult[], options: RunOptions): Basel
     publishable: results.filter((r) => r.quality?.passesPublishThreshold).length,
     modelCalls: results.reduce((s, r) => s + r.diagnostics.modelCalls, 0),
     retries: results.reduce((s, r) => s + r.diagnostics.retries, 0),
-    latencyMs: {
-      p50: percentile(latencies, 50),
-      p95: percentile(latencies, 95),
-      max: latencies.length ? latencies[latencies.length - 1]! : null,
-    },
+    latencyMs: { ...latencyStats(callLatencies), calls: callLatencies.length },
+    endToEndMs: { ...latencyStats(endToEnd), scenarios: endToEnd.length },
     tokens,
     estimatedCostUsd,
     inputLoss: {
@@ -361,15 +371,17 @@ export function renderSummaryMarkdown(summary: BaselineSummary, results: Scenari
     `- Generation: ${summary.generation.ok} ok, ${summary.generation.failed} failed, ${summary.generation.skipped} skipped · ` +
       `${summary.modelCalls} model calls, ${summary.retries} retries · ${summary.publishable} pass the publish threshold`
   );
+  const stats = (l: LatencyStats) => `p50 ${fmt(l.p50)} ms, p95 ${fmt(l.p95)} ms, max ${fmt(l.max)} ms`;
+  lines.push(`- Per-call model latency (all attempts, n=${summary.latencyMs.calls}): ${stats(summary.latencyMs)}`);
   lines.push(
-    `- Model latency (ok scenarios): p50 ${fmt(summary.latencyMs.p50)} ms, p95 ${fmt(summary.latencyMs.p95)} ms, max ${fmt(summary.latencyMs.max)} ms`
+    `- End-to-end per scenario (incl. retries and backoff, n=${summary.endToEndMs.scenarios}): ${stats(summary.endToEndMs)}`
   );
   lines.push(
     `- Tokens: ${summary.tokens ? `${summary.tokens.prompt} in / ${summary.tokens.output} out` : "not reported"} · ` +
       `Estimated cost: ${summary.estimatedCostUsd === null ? "not computed (no pricing supplied)" : `$${summary.estimatedCostUsd.toFixed(4)}`}`
   );
   lines.push("");
-  lines.push("| Scenario | City | In matrix | Reasons | Retrieval | Generation | Calls | Latency ms | Rule score | Dropped inputs |");
+  lines.push("| Scenario | City | In matrix | Reasons | Retrieval | Generation | Calls | Model ms (sum of attempts) | Rule score | Dropped inputs |");
   lines.push("|---|---|---|---|---|---|---|---|---|---|");
   for (const r of results) {
     lines.push(
