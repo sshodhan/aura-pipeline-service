@@ -1,0 +1,521 @@
+[
+  {
+    "id": "ar-relaxed-metropolitan-tailoring",
+    "type": "aesthetic_reference",
+    "title": "Relaxed metropolitan tailoring",
+    "summary": "Tailored pieces worn with ease rather than formality: fluid or wide trousers, soft-shouldered or compact structured jackets, fine-gauge knits in place of shirts, and loafers or minimal sneakers. Grey, charcoal, navy, cream and camel with one restrained accent. Proportion carries it: a longer trouser line against a compact jacket.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "relaxed-metropolitan-tailoring"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "footwear"
+    ],
+    "silhouettes": [
+      "wide-leg trouser",
+      "cropped jacket",
+      "soft shoulder"
+    ],
+    "materials": [
+      "wool",
+      "merino",
+      "cotton twill",
+      "leather"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "ar-rugged-utility",
+    "type": "aesthetic_reference",
+    "title": "Rugged utility",
+    "summary": "Workwear and outdoor references made deliberate: field and chore jackets, overshirts, straight dark denim or canvas trousers, chunky knits and leather boots. Olive, khaki, brown, rust and indigo in tactile materials such as waxed cotton, canvas, corduroy and suede. It should look designed rather than like technical hiking kit.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "rugged-utility"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "footwear"
+    ],
+    "silhouettes": [
+      "straight leg",
+      "boxy jacket",
+      "relaxed overshirt"
+    ],
+    "materials": [
+      "waxed cotton",
+      "canvas",
+      "denim",
+      "corduroy",
+      "suede",
+      "wool"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "ar-artistic-minimal",
+    "type": "aesthetic_reference",
+    "title": "Artistic minimal",
+    "summary": "Architectural, restrained dressing: clean lines and unusual proportions such as longline or cocoon shapes and wide or cropped trousers, with asymmetric or collarless details. Mostly monochrome or tonal in black, white, grey, ecru or stone, so interest comes from cut and texture rather than color or ornament.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "artistic-minimal"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "dress"
+    ],
+    "silhouettes": [
+      "cocoon coat",
+      "longline",
+      "wide-leg trouser",
+      "asymmetric"
+    ],
+    "materials": [
+      "wool",
+      "cotton poplin",
+      "crepe",
+      "leather"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "ar-classic-prep",
+    "type": "aesthetic_reference",
+    "title": "Classic prep",
+    "summary": "Collegiate and heritage pieces: oxford and rugby shirts, cable or v-neck knits, chinos and pleated trousers, blazers, trench coats and loafers. Navy, cream, burgundy and green, with stripes, tartan or argyle used in moderation. Polished but approachable.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "classic-prep"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "footwear"
+    ],
+    "silhouettes": [
+      "straight leg",
+      "pleated trouser",
+      "tailored blazer"
+    ],
+    "materials": [
+      "oxford cotton",
+      "cable knit",
+      "tweed",
+      "chino twill"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "ar-romantic",
+    "type": "aesthetic_reference",
+    "title": "Romantic",
+    "summary": "Soft, flowing dressing with delicate detail: fluid skirts and dresses, blouses with ruffles, lace or volume at the sleeve, cardigans and lighter footwear. Blush, cream, pastels and florals in silk, chiffon, lace and fine knits, with structure kept light.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "romantic"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "dress",
+      "footwear"
+    ],
+    "silhouettes": [
+      "flowing",
+      "a-line",
+      "puff sleeve"
+    ],
+    "materials": [
+      "silk",
+      "chiffon",
+      "lace",
+      "fine knit"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "ar-streetwear",
+    "type": "aesthetic_reference",
+    "title": "Streetwear",
+    "summary": "Relaxed, graphic and sneaker-led: hoodies and sweatshirts, graphic tees, wide or cargo trousers, bomber or puffer jackets, caps and statement sneakers. Proportions run oversized; color can be bold or tonal, with logos and graphics acting as accents.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "streetwear"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "footwear",
+      "accessory"
+    ],
+    "silhouettes": [
+      "oversized",
+      "wide-leg trouser",
+      "cargo"
+    ],
+    "materials": [
+      "cotton jersey",
+      "fleece",
+      "nylon",
+      "denim"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "ar-sport-luxe",
+    "type": "aesthetic_reference",
+    "title": "Sport-luxe",
+    "summary": "Performance and leisure pieces styled for the street: knit track pants, leggings or joggers with elevated tops, zip-up layers, technical shells and clean sneakers. Neutral or tonal palettes keep it polished, mixing technical and stretch fabrics with soft knits.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "sport-luxe"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "footwear"
+    ],
+    "silhouettes": [
+      "tapered jogger",
+      "zip-up",
+      "fitted"
+    ],
+    "materials": [
+      "technical nylon",
+      "stretch jersey",
+      "merino",
+      "fleece"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "ar-bohemian",
+    "type": "aesthetic_reference",
+    "title": "Bohemian",
+    "summary": "Relaxed, layered and craft-led: flowing maxi skirts and dresses, peasant blouses, suede or fringed pieces, crochet and embroidery, wide-brim hats, and boots or sandals. A warm, earthy palette with paisley and floral prints in natural fibers.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "bohemian"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "dress",
+      "footwear",
+      "accessory"
+    ],
+    "silhouettes": [
+      "maxi",
+      "flowing",
+      "layered"
+    ],
+    "materials": [
+      "cotton voile",
+      "suede",
+      "crochet",
+      "linen"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "ar-quiet-luxury",
+    "type": "aesthetic_reference",
+    "title": "Quiet luxury",
+    "summary": "Understated pieces whose value shows in material and fit rather than logos: cashmere knits, camel or navy coats, well-cut trousers, crisp shirts, and simple leather loafers and bags. A muted palette of camel, cream, grey, navy and chocolate.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "quiet-luxury"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "footwear",
+      "accessory"
+    ],
+    "silhouettes": [
+      "tailored",
+      "straight leg",
+      "clean line"
+    ],
+    "materials": [
+      "cashmere",
+      "wool",
+      "silk",
+      "leather"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "ar-relaxed-coastal",
+    "type": "aesthetic_reference",
+    "title": "Relaxed coastal",
+    "summary": "Light, breathable warm-weather dressing: linen shirts and trousers, cotton knits, relaxed shorts, slip dresses, and sandals or espadrilles. White, sand, sky blue and soft neutrals with natural textures, suited to heat and humidity.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "relaxed-coastal"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "dress",
+      "footwear"
+    ],
+    "silhouettes": [
+      "relaxed",
+      "wide-leg trouser",
+      "slip dress"
+    ],
+    "materials": [
+      "linen",
+      "cotton",
+      "raffia"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  },
+  {
+    "id": "ar-eclectic-maximalist",
+    "type": "aesthetic_reference",
+    "title": "Eclectic maximalist",
+    "summary": "Expressive layering of color, pattern and texture: clashing or tonal prints, statement outerwear, layered accessories and unexpected pairings held together by a shared color thread or repeated motif. Rewards confidence; needs one anchor piece to stay coherent.",
+    "basis": "editorial_judgment",
+    "aesthetics": [
+      "eclectic-maximalist"
+    ],
+    "garmentCategories": [
+      "top",
+      "bottom",
+      "outerwear",
+      "accessory"
+    ],
+    "silhouettes": [
+      "layered",
+      "statement coat"
+    ],
+    "materials": [
+      "jacquard",
+      "velvet",
+      "printed silk",
+      "mohair"
+    ],
+    "regions": [
+      "global"
+    ],
+    "relevantSeasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "provenance": [
+      {
+        "sourceId": "aura-editorial"
+      }
+    ],
+    "editorialStatus": "provisional",
+    "editorialReview": {
+      "lastReviewedAt": "2026-10-09",
+      "reviewedBy": "claude (draft for human editorial review)"
+    },
+    "knowledgeVersion": "fashion-2026-10.1"
+  }
+]
