@@ -167,10 +167,35 @@ export type ClimateBand = (typeof CLIMATE_BANDS)[number];
  */
 const formalityLevel = z.number().int().min(1).max(5);
 
+export const GARMENT_LAYERS = ["base", "mid", "outer"] as const;
+export const GARMENT_PROTECTIONS = ["rain", "wind", "cold", "sun"] as const;
+export type GarmentProtection = (typeof GARMENT_PROTECTIONS)[number];
+
+/**
+ * One garment type an aesthetic draws on (Phase 3 outfit composition). The
+ * template outfit writer picks from these; the model writer sees them as data.
+ */
+export const garmentOptionSchema = z
+  .object({
+    category: z.enum(GARMENT_CATEGORIES),
+    /** Garment type as it would be named, without color ("wool wide-leg trousers"). */
+    type: term,
+    material: term,
+    fit: term,
+    /** Layering position for tops and outerwear; omitted for bottoms, footwear and accessories. */
+    layer: z.enum(GARMENT_LAYERS).optional(),
+    climates: z.array(z.enum(CLIMATE_BANDS)).min(1),
+    formality: z.tuple([formalityLevel, formalityLevel]).refine(([lo, hi]) => lo <= hi, "formality must be [min, max]"),
+    /** Weather it is made to handle. */
+    protects: z.array(z.enum(GARMENT_PROTECTIONS)).optional(),
+  })
+  .strict();
+export type GarmentOption = z.infer<typeof garmentOptionSchema>;
+
 /**
  * Editorial attributes an aesthetic reference needs for direction planning
- * (Phase 2). Optional so older records stay valid; the planner skips
- * aesthetics without one.
+ * (Phase 2) and outfit composition (Phase 3). Optional so older records stay
+ * valid; the planner skips aesthetics without one.
  */
 export const aestheticProfileSchema = z
   .object({
@@ -184,6 +209,8 @@ export const aestheticProfileSchema = z
     palette: z.array(term).min(2).max(8),
     /** Words people use for this aesthetic; matched against stated aesthetic preferences and lifestyle. */
     preferenceTerms: z.array(term).max(12),
+    /** Garment types the aesthetic draws on (fashion-2026-10.3 and later). */
+    garments: z.array(garmentOptionSchema).max(30).optional(),
   })
   .strict();
 export type AestheticProfile = z.infer<typeof aestheticProfileSchema>;

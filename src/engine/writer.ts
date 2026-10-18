@@ -16,8 +16,9 @@
 import type { RecommendationContext } from "../baseline/fixtures";
 import type { TextGenerationModel } from "../pipeline/core/generate-outfits";
 import type { KnowledgeHit, KnowledgeStore } from "../knowledge/store";
+import { OCCASION_LABEL, capitalize, composePalette, list, mentionsAny } from "./palette";
 import { buildConceptPrompt, parseConceptResponse } from "./prompt";
-import type { ConceptDraft, ConstraintCode, DirectionAssignment, InterpretedContext, OccasionKind, ValidationIssue, WriterAttempt } from "./types";
+import type { ConceptDraft, ConstraintCode, DirectionAssignment, InterpretedContext, ValidationIssue, WriterAttempt } from "./types";
 
 export interface WriteRequest {
   context: RecommendationContext;
@@ -50,19 +51,6 @@ export interface ConceptWriter {
 // Template writer
 // =============================================================================
 
-const OCCASION_LABEL: Record<OccasionKind, string> = {
-  athletic: "the activity",
-  formal_event: "a formal event",
-  business: "a business day",
-  home: "a day at home",
-  office: "an office day",
-  date: "a date",
-  dinner: "dinner",
-  errands: "errands",
-  hangout: "a casual hangout",
-  unrecognized: "this occasion",
-};
-
 const ROLE_ANGLE: Record<DirectionAssignment["role"], string> = {
   best_bet: "the most direct answer to the occasion and the weather",
   adjacent: "a different but approachable take on the same day",
@@ -86,11 +74,6 @@ const HEAVY = /\b(tweed|corduroy|fleece|mohair|velvet|waxed|cable knit|shearling
 const LIGHT = /\b(linen|chiffon|raffia|voile|crochet)\b/;
 const FULL_SHAPES = /\b(wide|oversized|maxi|flowing|cocoon|boxy|relaxed|layered|a-line|statement)\b/;
 
-const list = (items: string[]) =>
-  items.length <= 1 ? (items[0] ?? "") : `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-const mentionsAny = (text: string, terms: string[]) =>
-  terms.some((t) => new RegExp(`\\b${t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i").test(text));
 
 /** The garment list in a reference's first sentence: "Lead: a, b, and c." → ["a", "b", "c"]. */
 function summaryItems(summary: string): string[] {
@@ -137,8 +120,7 @@ export class TemplateConceptWriter implements ConceptWriter {
       : "Keep a long, unbroken line, with outer layers that sit cleanly over what is underneath.";
 
     // Palette: the aesthetic's colors minus anything avoided, with stated preferences as the accent.
-    const baseColors = profile.palette.filter((c) => !mentionsAny(c, avoided) && !avoided.some((a) => c.includes(a)));
-    const accents = s.preferredColors.filter((c) => !mentionsAny(c, avoided) && !baseColors.includes(c));
+    const { base: baseColors, accents } = composePalette(profile, s);
     const accentText =
       accents.length > 0
         ? `${list(accents)} as the accent the person asked for`

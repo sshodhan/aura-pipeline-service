@@ -41,7 +41,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -71,9 +71,274 @@
         "business casual",
         "metropolitan",
         "polished"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "fine-gauge merino crewneck",
+          "material": "merino",
+          "fit": "slim",
+          "layer": "base",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "top",
+          "type": "cotton poplin shirt",
+          "material": "cotton poplin",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            4
+          ]
+        },
+        {
+          "category": "top",
+          "type": "linen-blend knit polo",
+          "material": "linen blend",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "soft-shouldered wool blazer",
+          "material": "wool",
+          "fit": "relaxed",
+          "layer": "mid",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            3,
+            4
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "unstructured cotton-twill jacket",
+          "material": "cotton twill",
+          "fit": "relaxed",
+          "layer": "outer",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "single-breasted wool overcoat",
+          "material": "wool",
+          "fit": "tailored",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "water-repellent cotton mac",
+          "material": "cotton gabardine",
+          "fit": "relaxed",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "water-resistant quilted car coat",
+          "material": "technical wool",
+          "fit": "tailored",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain",
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "wool wide-leg trousers",
+          "material": "wool",
+          "fit": "wide",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "pleated cotton-twill trousers",
+          "material": "cotton twill",
+          "fit": "relaxed",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "suede loafers",
+          "material": "suede",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "minimal leather sneakers",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "treated leather chelsea boots",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain",
+            "cold"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "rubber-soled leather derbies",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "wool scarf",
+          "material": "wool",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "cold"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "tortoiseshell sunglasses",
+          "material": "acetate",
+          "fit": "regular",
+          "climates": [
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "sun"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   },
   {
     "id": "ar-rugged-utility",
@@ -119,7 +384,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -146,9 +411,293 @@
         "rugged",
         "outdoor",
         "outdoorsy"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "merino base layer",
+          "material": "merino",
+          "fit": "close",
+          "layer": "base",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            1,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "heavyweight cotton tee",
+          "material": "cotton jersey",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            1,
+            2
+          ]
+        },
+        {
+          "category": "top",
+          "type": "chambray work shirt",
+          "material": "chambray",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "brushed flannel overshirt",
+          "material": "flannel",
+          "fit": "relaxed",
+          "layer": "mid",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "chunky wool sweater",
+          "material": "wool",
+          "fit": "relaxed",
+          "layer": "mid",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "waxed cotton field jacket",
+          "material": "waxed cotton",
+          "fit": "boxy",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "shearling-lined canvas chore coat",
+          "material": "canvas",
+          "fit": "boxy",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "ripstop trail shell",
+          "material": "ripstop nylon",
+          "fit": "regular",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            1,
+            2
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "insulated synthetic trail jacket",
+          "material": "technical nylon",
+          "fit": "regular",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            1,
+            2
+          ],
+          "protects": [
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "insulated waxed cotton parka",
+          "material": "waxed cotton",
+          "fit": "relaxed",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "rain",
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "dark selvedge straight jeans",
+          "material": "denim",
+          "fit": "straight",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "canvas work trousers",
+          "material": "canvas",
+          "fit": "straight",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "ripstop trail pants",
+          "material": "ripstop nylon",
+          "fit": "tapered",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            1,
+            2
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "fleece-lined trail pants",
+          "material": "technical nylon",
+          "fit": "tapered",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            1,
+            2
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "leather lace-up work boots",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "rain",
+            "cold"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "trail running shoes",
+          "material": "technical mesh",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            1,
+            2
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "ribbed wool beanie",
+          "material": "wool",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "cold"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   },
   {
     "id": "ar-artistic-minimal",
@@ -193,7 +742,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -223,9 +772,308 @@
         "creative",
         "artistic",
         "avant-garde"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "fine merino turtleneck",
+          "material": "merino",
+          "fit": "slim",
+          "layer": "base",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            5
+          ]
+        },
+        {
+          "category": "top",
+          "type": "oversized cotton poplin shirt",
+          "material": "cotton poplin",
+          "fit": "oversized",
+          "layer": "base",
+          "climates": [
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            5
+          ]
+        },
+        {
+          "category": "top",
+          "type": "boxy cotton tee",
+          "material": "cotton jersey",
+          "fit": "boxy",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "collarless silk-crepe top",
+          "material": "silk crepe",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "collarless crepe jacket",
+          "material": "crepe",
+          "fit": "boxy",
+          "layer": "mid",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "longline wool coat",
+          "material": "wool",
+          "fit": "longline",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            5
+          ],
+          "protects": [
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "bonded technical trench",
+          "material": "technical cotton",
+          "fit": "longline",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            5
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "lightweight linen duster",
+          "material": "linen",
+          "fit": "longline",
+          "layer": "outer",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "bonded technical down coat",
+          "material": "technical nylon",
+          "fit": "longline",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain",
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "wide-leg wool trousers",
+          "material": "wool",
+          "fit": "wide",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            5
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "cropped crepe trousers",
+          "material": "crepe",
+          "fit": "cropped",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            5
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "wide-leg linen trousers",
+          "material": "linen",
+          "fit": "wide",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "leather derby shoes",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            5
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "polished leather loafers",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "lug-sole leather boots",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain",
+            "cold"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "minimal leather sandals",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "rubber-soled leather derbies",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            5
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "acetate sunglasses",
+          "material": "acetate",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            5
+          ],
+          "protects": [
+            "sun"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   },
   {
     "id": "ar-classic-prep",
@@ -269,7 +1117,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -297,9 +1145,293 @@
         "collegiate",
         "heritage",
         "polished"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "oxford cotton shirt",
+          "material": "oxford cotton",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "top",
+          "type": "cotton pique polo",
+          "material": "cotton pique",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "cable-knit wool sweater",
+          "material": "wool",
+          "fit": "regular",
+          "layer": "mid",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "merino v-neck sweater",
+          "material": "merino",
+          "fit": "regular",
+          "layer": "mid",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "wool hopsack blazer",
+          "material": "wool",
+          "fit": "tailored",
+          "layer": "mid",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            3,
+            4
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "cotton gabardine trench coat",
+          "material": "cotton gabardine",
+          "fit": "belted",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "wool duffle coat",
+          "material": "wool",
+          "fit": "regular",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "quilted waxed jacket",
+          "material": "waxed cotton",
+          "fit": "regular",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "rain",
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "cotton chinos",
+          "material": "chino twill",
+          "fit": "straight",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "pleated wool trousers",
+          "material": "wool flannel",
+          "fit": "pleated",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            3,
+            4
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "corduroy trousers",
+          "material": "corduroy",
+          "fit": "straight",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "leather penny loafers",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "rubber-soled leather boat shoes",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "rubber-soled duck boots",
+          "material": "rubber and leather",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "rain",
+            "cold"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "treated leather brogue boots",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            3,
+            4
+          ],
+          "protects": [
+            "rain",
+            "cold"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "wool scarf",
+          "material": "wool",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "cold"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "woven straw hat",
+          "material": "straw",
+          "fit": "regular",
+          "climates": [
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "sun"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   },
   {
     "id": "ar-romantic",
@@ -343,7 +1475,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -371,9 +1503,329 @@
         "delicate",
         "dreamy",
         "whimsical"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "soft-collared cotton voile shirt",
+          "material": "cotton voile",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "top",
+          "type": "puff-sleeve poplin blouse",
+          "material": "cotton poplin",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "top",
+          "type": "fluid silk shirt",
+          "material": "silk",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "top",
+          "type": "fine-gauge knit top",
+          "material": "fine knit",
+          "fit": "slim",
+          "layer": "base",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "top",
+          "type": "fine-knit cardigan",
+          "material": "fine knit",
+          "fit": "relaxed",
+          "layer": "mid",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "cropped boucle jacket",
+          "material": "boucle",
+          "fit": "cropped",
+          "layer": "mid",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "soft wool wrap coat",
+          "material": "wool",
+          "fit": "wrapped",
+          "layer": "outer",
+          "climates": [
+            "cool"
+          ],
+          "formality": [
+            2,
+            5
+          ],
+          "protects": [
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "lightweight cotton trench",
+          "material": "cotton gabardine",
+          "fit": "belted",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "fluid wide-leg trousers",
+          "material": "crepe",
+          "fit": "wide",
+          "climates": [
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            5
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "linen drawstring trousers",
+          "material": "linen",
+          "fit": "relaxed",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "pleated midi skirt",
+          "material": "chiffon",
+          "fit": "a-line",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "dress",
+          "type": "floral tea dress",
+          "material": "printed cotton",
+          "fit": "a-line",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "dress",
+          "type": "silk bias-cut gown",
+          "material": "silk",
+          "fit": "bias-cut",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            4,
+            5
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "suede loafers",
+          "material": "suede",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "polished leather loafers",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "treated suede ankle boots",
+          "material": "suede",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "leather sandals",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "rubber-soled leather loafers",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "silk scarf",
+          "material": "silk",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            5
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "wide-brim straw hat",
+          "material": "straw",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "sun"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   },
   {
     "id": "ar-streetwear",
@@ -418,7 +1870,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -449,9 +1901,364 @@
         "skate",
         "bold",
         "edgy"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "boxy cotton tee",
+          "material": "cotton jersey",
+          "fit": "boxy",
+          "layer": "base",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "heavyweight graphic tee",
+          "material": "cotton jersey",
+          "fit": "oversized",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "open-collar camp shirt",
+          "material": "cotton",
+          "fit": "boxy",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "technical running long-sleeve",
+          "material": "technical jersey",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            1,
+            1
+          ]
+        },
+        {
+          "category": "top",
+          "type": "technical mesh tee",
+          "material": "technical mesh",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            1
+          ]
+        },
+        {
+          "category": "top",
+          "type": "loopback cotton hoodie",
+          "material": "cotton fleece",
+          "fit": "oversized",
+          "layer": "mid",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "nylon bomber jacket",
+          "material": "nylon",
+          "fit": "cropped",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "water-resistant hooded puffer jacket",
+          "material": "nylon and down",
+          "fit": "oversized",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "rain",
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "packable nylon anorak",
+          "material": "nylon",
+          "fit": "oversized",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "loose straight jeans",
+          "material": "denim",
+          "fit": "loose",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "wide-leg cargo trousers",
+          "material": "cotton twill",
+          "fit": "wide",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "nylon track pants",
+          "material": "nylon",
+          "fit": "relaxed",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            1,
+            2
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "relaxed cotton shorts",
+          "material": "cotton twill",
+          "fit": "relaxed",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "technical running shorts",
+          "material": "technical nylon",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            1
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "chunky leather sneakers",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "canvas high-tops",
+          "material": "canvas",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "cushioned running shoes",
+          "material": "technical mesh",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            2
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "water-resistant trail sneakers",
+          "material": "synthetic",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "water-resistant sneaker boots",
+          "material": "synthetic",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "rain",
+            "cold"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "cotton baseball cap",
+          "material": "cotton",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "sun"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "ribbed beanie",
+          "material": "acrylic knit",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "cold"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   },
   {
     "id": "ar-sport-luxe",
@@ -495,7 +2302,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -525,9 +2332,294 @@
         "athletic",
         "active",
         "performance"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "technical merino tee",
+          "material": "merino",
+          "fit": "slim",
+          "layer": "base",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            1,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "breathable technical tee",
+          "material": "technical jersey",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "performance half-zip",
+          "material": "technical jersey",
+          "fit": "regular",
+          "layer": "mid",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            1,
+            2
+          ]
+        },
+        {
+          "category": "top",
+          "type": "fine-knit zip-up sweater",
+          "material": "merino",
+          "fit": "regular",
+          "layer": "mid",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "technical shell jacket",
+          "material": "technical nylon",
+          "fit": "regular",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "water-resistant quilted puffer jacket",
+          "material": "nylon and down",
+          "fit": "regular",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "rain",
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "knit track pants",
+          "material": "stretch jersey",
+          "fit": "tapered",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            1,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "technical joggers",
+          "material": "stretch nylon",
+          "fit": "tapered",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            1,
+            2
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "running tights",
+          "material": "stretch jersey",
+          "fit": "close",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            1,
+            1
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "technical running shorts",
+          "material": "technical nylon",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            2
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "lightweight drawstring trousers",
+          "material": "stretch cotton",
+          "fit": "tapered",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "clean leather sneakers",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "knit running shoes",
+          "material": "knit mesh",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "water-resistant trail runners",
+          "material": "synthetic",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "insulated water-resistant trail boots",
+          "material": "synthetic",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "rain",
+            "cold"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "technical running cap",
+          "material": "technical nylon",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "sun"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "merino beanie",
+          "material": "merino",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            1,
+            3
+          ],
+          "protects": [
+            "cold"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   },
   {
     "id": "ar-bohemian",
@@ -572,7 +2664,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -600,9 +2692,295 @@
         "free-spirited",
         "earthy",
         "festival"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "embroidered cotton shirt",
+          "material": "cotton",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "loose cotton gauze shirt",
+          "material": "cotton gauze",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "brushed cotton henley",
+          "material": "brushed cotton",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "peasant blouse",
+          "material": "cotton voile",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "open-knit cardigan",
+          "material": "cotton knit",
+          "fit": "relaxed",
+          "layer": "mid",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "suede fringe jacket",
+          "material": "suede",
+          "fit": "relaxed",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "oiled cotton duster coat",
+          "material": "oiled cotton",
+          "fit": "longline",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "wool blanket coat",
+          "material": "wool",
+          "fit": "relaxed",
+          "layer": "outer",
+          "climates": [
+            "cool"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "flared corduroy trousers",
+          "material": "corduroy",
+          "fit": "flared",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "washed flare jeans",
+          "material": "denim",
+          "fit": "flared",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "wide linen trousers",
+          "material": "linen",
+          "fit": "wide",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "tiered maxi skirt",
+          "material": "cotton voile",
+          "fit": "flowing",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "dress",
+          "type": "printed maxi dress",
+          "material": "printed cotton",
+          "fit": "flowing",
+          "climates": [
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "suede ankle boots",
+          "material": "suede",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "treated leather western boots",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "leather sandals",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "wide-brim felt hat",
+          "material": "felt",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "woven straw hat",
+          "material": "straw",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "sun"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   },
   {
     "id": "ar-quiet-luxury",
@@ -647,7 +3025,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -676,9 +3054,306 @@
         "polished",
         "elegant",
         "professional"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "cashmere crewneck",
+          "material": "cashmere",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "top",
+          "type": "crisp cotton shirt",
+          "material": "cotton poplin",
+          "fit": "tailored",
+          "layer": "base",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "top",
+          "type": "silk-cotton knit polo",
+          "material": "silk cotton",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            4
+          ]
+        },
+        {
+          "category": "top",
+          "type": "fine cashmere cardigan",
+          "material": "cashmere",
+          "fit": "regular",
+          "layer": "mid",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            3,
+            4
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "unlined linen-silk blazer",
+          "material": "linen silk",
+          "fit": "relaxed",
+          "layer": "mid",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "suede overshirt jacket",
+          "material": "suede",
+          "fit": "relaxed",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            3,
+            4
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "double-faced wool coat",
+          "material": "wool",
+          "fit": "tailored",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            3,
+            5
+          ],
+          "protects": [
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "cotton gabardine trench",
+          "material": "cotton gabardine",
+          "fit": "tailored",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            5
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "water-repellent down-lined wool coat",
+          "material": "wool",
+          "fit": "tailored",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            3,
+            5
+          ],
+          "protects": [
+            "rain",
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "tailored wool trousers",
+          "material": "wool",
+          "fit": "straight",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "tropical wool trousers",
+          "material": "tropical wool",
+          "fit": "straight",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "linen-blend trousers",
+          "material": "linen blend",
+          "fit": "straight",
+          "climates": [
+            "warm"
+          ],
+          "formality": [
+            3,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "suede loafers",
+          "material": "suede",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "polished leather loafers",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            5
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "treated leather chelsea boots",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            3,
+            5
+          ],
+          "protects": [
+            "rain",
+            "cold"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "rubber-soled leather loafers",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            5
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "cashmere scarf",
+          "material": "cashmere",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            3,
+            5
+          ],
+          "protects": [
+            "cold"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "tortoiseshell sunglasses",
+          "material": "acetate",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            3,
+            5
+          ],
+          "protects": [
+            "sun"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   },
   {
     "id": "ar-relaxed-coastal",
@@ -721,7 +3396,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -747,9 +3422,192 @@
         "resort",
         "breezy",
         "laid-back"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "linen camp-collar shirt",
+          "material": "linen",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "breton cotton tee",
+          "material": "cotton jersey",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "open-weave cotton sweater",
+          "material": "cotton",
+          "fit": "relaxed",
+          "layer": "mid",
+          "climates": [
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "unlined linen overshirt",
+          "material": "linen",
+          "fit": "relaxed",
+          "layer": "mid",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "water-repellent cotton anorak",
+          "material": "cotton",
+          "fit": "relaxed",
+          "layer": "outer",
+          "climates": [
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "linen drawstring trousers",
+          "material": "linen",
+          "fit": "relaxed",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "cotton chino shorts",
+          "material": "cotton twill",
+          "fit": "relaxed",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "dress",
+          "type": "linen slip dress",
+          "material": "linen",
+          "fit": "relaxed",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "canvas espadrilles",
+          "material": "canvas",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "leather slide sandals",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "rubber-soled canvas deck shoes",
+          "material": "canvas",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "straw sun hat",
+          "material": "straw",
+          "fit": "regular",
+          "climates": [
+            "warm",
+            "hot"
+          ],
+          "formality": [
+            2,
+            3
+          ],
+          "protects": [
+            "sun"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   },
   {
     "id": "ar-eclectic-maximalist",
@@ -792,7 +3650,7 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-14",
+      "lastReviewedAt": "2026-10-18",
       "reviewedBy": "claude (draft for human editorial review)"
     },
     "profile": {
@@ -822,8 +3680,319 @@
         "creative",
         "expressive",
         "statement"
+      ],
+      "garments": [
+        {
+          "category": "top",
+          "type": "printed silk shirt",
+          "material": "printed silk",
+          "fit": "relaxed",
+          "layer": "base",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "top",
+          "type": "merino roll-neck",
+          "material": "merino",
+          "fit": "slim",
+          "layer": "base",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "top",
+          "type": "striped cotton knit",
+          "material": "cotton knit",
+          "fit": "regular",
+          "layer": "base",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "top",
+          "type": "jacquard knit sweater",
+          "material": "jacquard knit",
+          "fit": "regular",
+          "layer": "mid",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "statement velvet blazer",
+          "material": "velvet",
+          "fit": "tailored",
+          "layer": "mid",
+          "climates": [
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            3,
+            4
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "embroidered satin bomber",
+          "material": "satin",
+          "fit": "cropped",
+          "layer": "outer",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "checked wool overcoat",
+          "material": "wool",
+          "fit": "oversized",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "printed cotton trench",
+          "material": "cotton gabardine",
+          "fit": "belted",
+          "layer": "outer",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain",
+            "wind"
+          ]
+        },
+        {
+          "category": "outerwear",
+          "type": "water-resistant quilted print coat",
+          "material": "printed technical cotton",
+          "fit": "oversized",
+          "layer": "outer",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain",
+            "cold",
+            "wind"
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "patterned wide-leg trousers",
+          "material": "printed wool",
+          "fit": "wide",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "color-block corduroy trousers",
+          "material": "corduroy",
+          "fit": "straight",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "bottom",
+          "type": "printed cotton trousers",
+          "material": "printed cotton",
+          "fit": "relaxed",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "suede loafers",
+          "material": "suede",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "patent leather boots",
+          "material": "patent leather",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool",
+            "mild"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain",
+            "cold"
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "two-tone leather sneakers",
+          "material": "leather",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            3
+          ]
+        },
+        {
+          "category": "footwear",
+          "type": "patent leather loafers",
+          "material": "patent leather",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "rain"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "patterned silk scarf",
+          "material": "silk",
+          "fit": "regular",
+          "climates": [
+            "cool",
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "colored acetate sunglasses",
+          "material": "acetate",
+          "fit": "regular",
+          "climates": [
+            "mild",
+            "warm"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "sun"
+          ]
+        },
+        {
+          "category": "accessory",
+          "type": "chunky knit scarf",
+          "material": "wool knit",
+          "fit": "regular",
+          "climates": [
+            "cold",
+            "cool"
+          ],
+          "formality": [
+            2,
+            4
+          ],
+          "protects": [
+            "cold"
+          ]
+        }
       ]
     },
-    "knowledgeVersion": "fashion-2026-10.2"
+    "knowledgeVersion": "fashion-2026-10.3"
   }
 ]

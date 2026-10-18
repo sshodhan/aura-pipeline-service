@@ -30,6 +30,9 @@ caching or API shapes:
    engine (Phase 2): context interpretation, deterministic direction
    selection, the concept writers and their trust boundary, validation, the
    call budget, and what Phase 3 consumes.
+8. [`docs/OUTFIT_COMPOSITION.md`](docs/OUTFIT_COMPOSITION.md): outfit composition
+   (Phase 3): garment contracts, garment vocabularies, the template and model
+   writers, outfit validation, the `recommend()` entry point and its budget.
 
 Core principle: **Aura should be a compelling stylist before it becomes a
 personalized stylist.** Optimize for first-session recommendation quality, not
@@ -89,6 +92,7 @@ Run these from the repo root. No API keys, Redis or network are needed:
 | `npm run knowledge:coverage` | Knowledge available to each benchmark scenario (reports gaps; no thresholds) |
 | `npm run knowledge:release -- --version V --notes N` | The only way to release a knowledge change (append-only ledger) |
 | `npm run concepts` | Runs the 20 fixtures through the style direction engine with the template writer and writes to `baselines/local/`. `--writer gemini` needs `GEMINI_API_KEY`. |
+| `npm run recommend` | Runs the 20 fixtures through `recommend()` (concepts then outfits) with the template writers and writes to `baselines/local/`. `--writer gemini` needs `GEMINI_API_KEY`. |
 | `npm run lint` | Fails: there is no ESLint config in the repo |
 | `cd ml-service && pytest` | Python tests for the ML service (`ml-service/tests/`) |
 
@@ -98,5 +102,7 @@ Run these from the repo root. No API keys, Redis or network are needed:
 `config`, directly or indirectly (`tests/unit/engine-plan.test.ts` checks this for the engine).
 `src/utils/logger.ts` is safe to import.
 
-User text is untrusted too. Pass request fields to a model only inside a data block
-(`renderRequestAsData`, `src/engine/prompt.ts`), and keep revision feedback to issue codes.
+User text is untrusted too, and so is anything a model wrote. Pass request fields to a model only
+inside a data block (`renderRequestAsData`, `src/engine/prompt.ts`), pass concepts to the outfit
+stage only through `renderConceptsAsData` (`src/engine/outfit-prompt.ts`), and keep revision
+feedback to issue codes.
