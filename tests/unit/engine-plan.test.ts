@@ -179,7 +179,7 @@ describe("key-free engine", () => {
   }
 
   it("never reaches src/utils/config or src/services from the engine or its CLI", () => {
-    const files = [...readdirSync("src/engine").map((f) => join("src/engine", f)), "src/scripts/run-concepts.ts"];
+    const files = [...readdirSync("src/engine").map((f) => join("src/engine", f)), "src/scripts/run-concepts.ts", "src/scripts/run-recommend.ts"];
     for (const entry of files) {
       const reached = [...importGraph(entry)];
       expect(reached.filter((f) => /src\/utils\/config\.ts$|src\/services\//.test(f)), entry).toEqual([]);
