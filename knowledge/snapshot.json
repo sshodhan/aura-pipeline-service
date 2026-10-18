@@ -1,11 +1,17 @@
 {
-  "knowledgeVersion": "fashion-2026-10.1",
+  "knowledgeVersion": "fashion-2026-10.2",
   "releases": [
     {
       "version": "fashion-2026-10.1",
       "contentHash": "3328f0a83829876bac92ac91d70790fd552946de7b039d6b97d56c6312482716",
       "releasedAt": "2026-10-09",
       "notes": "Initial corpus: 13 timeless principles and 11 aesthetic references (Aura editorial, provisional). No contemporary or regional records: sources could not be read from this environment."
+    },
+    {
+      "version": "fashion-2026-10.2",
+      "contentHash": "f3e40dd9f207b0cede86cee2fea00f141fea4b3af32286cd80a7897c60795739",
+      "releasedAt": "2026-10-14",
+      "notes": "Adds planning profiles (formality range, climate bands, expressiveness, palette, preference terms) to all 11 aesthetic references for Phase 2 direction planning. relaxed-coastal now applies in any season, governed by its warm/hot climate profile. Aura editorial, provisional."
     }
   ],
   "counts": {

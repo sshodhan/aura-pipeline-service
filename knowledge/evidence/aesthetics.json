@@ -41,10 +41,39 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        2,
+        4
+      ],
+      "climates": [
+        "cold",
+        "cool",
+        "mild",
+        "warm"
+      ],
+      "expressiveness": 2,
+      "palette": [
+        "grey",
+        "charcoal",
+        "navy",
+        "cream",
+        "camel"
+      ],
+      "preferenceTerms": [
+        "tailored",
+        "tailoring",
+        "smart casual",
+        "elevated casual",
+        "business casual",
+        "metropolitan",
+        "polished"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   },
   {
     "id": "ar-rugged-utility",
@@ -90,10 +119,36 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        1,
+        3
+      ],
+      "climates": [
+        "cold",
+        "cool",
+        "mild"
+      ],
+      "expressiveness": 2,
+      "palette": [
+        "olive",
+        "khaki",
+        "brown",
+        "rust",
+        "indigo"
+      ],
+      "preferenceTerms": [
+        "utility",
+        "workwear",
+        "rugged",
+        "outdoor",
+        "outdoorsy"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   },
   {
     "id": "ar-artistic-minimal",
@@ -138,10 +193,39 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        2,
+        5
+      ],
+      "climates": [
+        "cold",
+        "cool",
+        "mild",
+        "warm",
+        "hot"
+      ],
+      "expressiveness": 3,
+      "palette": [
+        "black",
+        "white",
+        "grey",
+        "ecru",
+        "stone"
+      ],
+      "preferenceTerms": [
+        "minimal",
+        "minimalist",
+        "architectural",
+        "creative",
+        "artistic",
+        "avant-garde"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   },
   {
     "id": "ar-classic-prep",
@@ -185,10 +269,37 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        2,
+        4
+      ],
+      "climates": [
+        "cold",
+        "cool",
+        "mild",
+        "warm"
+      ],
+      "expressiveness": 2,
+      "palette": [
+        "navy",
+        "cream",
+        "burgundy",
+        "forest green"
+      ],
+      "preferenceTerms": [
+        "preppy",
+        "prep",
+        "classic",
+        "collegiate",
+        "heritage",
+        "polished"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   },
   {
     "id": "ar-romantic",
@@ -232,10 +343,37 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        2,
+        5
+      ],
+      "climates": [
+        "cool",
+        "mild",
+        "warm",
+        "hot"
+      ],
+      "expressiveness": 3,
+      "palette": [
+        "blush",
+        "cream",
+        "lavender",
+        "powder blue",
+        "sage"
+      ],
+      "preferenceTerms": [
+        "romantic",
+        "soft",
+        "delicate",
+        "dreamy",
+        "whimsical"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   },
   {
     "id": "ar-streetwear",
@@ -280,10 +418,40 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        1,
+        3
+      ],
+      "climates": [
+        "cold",
+        "cool",
+        "mild",
+        "warm",
+        "hot"
+      ],
+      "expressiveness": 4,
+      "palette": [
+        "black",
+        "white",
+        "grey",
+        "washed olive",
+        "varsity red"
+      ],
+      "preferenceTerms": [
+        "streetwear",
+        "street style",
+        "street",
+        "urban",
+        "skate",
+        "bold",
+        "edgy"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   },
   {
     "id": "ar-sport-luxe",
@@ -327,10 +495,39 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        1,
+        3
+      ],
+      "climates": [
+        "cold",
+        "cool",
+        "mild",
+        "warm",
+        "hot"
+      ],
+      "expressiveness": 2,
+      "palette": [
+        "black",
+        "grey",
+        "cream",
+        "navy",
+        "stone"
+      ],
+      "preferenceTerms": [
+        "athleisure",
+        "sport-luxe",
+        "sporty",
+        "athletic",
+        "active",
+        "performance"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   },
   {
     "id": "ar-bohemian",
@@ -375,10 +572,37 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        2,
+        3
+      ],
+      "climates": [
+        "cool",
+        "mild",
+        "warm",
+        "hot"
+      ],
+      "expressiveness": 4,
+      "palette": [
+        "terracotta",
+        "rust",
+        "ochre",
+        "olive",
+        "cream"
+      ],
+      "preferenceTerms": [
+        "boho",
+        "bohemian",
+        "free-spirited",
+        "earthy",
+        "festival"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   },
   {
     "id": "ar-quiet-luxury",
@@ -423,10 +647,38 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        3,
+        5
+      ],
+      "climates": [
+        "cold",
+        "cool",
+        "mild",
+        "warm"
+      ],
+      "expressiveness": 1,
+      "palette": [
+        "camel",
+        "cream",
+        "grey",
+        "navy",
+        "chocolate"
+      ],
+      "preferenceTerms": [
+        "quiet luxury",
+        "understated",
+        "refined",
+        "polished",
+        "elegant",
+        "professional"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   },
   {
     "id": "ar-relaxed-coastal",
@@ -458,7 +710,9 @@
     ],
     "relevantSeasons": [
       "spring",
-      "summer"
+      "summer",
+      "fall",
+      "winter"
     ],
     "provenance": [
       {
@@ -467,10 +721,35 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        2,
+        3
+      ],
+      "climates": [
+        "warm",
+        "hot"
+      ],
+      "expressiveness": 2,
+      "palette": [
+        "white",
+        "sand",
+        "sky blue",
+        "stone",
+        "natural linen"
+      ],
+      "preferenceTerms": [
+        "coastal",
+        "beachy",
+        "resort",
+        "breezy",
+        "laid-back"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   },
   {
     "id": "ar-eclectic-maximalist",
@@ -513,9 +792,38 @@
     ],
     "editorialStatus": "provisional",
     "editorialReview": {
-      "lastReviewedAt": "2026-10-09",
+      "lastReviewedAt": "2026-10-14",
       "reviewedBy": "claude (draft for human editorial review)"
     },
-    "knowledgeVersion": "fashion-2026-10.1"
+    "profile": {
+      "formality": [
+        2,
+        4
+      ],
+      "climates": [
+        "cold",
+        "cool",
+        "mild",
+        "warm"
+      ],
+      "expressiveness": 5,
+      "palette": [
+        "emerald",
+        "fuchsia",
+        "cobalt",
+        "mustard",
+        "burgundy"
+      ],
+      "preferenceTerms": [
+        "maximalist",
+        "eclectic",
+        "bold",
+        "colorful",
+        "creative",
+        "expressive",
+        "statement"
+      ]
+    },
+    "knowledgeVersion": "fashion-2026-10.2"
   }
 ]

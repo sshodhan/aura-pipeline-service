@@ -2,12 +2,16 @@
 
 **Status:** Phase 1 of [`FASHION_INTELLIGENCE_DESIGN.md`](./FASHION_INTELLIGENCE_DESIGN.md).
 
-- **Knowledge version:** `fashion-2026-10.1`, released 2026-10-09.
+- **Knowledge version:** `fashion-2026-10.2`, released 2026-10-14.
+  - `fashion-2026-10.1` (2026-10-09) was the initial corpus.
+  - `fashion-2026-10.2` adds planning profiles to the aesthetic references
+    (§2).
 - **Corpus:** 13 timeless principles and 11 aesthetic references, all
   **provisional** Aura editorial judgment.
 - **Contemporary and regional records:** none (see §1).
-- **Runtime:** nothing in the pipeline, prompts, Redis or API reads the store
-  yet. Phase 2 is its first consumer.
+- **Runtime:** nothing in the existing pipeline, prompts, Redis or API reads
+  the store. The Phase 2 style direction engine
+  ([`STYLE_DIRECTIONS.md`](./STYLE_DIRECTIONS.md)) is its first consumer.
 
 > **Labels.** **Implemented** means it is in code and covered by tests;
 > **Planned** means later phases; **Assumption** means not yet confirmed.
@@ -78,6 +82,19 @@ source. Those are not part of this store.
   Editorial review now lives in `editorialReview.lastReviewedAt`.
 - A per-record `knowledgeVersion`, meaning the release in which the record was
   added or last changed.
+- `profile`, added in `fashion-2026-10.2`. It is allowed on
+  `aesthetic_reference` records only, and is what Phase 2 direction planning
+  uses. It holds:
+  - `formality: [min, max]` on a 1–5 scale (1 athletic or lounge · 2 casual ·
+    3 smart casual · 4 business or dressy · 5 formal);
+  - `climates`: the bands it suits (`cold`, `cool`, `mild`, `warm`, `hot`);
+  - `expressiveness`: 1 (restrained) to 5 (statement);
+  - `palette`: core colors;
+  - `preferenceTerms`: words people use for the aesthetic.
+
+  Profiles are Aura editorial judgment, provisional like the records they
+  sit on. The field is optional, so older records stay valid; the planner
+  skips aesthetics without one.
 
 **Integrity checks** (`readKnowledge`):
 
@@ -194,10 +211,14 @@ reviewed pull requests:
 | `npm run knowledge:release -- --version V --notes N` | Appends a release (§4). |
 | `npm run knowledge:coverage -- [--as-of D] [--json]` | Knowledge available to each of the 20 benchmark scenarios, by type. No minimums for regional or contemporary evidence; absence is reported as a note. |
 
-**Coverage at release** (as of 2026-10-09, fall):
+**Coverage** (as of 2026-10-14, fall, release `fashion-2026-10.2`):
 
-- Every scenario can draw on 13 timeless principles and 10 aesthetic
-  references. `relaxed-coastal` is tagged spring/summer only.
+- Every scenario can draw on 13 timeless principles and 11 aesthetic
+  references.
+- `relaxed-coastal` is no longer limited to spring/summer. Its `warm`/`hot`
+  climate profile now decides where it applies, so a hot October day in
+  Miami can use it and a cold one cannot. In `fashion-2026-10.1`, fall
+  scenarios had 10 aesthetic references.
 - Every scenario gets 0 regional and 0 contemporary records, with notes
   saying so.
 - London and Paris map to their own regions (`london`, `paris`) and never
@@ -206,6 +227,8 @@ reviewed pull requests:
 ---
 
 ## 8. What Phase 2 can consume
+
+Phase 2 now uses these; see [`STYLE_DIRECTIONS.md`](./STYLE_DIRECTIONS.md).
 
 All of the following is **Implemented**, pure, and key-free (no `config`,
 network or model calls):
