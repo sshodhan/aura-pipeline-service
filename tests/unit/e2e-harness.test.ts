@@ -21,6 +21,11 @@ describe("end-to-end harness (template writers)", () => {
       expect(b.pass + b.fail + b.manual + b.skipped, s).toBeGreaterThan(0);
     }
     expect(report.bySection["live-model"].skipped).toBe(1);
+    // Phase 4: both revision paths ran, and nothing is flagged at the default threshold on template output.
+    for (const id of ["template-repair", "model-revision", "failed-revision-kept"]) {
+      expect(report.checks.find((c) => c.section === "phase4-quality" && c.id === id)?.status, id).toBe("pass");
+    }
+    expect(report.measurements["phase4.strict.revised"]).toBeGreaterThan(0);
     // Taste is never auto-passed: gender-appropriate garments always need a person.
     expect(report.checks.filter((c) => c.section === "fixture-expectations" && c.title.includes("gender expression (") && c.status !== "manual")).toEqual([]);
     expect(renderHarnessMarkdown(report)).toMatch(/\*\*PASS\*\*/);

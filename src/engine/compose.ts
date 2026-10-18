@@ -42,6 +42,23 @@ export interface ComposeResult {
 const defaultSleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 const ORDER = ["best_bet", "adjacent", "exploration"];
 
+/** Drafts → specs in role order, with ids derived from their concepts (stable for the same request). */
+export function toOutfitSpecs(drafts: OutfitDraft[], concepts: StyleConcept[], knowledgeVersion: string): OutfitSpec[] {
+  return drafts
+    .slice()
+    .sort((a, b) => ORDER.indexOf(a.role) - ORDER.indexOf(b.role))
+    .map((d) => {
+      const concept = concepts.find((c) => c.role === d.role)!;
+      const id = `${concept.id}-outfit`;
+      return { ...d, id, conceptId: concept.id, garments: d.garments.map((g, i) => ({ id: `${id}-g${i + 1}`, ...g })), knowledgeVersion };
+    });
+}
+
+/** Specs → drafts (what a writer produces), for re-validation and scoring. */
+export function toOutfitDrafts(outfits: OutfitSpec[]): OutfitDraft[] {
+  return outfits.map(({ id: _i, conceptId: _c, knowledgeVersion: _k, garments, ...rest }) => ({ ...rest, garments: garments.map(({ id: _g, ...g }) => g) }));
+}
+
 export async function composeOutfits(input: ComposeInput, options: ComposeOptions): Promise<ComposeResult> {
   const startedAt = Date.now();
   const maxModelCalls = options.maxModelCalls ?? DEFAULT_MAX_OUTFIT_CALLS;
@@ -112,15 +129,7 @@ export async function composeOutfits(input: ComposeInput, options: ComposeOption
     }
   }
 
-  const knowledgeVersion = input.store.knowledgeVersion;
-  const outfits: OutfitSpec[] = accepted.drafts
-    .slice()
-    .sort((a, b) => ORDER.indexOf(a.role) - ORDER.indexOf(b.role))
-    .map((d) => {
-      const concept = input.concepts.find((c) => c.role === d.role)!;
-      const id = `${concept.id}-outfit`;
-      return { ...d, id, conceptId: concept.id, garments: d.garments.map((g, i) => ({ id: `${id}-g${i + 1}`, ...g })), knowledgeVersion };
-    });
+  const outfits = toOutfitSpecs(accepted.drafts, input.concepts, input.store.knowledgeVersion);
 
   diagnostics.latencyMs = Date.now() - startedAt;
   return { outfits, validation: accepted.validation, diagnostics, fellBack };

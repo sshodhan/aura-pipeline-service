@@ -3,7 +3,10 @@
 **Status:** Phase 3 of [`FASHION_INTELLIGENCE_DESIGN.md`](./FASHION_INTELLIGENCE_DESIGN.md).
 
 - **Engine version:** `recommend-0.1` (concept stage `concepts-0.1`); reads
-  knowledge release `fashion-2026-10.3`.
+  knowledge release `fashion-2026-10.3`. Phase 4 adds curation after this
+  stage and bumps the engine to `recommend-0.2`
+  ([`QUALITY_CURATION.md`](./QUALITY_CURATION.md)); with `curate: false` the
+  output below is unchanged, byte for byte.
 - **What it does:** dresses each of Phase 2's three style concepts as a
   complete outfit. Each garment has a category, layer, type, color, material,
   fit, silhouette and a reason. Each outfit adds layering, proportion, color
@@ -31,8 +34,9 @@ recommend(context)
 
 Composition is a **separate stage**. It has its own call budget, its own
 revision with issue codes, and its own deterministic fallback, so a failure is
-attributed to the stage that caused it. A request makes at most **4 model
-calls** (2 per stage; set with `maxModelCallsPerStage` or `--max-calls`).
+attributed to the stage that caused it. Concepts and outfits make at most
+**4 model calls** (2 per stage; set with `maxModelCallsPerStage` or
+`--max-calls`). Phase 4's curation can add 1, for at most 5 per request.
 
 ---
 
@@ -170,7 +174,9 @@ The checks are deterministic and structural:
 - Whether a garment is well chosen, colors harmonize, proportions flatter or
   the outfit is compelling.
 - Keyword checks show a requirement is addressed in words, not well.
-- The rubric, ranking and human calibration are Phase 4.
+- The rubric and curation are Phase 4
+  ([`QUALITY_CURATION.md`](./QUALITY_CURATION.md)); human calibration is
+  Phase 6.
 
 ---
 
@@ -253,9 +259,12 @@ All of the following is **Implemented**:
 | Per-stage diagnostics for cost and latency gates | `diagnostics.concepts`, `diagnostics.outfits`, `totalModelCalls` |
 | Keyless runs | the template writers, `runRecommendScenarios`, `npm run recommend` |
 
+Phase 4 consumes these as described in
+[`QUALITY_CURATION.md`](./QUALITY_CURATION.md).
+
 **Not in Phase 3:**
 
-- quality rubric, ranking and curation (Phase 4);
+- quality rubric and curation (Phase 4, now implemented);
 - API, storage and byte-identical refetch (Phase 5);
 - images;
 - the consumer adapter;

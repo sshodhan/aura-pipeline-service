@@ -86,6 +86,10 @@ These interfaces come from the original design brief.
     `OutfitSpec`, `RecommendationCollection`): Phase 3, in
     `src/engine/outfit-types.ts`; see
     [`OUTFIT_COMPOSITION.md`](./OUTFIT_COMPOSITION.md) §2.
+  - `QualityAssessment`: Phase 4, in `src/engine/curate.ts`, with additions
+    (`role`, `reasons`, `issueCodes`, `outcome`) in
+    [`QUALITY_CURATION.md`](./QUALITY_CURATION.md) §2. The scores come from a
+    deterministic rubric; the user chose rules only, with no model judge.
 - **Planned:** the rest. Later phases should implement them, or document any
   deviation.
 

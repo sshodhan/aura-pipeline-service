@@ -12,10 +12,11 @@
 import { z } from "zod";
 
 import { GARMENT_CATEGORIES, GARMENT_LAYERS } from "../knowledge/schema";
+import type { CollectionQuality, CurationDiagnostics, QualityAssessment } from "./curate";
 import type { CollectionDiagnostics, CollectionValidation, ConceptRole, ConstraintCode, DirectionSelection, InterpretedContext, StyleConcept } from "./types";
 import { ROLES } from "./types";
 
-export const RECOMMEND_ENGINE_VERSION = "recommend-0.1";
+export const RECOMMEND_ENGINE_VERSION = "recommend-0.2";
 export const RECOMMENDATION_SCHEMA_VERSION = "1.0";
 
 /** Garments per outfit: footwear plus a top and bottom (or a dress) at minimum. */
@@ -126,6 +127,8 @@ export interface Recommendation {
   role: ConceptRole;
   concept: StyleConcept;
   outfit: OutfitSpec;
+  /** Phase 4 rubric assessment; absent when curation is off. */
+  quality?: QualityAssessment;
 }
 
 export type RecommendationStatus = "ok" | "fallback" | "invalid_request" | "insufficient_knowledge";
@@ -144,10 +147,13 @@ export interface RecommendationCollection {
   selection: Omit<DirectionSelection, "candidates"> | null;
   recommendations: Recommendation[];
   validation: { concepts: CollectionValidation | null; outfits: OutfitValidation | null };
+  /** Phase 4 rubric scores and curation decisions; null when curation is off or nothing was composed. */
+  quality: CollectionQuality | null;
   errors: string[];
   diagnostics: {
     concepts: CollectionDiagnostics;
     outfits: CollectionDiagnostics | null;
+    curation: CurationDiagnostics | null;
     totalModelCalls: number;
     latencyMs: number;
   };

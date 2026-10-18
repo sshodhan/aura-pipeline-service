@@ -8,6 +8,7 @@
  *   phase1-knowledge     the knowledge corpus and release ledger are valid and honest
  *   phase2-concepts      three valid, distinct style directions per scenario
  *   phase3-outfits       three valid, schema-conformant, distinct outfits per scenario
+ *   phase4-quality       rubric scores with reasons, hollow-word invariance, curation never worse, budget
  *   input-parity         every input the current pipeline drops reaches the new engine
  *   fixture-expectations each scenario's own expectedConstraints, checked where a rule exists
  *   adversarial          prompt injection, invalid input, broken models, the call budget
@@ -15,8 +16,9 @@
  *   live-model           a real-model run, when writers for one are supplied
  *
  * Key-free by default (template writers, mock and scripted models). Pass model
- * writers to run phases 2–3 against a real model; the adversarial section
- * always uses scripted models so it stays deterministic.
+ * writers to run phases 2–4 against a real model; the adversarial section
+ * and the curation probes always use scripted models so they stay
+ * deterministic.
  */
 
 import type { Scenario } from "../baseline/fixtures";
@@ -38,16 +40,17 @@ import { adapterFeasibility } from "./adapter";
 import { runAdversarialChecks } from "./adversarial";
 import { contractProblems } from "./contract";
 import { checkExpectations } from "./expectations";
+import { runQualityChecks } from "./quality";
 import { HARNESS_SECTIONS, type CheckStatus, type HarnessCheck, type HarnessReport, type HarnessSection } from "./types";
 
-export const HARNESS_VERSION = "e2e-0.1";
+export const HARNESS_VERSION = "e2e-0.2";
 /** The date PHASE_0_BASELINE.md was measured on; Phase 0 claims are checked at that date. */
 export const PHASE0_DOC_DATE = "2026-10-09";
 
 export interface HarnessOptions {
   store: KnowledgeStore;
   scenarios: Scenario[];
-  /** YYYY-MM-DD for phases 1–3. */
+  /** YYYY-MM-DD for phases 1–4. */
   asOf: string;
   /** Default: template writers (key-free). */
   conceptWriter?: ConceptWriter;
@@ -119,7 +122,7 @@ export async function runHarness(options: HarnessOptions): Promise<HarnessReport
   }
 
   // ---------------------------------------------------------------------------
-  // Phases 2–3 and everything that reads their output: one recommend() per scenario.
+  // Phases 2–4 and everything that reads their output: one recommend() per scenario.
   // ---------------------------------------------------------------------------
   const collections = new Map<string, RecommendationCollection>();
   let adapterDirect = 0;
@@ -155,7 +158,8 @@ export async function runHarness(options: HarnessOptions): Promise<HarnessReport
     const slots = c.validation.outfits?.differingCoreSlots.map((x) => x.slots) ?? [];
     check("phase3-outfits", "distinct-garments", slots.length === 3 && slots.every((n) => n >= 2), "Every pair of outfits differs in at least two core garments", `differing ${slots.join("/")}`, id);
     check("phase3-outfits", "linked", c.recommendations.every((r) => r.outfit.conceptId === r.concept.id && r.outfit.aesthetic === r.concept.aesthetic), "Each outfit belongs to its concept", undefined, id);
-    check("phase3-outfits", "budget", c.diagnostics.totalModelCalls <= 4, "At most 4 model calls per request", `${c.diagnostics.totalModelCalls} calls`, id);
+    const stageCalls = c.diagnostics.concepts.modelCalls + (c.diagnostics.outfits?.modelCalls ?? 0);
+    check("phase3-outfits", "budget", stageCalls <= 4, "At most 4 model calls for concepts and outfits", `${stageCalls} calls`, id);
     if (!live) {
       const again = await recommend(scenario.context, store, { conceptWriter, outfitWriter, asOf, region: regionForScenario(scenario) });
       const strip = (x: RecommendationCollection) => JSON.stringify({ ...x, diagnostics: null });
@@ -209,6 +213,15 @@ export async function runHarness(options: HarnessOptions): Promise<HarnessReport
   measurements["adapter.noOuterLayer"] = adapterNoOuter;
   measurements["adapter.dressOnly"] = adapterDressOnly;
   measurements["adapter.unslottedAccessories"] = adapterUnslotted;
+
+  // ---------------------------------------------------------------------------
+  // Phase 4: rubric and curation, on the collections above plus scripted probes.
+  // ---------------------------------------------------------------------------
+  {
+    const quality = await runQualityChecks(scenarios, collections, store, asOf);
+    checks.push(...quality.checks);
+    Object.assign(measurements, quality.measurements);
+  }
 
   // ---------------------------------------------------------------------------
   // Adversarial (always scripted models).
