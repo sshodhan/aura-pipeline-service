@@ -1,10 +1,14 @@
 /**
- * recommend(context) → RecommendationCollection (Phase 3)
+ * recommend(context) → RecommendationCollection (Phases 3–4)
  *
- * The pure engine entry point: style directions (Phase 2), then outfit
- * composition (Phase 3). Each stage has its own model-call budget (default 2:
- * a draft and one revision), so a request makes at most 4 model calls, and
- * each stage falls back to its deterministic template instead of looping.
+ * The pure engine entry point: style directions (Phase 2), outfit
+ * composition (Phase 3), then quality curation (Phase 4). The concept and
+ * outfit stages each have their own model-call budget (default 2: a draft and
+ * one revision) and fall back to their deterministic templates instead of
+ * looping. Curation scores every outfit with the deterministic rubric and
+ * revises weak ones once: with the model writer (default 1 call) when the
+ * outfits came from a model, otherwise with a template rewrite (no call). A
+ * request therefore makes at most 5 model calls by default.
  * Phase 5's HTTP route and any batch runner are meant to call this.
  *
  * Pure and key-free; models, if any, are injected through the writers.
@@ -13,6 +17,7 @@
 import type { KnowledgeStore } from "../knowledge/store";
 import { composeOutfits, DEFAULT_MAX_OUTFIT_CALLS } from "./compose";
 import { parseContext } from "./context";
+import { curateCollection, DEFAULT_MAX_CURATION_CALLS } from "./curate";
 import { DEFAULT_MAX_MODEL_CALLS, evidenceForWriter, planStyleDirections } from "./plan";
 import { RECOMMEND_ENGINE_VERSION, RECOMMENDATION_SCHEMA_VERSION, type RecommendationCollection } from "./outfit-types";
 import type { OutfitWriter } from "./outfit-writer";
@@ -27,9 +32,15 @@ export interface RecommendOptions {
   region?: string;
   /** Model calls allowed per stage (concepts, outfits). */
   maxModelCallsPerStage?: number;
+  /** Score and curate the outfits (Phase 4). Default true; false returns Phase 3 output with quality null. */
+  curate?: boolean;
+  /** Rubric threshold that sends an outfit to revision (default REVISE_BELOW, uncalibrated). */
+  reviseBelow?: number;
+  /** Model calls allowed for the curation revision (default 1). */
+  maxCurationCalls?: number;
   sleep?: (ms: number) => Promise<void>;
   /** Receives each prompt sent (local diagnostics only). */
-  onPrompt?: (stage: "concepts" | "outfits", prompt: string, call: number) => void;
+  onPrompt?: (stage: "concepts" | "outfits" | "curation", prompt: string, call: number) => void;
 }
 
 export async function recommend(input: unknown, store: KnowledgeStore, options: RecommendOptions): Promise<RecommendationCollection> {
@@ -64,32 +75,51 @@ export async function recommend(input: unknown, store: KnowledgeStore, options: 
       status: plan.status === "invalid_request" || !parsed.ok ? "invalid_request" : "insufficient_knowledge",
       recommendations: [],
       validation: { concepts: plan.validation, outfits: null },
+      quality: null,
       errors: plan.errors,
-      diagnostics: { concepts: plan.diagnostics, outfits: null, totalModelCalls: plan.diagnostics.modelCalls, latencyMs: Date.now() - startedAt },
+      diagnostics: { concepts: plan.diagnostics, outfits: null, curation: null, totalModelCalls: plan.diagnostics.modelCalls, latencyMs: Date.now() - startedAt },
     };
   }
 
   const evidence = evidenceForWriter(store, plan.interpreted, plan.selection.assignments.map((a) => a.evidenceId), asOf);
-  const composed = await composeOutfits(
-    { context: parsed.context, interpreted: plan.interpreted, concepts: plan.concepts, evidence, store },
-    {
-      writer: options.outfitWriter,
-      maxModelCalls: options.maxModelCallsPerStage ?? DEFAULT_MAX_OUTFIT_CALLS,
-      sleep: options.sleep,
-      onPrompt: options.onPrompt ? (p, call) => options.onPrompt!("outfits", p, call) : undefined,
-    }
-  );
+  const composeInput = { context: parsed.context, interpreted: plan.interpreted, concepts: plan.concepts, evidence, store };
+  const composed = await composeOutfits(composeInput, {
+    writer: options.outfitWriter,
+    maxModelCalls: options.maxModelCallsPerStage ?? DEFAULT_MAX_OUTFIT_CALLS,
+    sleep: options.sleep,
+    onPrompt: options.onPrompt ? (p, call) => options.onPrompt!("outfits", p, call) : undefined,
+  });
+
+  // Model-written outfits are revised by the model; template output (including a fallback) is repaired by the template.
+  const curated =
+    options.curate === false
+      ? null
+      : await curateCollection(
+          { ...composeInput, outfits: composed.outfits },
+          {
+            modelWriter: options.outfitWriter.mode === "model" && composed.diagnostics.generationMode === "model" ? options.outfitWriter : undefined,
+            maxModelCalls: options.maxCurationCalls ?? DEFAULT_MAX_CURATION_CALLS,
+            reviseBelow: options.reviseBelow,
+            onPrompt: options.onPrompt ? (p, call) => options.onPrompt!("curation", p, call) : undefined,
+          }
+        );
+  const outfits = curated?.outfits ?? composed.outfits;
 
   return {
     ...base,
     status: plan.status === "fallback" || composed.fellBack ? "fallback" : "ok",
-    recommendations: plan.concepts.map((concept) => ({ role: concept.role, concept, outfit: composed.outfits.find((o) => o.role === concept.role)! })),
-    validation: { concepts: plan.validation, outfits: composed.validation },
+    recommendations: plan.concepts.map((concept) => {
+      const quality = curated?.quality.assessments.find((a) => a.role === concept.role);
+      return { role: concept.role, concept, outfit: outfits.find((o) => o.role === concept.role)!, ...(quality ? { quality } : {}) };
+    }),
+    validation: { concepts: plan.validation, outfits: curated?.validation ?? composed.validation },
+    quality: curated?.quality ?? null,
     errors: [],
     diagnostics: {
       concepts: plan.diagnostics,
       outfits: composed.diagnostics,
-      totalModelCalls: plan.diagnostics.modelCalls + composed.diagnostics.modelCalls,
+      curation: curated?.diagnostics ?? null,
+      totalModelCalls: plan.diagnostics.modelCalls + composed.diagnostics.modelCalls + (curated?.diagnostics.modelCalls ?? 0),
       latencyMs: Date.now() - startedAt,
     },
   };

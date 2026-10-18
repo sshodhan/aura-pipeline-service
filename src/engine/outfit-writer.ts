@@ -18,8 +18,28 @@ import type { KnowledgeHit, KnowledgeStore } from "../knowledge/store";
 import { GARMENT_PATTERNS as P, climateDistance, templateUsable } from "./garments";
 import { OCCASION_LABEL, capitalize, composePalette, list, mentionsAny } from "./palette";
 import { buildOutfitPrompt, parseOutfitResponse } from "./outfit-prompt";
-import type { GarmentDraft, OutfitDraft, OutfitIssue } from "./outfit-types";
+import { classifyColor } from "./colors";
+import type { GarmentDraft, OutfitDraft } from "./outfit-types";
 import type { ConceptRole, InterpretedContext, StyleConcept, WriterAttempt } from "./types";
+
+/** Steering for a template rewrite during curation (Phase 4); ignored by the model writer. */
+export interface TemplateHint {
+  /** Garment types to steer away from; the next-best options are used instead. */
+  avoidTypes?: string[];
+  /** Keep at most this many accent colors; the rest become palette neutrals. */
+  maxAccents?: number;
+  /** Use neutrals of one temperature only. */
+  neutralTemperature?: "warm" | "cool";
+}
+
+/** Revision feedback: codes, roles and field or category names only. */
+export interface FeedbackIssue {
+  code: string;
+  role?: ConceptRole;
+  field?: string;
+  category?: string;
+  constraint?: string;
+}
 
 export interface OutfitWriteRequest {
   context: RecommendationContext;
@@ -27,7 +47,8 @@ export interface OutfitWriteRequest {
   concepts: StyleConcept[];
   evidence: KnowledgeHit[];
   store: KnowledgeStore;
-  feedback?: OutfitIssue[];
+  feedback?: FeedbackIssue[];
+  templateHints?: Partial<Record<ConceptRole, TemplateHint>>;
 }
 
 export interface OutfitWriteResult {
@@ -89,6 +110,7 @@ export class TemplateOutfitWriter implements OutfitWriter {
     const record = store.query({ types: ["aesthetic_reference"], aesthetics: [concept.aesthetic], includeExpired: true })[0]!.evidence;
     const profile = record.profile!;
     const options = (profile.garments ?? []).filter(templateUsable);
+    const hint = request.templateHints?.[concept.role];
 
     const rain = codes.has("rain_protection") || codes.has("snow_protection");
     const cold = codes.has("insulation") || codes.has("snow_protection");
@@ -109,6 +131,7 @@ export class TemplateOutfitWriter implements OutfitWriter {
       if ((s.climate === "warm" || s.climate === "hot") && g.category !== "footwear" && g.category !== "accessory" && P.heavy.test(t)) v -= 6;
       if (s.climate === "cold" && LIGHT_FABRIC.test(t)) v -= 3;
       if (used.get(g.category)?.has(g.type)) v -= 5;
+      if (hint?.avoidTypes?.includes(g.type)) v -= 8;
       return v;
     };
     // Weather needs are a hard filter whenever some garment meets them all; otherwise the closest scores best.
@@ -154,7 +177,11 @@ export class TemplateOutfitWriter implements OutfitWriter {
     // Colors: palette base minus avoided colors; a stated preference becomes the top's color.
     const palette = composePalette(profile, s);
     const notAvoided = (c: string) => !mentionsAny(c, s.avoidedColors) && !s.avoidedColors.some((a) => c.includes(a));
-    const base = palette.base.length > 0 ? palette.base : FALLBACK_NEUTRALS.filter(notAvoided);
+    let base = palette.base.length > 0 ? palette.base : FALLBACK_NEUTRALS.filter(notAvoided);
+    if (hint?.neutralTemperature) {
+      const oneTemperature = base.filter((c) => classifyColor(c).role !== "neutral" || classifyColor(c).temperature === hint.neutralTemperature);
+      if (oneTemperature.filter((c) => classifyColor(c).role === "neutral").length >= 2) base = oneTemperature;
+    }
     const at = (i: number) => base[Math.min(i, base.length - 1)]!;
     const footwearColor = FOOTWEAR_NEUTRALS.find((c) => base.includes(c)) ?? FOOTWEAR_NEUTRALS.find(notAvoided) ?? at(0);
     const colorFor: Record<Slot, string> = {
@@ -166,6 +193,20 @@ export class TemplateOutfitWriter implements OutfitWriter {
       accessory: palette.accents[1] ?? palette.accents[0] ?? at(base.length - 1),
     };
     const choices: Choice[] = picks.map((p) => ({ ...p, color: colorFor[p.slot] }));
+    if (hint?.maxAccents !== undefined) {
+      // Recolor surplus accents to neutrals, keeping the accent on the accessory, then the top.
+      const neutrals = [...base, ...FALLBACK_NEUTRALS, ...FOOTWEAR_NEUTRALS].filter((c) => notAvoided(c) && classifyColor(c).role === "neutral");
+      const priority: Slot[] = ["outer", "mid", "bottom", "footwear", "top", "accessory"];
+      let accents = choices.filter((c) => classifyColor(c.color).role === "accent").length;
+      for (const slot of priority) {
+        if (accents <= hint.maxAccents) break;
+        const c = choices.find((x) => x.slot === slot);
+        if (c && classifyColor(c.color).role === "accent" && neutrals.length > 0) {
+          c.color = neutrals[priority.indexOf(slot) % neutrals.length]!;
+          accents--;
+        }
+      }
+    }
 
     const garments = choices.map((c) => this.garment(c, concept, request));
     const find = (slot: Slot) => choices.find((c) => c.slot === slot);

@@ -1,12 +1,15 @@
 /**
- * Recommendation runner (Phase 3: style directions + outfit composition).
+ * Recommendation runner (style directions, outfit composition, curation).
  *
  *   npm run recommend -- [--writer template|gemini] [--model <id>] [--out <dir>]
- *                        [--as-of YYYY-MM-DD] [--max-calls N] [--save-prompts] [scenario.json ...]
+ *                        [--as-of YYYY-MM-DD] [--max-calls N] [--no-curate]
+ *                        [--revise-below N] [--save-prompts] [scenario.json ...]
  *
  * Runs the benchmark scenarios (fixtures/scenarios by default) through
- * recommend() and writes one collection per scenario plus summary.json and
- * summary.md. --max-calls is per stage (concepts, outfits). The template
+ * recommend() and writes one collection per scenario, summary.json,
+ * summary.md, and the calibration pair: calibration-sheet.csv (blind, for
+ * human raters) and calibration-key.csv (the rubric scores it joins back to).
+ * --max-calls is per stage (concepts, outfits). The template
  * writers need no keys. The gemini writers read GEMINI_API_KEY from the
  * environment (or .env) and never import src/utils/config.ts.
  */
@@ -19,7 +22,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import { loadScenarios } from "../baseline/fixtures";
 import { loadKnowledge } from "../knowledge/store";
-import { renderRecommendSummaryMarkdown, runRecommendScenarios, summarizeRecommendRun } from "../engine/recommend-runner";
+import { calibrationSheets, renderRecommendSummaryMarkdown, runRecommendScenarios, summarizeRecommendRun } from "../engine/recommend-runner";
 import { DEFAULT_MAX_MODEL_CALLS } from "../engine/plan";
 import { RECOMMEND_ENGINE_VERSION } from "../engine/outfit-types";
 import { ModelOutfitWriter, TemplateOutfitWriter, type OutfitWriter } from "../engine/outfit-writer";
@@ -32,6 +35,8 @@ interface Args {
   out?: string;
   asOf: string;
   maxCalls: number;
+  curate: boolean;
+  reviseBelow?: number;
   savePrompts: boolean;
   files: string[];
 }
@@ -42,6 +47,7 @@ function parseArgs(argv: string[]): Args {
     model: PIPELINE_TEXT_MODEL,
     asOf: new Date().toISOString().slice(0, 10),
     maxCalls: DEFAULT_MAX_MODEL_CALLS,
+    curate: true,
     savePrompts: false,
     files: [],
   };
@@ -69,6 +75,12 @@ function parseArgs(argv: string[]): Args {
       case "--max-calls": {
         args.maxCalls = Number(value());
         if (!Number.isInteger(args.maxCalls) || args.maxCalls < 1) throw new Error("--max-calls must be a positive integer");
+        break;
+      }
+      case "--no-curate": args.curate = false; break;
+      case "--revise-below": {
+        args.reviseBelow = Number(value());
+        if (!Number.isInteger(args.reviseBelow) || args.reviseBelow < 1 || args.reviseBelow > 6) throw new Error("--revise-below must be an integer from 1 to 6");
         break;
       }
       case "--save-prompts": args.savePrompts = true; break;
@@ -125,6 +137,8 @@ async function main() {
     outfitWriter,
     asOf: args.asOf,
     maxModelCallsPerStage: args.maxCalls,
+    curate: args.curate,
+    reviseBelow: args.reviseBelow,
     onPrompt: args.savePrompts ? (id, stage, prompt, call) => writeFileSync(join(out, "prompts", `${id}-${stage}-call${call}.txt`), prompt) : undefined,
   });
   for (const r of results) writeJson(join(out, "scenarios", `${r.scenarioId}.json`), r.collection);
@@ -141,6 +155,9 @@ async function main() {
   writeJson(join(out, "summary.json"), { ...meta, ...summary });
   const md = renderRecommendSummaryMarkdown(summary, meta);
   writeFileSync(join(out, "summary.md"), md);
+  const calibration = calibrationSheets(scenarios, results);
+  writeFileSync(join(out, "calibration-sheet.csv"), calibration.sheet);
+  writeFileSync(join(out, "calibration-key.csv"), calibration.key);
   console.log(md);
   console.log(`Wrote ${out}`);
   if (summary.validCollections < summary.scenarios) process.exitCode = 1;
