@@ -2,16 +2,19 @@
 
 **Status:** Phase 1 of [`FASHION_INTELLIGENCE_DESIGN.md`](./FASHION_INTELLIGENCE_DESIGN.md).
 
-- **Knowledge version:** `fashion-2026-10.2`, released 2026-10-14.
+- **Knowledge version:** `fashion-2026-10.3`, released 2026-10-18.
   - `fashion-2026-10.1` (2026-10-09) was the initial corpus.
   - `fashion-2026-10.2` adds planning profiles to the aesthetic references
     (§2).
+  - `fashion-2026-10.3` adds garment vocabularies to those profiles (§2) for
+    Phase 3 outfit composition.
 - **Corpus:** 13 timeless principles and 11 aesthetic references, all
   **provisional** Aura editorial judgment.
 - **Contemporary and regional records:** none (see §1).
 - **Runtime:** nothing in the existing pipeline, prompts, Redis or API reads
   the store. The Phase 2 style direction engine
-  ([`STYLE_DIRECTIONS.md`](./STYLE_DIRECTIONS.md)) is its first consumer.
+  ([`STYLE_DIRECTIONS.md`](./STYLE_DIRECTIONS.md)) and the Phase 3 outfit
+  composer ([`OUTFIT_COMPOSITION.md`](./OUTFIT_COMPOSITION.md)) use it.
 
 > **Labels.** **Implemented** means it is in code and covered by tests;
 > **Planned** means later phases; **Assumption** means not yet confirmed.
@@ -91,6 +94,13 @@ source. Those are not part of this store.
   - `expressiveness`: 1 (restrained) to 5 (statement);
   - `palette`: core colors;
   - `preferenceTerms`: words people use for the aesthetic.
+
+  - `garments` (added in `fashion-2026-10.3`): the garment types the
+    aesthetic draws on, 12–21 per aesthetic. Each entry has `category`,
+    `type`, `material`, `fit`, an optional `layer` (`base`, `mid`, `outer`),
+    the `climates` and `formality` range it suits, and optional `protects`
+    (`rain`, `wind`, `cold`, `sun`). The coverage rule every aesthetic must
+    meet is in [`OUTFIT_COMPOSITION.md`](./OUTFIT_COMPOSITION.md) §3.
 
   Profiles are Aura editorial judgment, provisional like the records they
   sit on. The field is optional, so older records stay valid; the planner
