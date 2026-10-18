@@ -125,6 +125,18 @@ export function includesMinor(ageRange: string | undefined): boolean {
   return lower !== undefined && Number(lower) < 18;
 }
 
+/** Fit words the engine can act on. A stated fit maps to the first of these it contains. */
+export const FIT_TERMS = ["relaxed", "oversized", "loose", "regular", "slim", "fitted", "tailored", "structured", "wide", "cropped", "straight", "boxy", "flowing"] as const;
+
+/** The fit term a stated fit names, or null when it names none ("not too tight"). */
+export function recognizeFit(phrase: string): string | null {
+  const p = normalize(phrase);
+  return FIT_TERMS.find((t) => new RegExp(`\\b${t}\\b`).test(p)) ?? null;
+}
+
+/** A stated color the engine may use in garment names: a short plain phrase ("coral", "forest green"). */
+export const isColorTerm = (phrase: string) => /^[a-z][a-z' -]{1,29}$/.test(normalize(phrase));
+
 /** Aesthetics whose slug, title or preference terms equal the phrase. */
 export function matchAesthetics(phrase: string, store: KnowledgeStore): string[] {
   const p = normalize(phrase);
@@ -180,7 +192,11 @@ export function interpretContext(context: RecommendationContext, store: Knowledg
   const sunny = SUN.test(condition) && (climate === "hot" || climate === "warm");
   const minor = includesMinor(demographics?.ageRange);
 
-  const preferredColors = (preferences?.preferredColors ?? []).map(normalize);
+  // Stated values the engine acts on must be recognizable; anything else stays in the request data only.
+  const statedColors = (preferences?.preferredColors ?? []).map(normalize);
+  const preferredColors = statedColors.filter(isColorTerm);
+  const unusableColors = statedColors.filter((c) => !isColorTerm(c));
+  const statedFit = preferences?.fit ? normalize(preferences.fit) : null;
   const avoidedColors = (preferences?.avoidedColors ?? []).map(normalize);
 
   const preferredAesthetics: string[] = [];
@@ -210,7 +226,7 @@ export function interpretContext(context: RecommendationContext, store: Knowledg
     ageRange: demographics?.ageRange ?? null,
     preferredColors,
     avoidedColors,
-    fit: preferences?.fit ? normalize(preferences.fit) : null,
+    fit: statedFit ? recognizeFit(statedFit) : null,
     comfortPriority: preferences?.comfortPriority ? normalize(preferences.comfortPriority) : null,
     preferredAesthetics,
     unmatchedPreferences,
@@ -242,6 +258,7 @@ export function interpretContext(context: RecommendationContext, store: Knowledg
     );
   }
   if (preferredColors.length > 0) explicitPreferences.push(`Preferred colors: ${preferredColors.join(", ")}`);
+  if (unusableColors.length > 0) explicitPreferences.push(`Preferred colors not used as color names: ${unusableColors.join(", ")}`);
   if (signals.fit) explicitPreferences.push(`Fit: ${signals.fit}`);
   if (signals.comfortPriority) explicitPreferences.push(`Comfort: ${signals.comfortPriority}`);
   for (const phrase of preferences?.preferredAesthetics ?? []) {
@@ -260,8 +277,9 @@ export function interpretContext(context: RecommendationContext, store: Knowledg
   const unknowns: string[] = [];
   if (!signals.genderExpression) unknowns.push("Gender expression not stated: keep every direction open to any expression");
   if (!signals.ageRange) unknowns.push("Age range not stated");
-  if (preferredColors.length === 0 && avoidedColors.length === 0) unknowns.push("No color preferences stated");
-  if (!signals.fit) unknowns.push("Preferred fit not stated");
+  if (statedColors.length === 0 && avoidedColors.length === 0) unknowns.push("No color preferences stated");
+  if (!statedFit) unknowns.push("Preferred fit not stated");
+  else if (!signals.fit) unknowns.push("Stated fit names no recognized fit term; it is kept as stated in the request");
   if ((preferences?.preferredAesthetics ?? []).length === 0) unknowns.push("No aesthetic preference stated");
   if (!rule) unknowns.push(`Occasion not recognized: assuming formality ${band[0]}–${band[1]}`);
   if (lifestyleFormality === undefined) unknowns.push("Lifestyle formality not recognized");

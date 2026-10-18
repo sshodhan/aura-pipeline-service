@@ -122,6 +122,18 @@ aesthetic preference are listed when absent, never defaulted.
   each record's `profile.preferenceTerms`.
 - Phrases that match nothing are kept in `unmatchedPreferences`, never
   guessed at.
+- A stated fit maps to the first fit term it contains (`FIT_TERMS`:
+  relaxed, oversized, loose, regular, slim, fitted, tailored, structured,
+  wide, cropped, straight, boxy, flowing). One that names none becomes an
+  unknown.
+- Only plain color phrases (letters, spaces, hyphens; at most 30 characters)
+  become `preferredColors`. Anything else is listed as "not used as color
+  names".
+
+  In both cases the original text still reaches a model, inside the request
+  data block, but it never becomes a garment attribute. The end-to-end
+  harness found this: free text in these fields used to flow straight into
+  garment names.
 
 ---
 
