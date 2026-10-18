@@ -532,4 +532,5 @@ Byte-identical strings on refetch (A8.1) need storage and are Phase 5.
 | How should a dress-only look fill `lowerBody`, which the consumer requires? | Undecided. The keyless template never produces dresses; a model writer may. Options: the adapter states the dress covers both slots, or consumer requests exclude dresses. |
 | How should a look with no outer layer (warm, dry weather) fill `outerwear`? | Undecided. Options: use the mid layer or an accessory, or agree a "no outer layer needed" string. |
 | Where do accessories without a consumer slot go (scarf, beanie, cap)? | Undecided; today they would be dropped by the adapter. |
+| Should the consumer show Phase 4's rubric scores or the `low_confidence` flag ([`QUALITY_CURATION.md`](./QUALITY_CURATION.md))? | No for scores: they are uncalibrated and meant for evaluation. A `low_confidence` outfit is still a valid look and is returned so the collection keeps three; whether the app hides, labels or reorders it is undecided. |
 | Are color-energy palettes equivalent across the two repos? | Not compared. Resolve when the knowledge store defines the aesthetic vocabulary. |

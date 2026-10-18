@@ -14,6 +14,7 @@ export const HARNESS_SECTIONS = [
   "phase1-knowledge",
   "phase2-concepts",
   "phase3-outfits",
+  "phase4-quality",
   "input-parity",
   "fixture-expectations",
   "adversarial",
