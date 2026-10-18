@@ -31,12 +31,12 @@ const CONSTRAINT_PATTERNS: Partial<Record<ConstraintCode, RegExp[]>> = {
   performance: [/\b(technical|performance|wicking|moisture|stretch|running (shoes|tights|shorts|jacket|layer))\b/],
 };
 
-const MINOR_UNSAFE = /\b(sexy|sultry|seductive|sheer|see[- ]through|plunging|low[- ]cut|bodycon|cut[- ]?outs?|lingerie|corset\w*|micro[- ]?mini|backless|bralette|revealing)\b/;
-const TREND_CLAIM = /\b(trend\w*|on-trend|viral|it[- ](bag|girl|piece)|runways?|catwalk|this season'?s?|of the moment|currently popular|everyone is wearing|must[- ]have)\b/;
-const LOCAL_CLAIM = /\b(locals|local (style|fashion|uniform|taste|dress\w*)|parisians?|londoners?|new yorkers?|angelenos?|milanese|chicagoans?|bostonians?|seattleites?|portlanders?|austinites?|nashvillians?|atlantans?|miamians?|denverites?|san franciscans?)\b/;
+export const MINOR_UNSAFE = /\b(sexy|sultry|seductive|sheer|see[- ]through|plunging|low[- ]cut|bodycon|cut[- ]?outs?|lingerie|corset\w*|micro[- ]?mini|backless|bralette|revealing)\b/;
+export const TREND_CLAIM = /\b(trend\w*|on-trend|viral|it[- ](bag|girl|piece)|runways?|catwalk|this season'?s?|of the moment|currently popular|everyone is wearing|must[- ]have)\b/;
+export const LOCAL_CLAIM = /\b(locals|local (style|fashion|uniform|taste|dress\w*)|parisians?|londoners?|new yorkers?|angelenos?|milanese|chicagoans?|bostonians?|seattleites?|portlanders?|austinites?|nashvillians?|atlantans?|miamians?|denverites?|san franciscans?)\b/;
 
 /** Words that sound like taste but carry no direction. */
-const HOLLOW = new Set([
+export const HOLLOW = new Set([
   "stylish", "chic", "trendy", "perfect", "perfectly", "elegant", "effortless", "effortlessly", "timeless", "fashionable",
   "sophisticated", "flattering", "beautiful", "gorgeous", "iconic", "versatile", "cool", "fresh", "modern", "amazing",
   "stunning", "sleek", "classy", "fabulous", "great", "nice", "polished", "elevated",
@@ -52,7 +52,7 @@ const STOPWORDS = new Set([
   "about", "through", "rather", "like", "look", "looks", "wear", "worn", "wearing", "piece", "pieces", "outfit",
 ]);
 
-const words = (text: string) => text.toLowerCase().match(/[a-z][a-z'-]*/g) ?? [];
+export const words = (text: string) => text.toLowerCase().match(/[a-z][a-z'-]*/g) ?? [];
 const contentTokens = (text: string) => new Set(words(text).filter((w) => w.length >= 3 && !STOPWORDS.has(w)));
 
 function jaccard(a: Set<string>, b: Set<string>): number {
@@ -76,6 +76,12 @@ const LOOK_FIELDS = ["title", "aestheticThesis", "silhouetteDirection", "proport
 /** Text used for distinctness: what the look is, not the shared weather and context reasoning. */
 const identityText = (d: ConceptDraft) =>
   [d.title, d.aestheticThesis, d.silhouetteDirection, d.proportionDirection, d.paletteDirection, ...d.definingDetails].join(" ");
+
+/** A city- or region-authority claim ("Parisian", "locals", "<city> style"), checked when there is no regional evidence. */
+export function makesLocalClaim(text: string, city: string): boolean {
+  const cityClaim = new RegExp(`\\b${escapeRegex(city.toLowerCase())}('s)?\\s+(\\w+\\s+)?(style|fashion|dressers?|dressing|chic|uniform|aesthetic|crowd|wardrobe|sensibility)\\b`);
+  return LOCAL_CLAIM.test(text) || cityClaim.test(text);
+}
 
 export interface ValidationInput {
   interpreted: InterpretedContext;
@@ -153,8 +159,7 @@ export function validateCollection(drafts: ConceptDraft[], input: ValidationInpu
     if (!input.hasContemporaryEvidence && TREND_CLAIM.test(text)) {
       issues.push({ code: "unsupported_claim", role, message: "makes a trend claim without contemporary evidence" });
     }
-    const cityClaim = new RegExp(`\\b${escapeRegex(s.city.toLowerCase())}('s)?\\s+(\\w+\\s+)?(style|fashion|dressers?|dressing|chic|uniform|aesthetic|crowd|wardrobe|sensibility)\\b`);
-    if (!input.hasRegionalEvidence && (LOCAL_CLAIM.test(text) || cityClaim.test(text))) {
+    if (!input.hasRegionalEvidence && makesLocalClaim(text, s.city)) {
       issues.push({ code: "unsupported_claim", role, message: "makes a city or regional style claim without regional evidence" });
     }
 
