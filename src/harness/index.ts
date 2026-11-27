@@ -54,6 +54,8 @@ export interface HarnessOptions {
   outfitWriter?: OutfitWriter;
   sleep?: (ms: number) => Promise<void>;
   gitCommit?: string | null;
+  /** Receives each scenario's collection, so the outfits the report asks a person to read can be saved. */
+  onCollection?: (scenarioId: string, collection: RecommendationCollection) => void;
 }
 
 const noSleep = async () => {};
@@ -133,6 +135,7 @@ export async function runHarness(options: HarnessOptions): Promise<HarnessReport
     const id = scenario.id;
     const c = await recommend(scenario.context, store, { conceptWriter, outfitWriter, asOf, region: regionForScenario(scenario), sleep: options.sleep });
     collections.set(id, c);
+    options.onCollection?.(id, c);
     modelCalls += c.diagnostics.totalModelCalls;
     if (c.diagnostics.concepts.generationMode === "template_fallback") conceptFallbacks++;
     if (c.diagnostics.outfits?.generationMode === "template_fallback") outfitFallbacks++;

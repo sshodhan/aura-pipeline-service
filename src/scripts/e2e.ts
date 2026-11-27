@@ -68,10 +68,12 @@ async function main() {
     outfitWriter = new ModelOutfitWriter(model, args.model);
   }
 
-  const report = await runHarness({ store: loadKnowledge(), scenarios: loadScenarios(), asOf: args.asOf, conceptWriter, outfitWriter, gitCommit: gitCommit() });
   const stamp = new Date().toISOString().replace(/[:.]/g, "-");
   const out = resolve(args.out ?? join("baselines", "local", `e2e-${args.writer}-${stamp}`));
-  mkdirSync(out, { recursive: true });
+  mkdirSync(join(out, "scenarios"), { recursive: true });
+  // The collections the checks ran on, so a person can read exactly those outfits (a later run would differ with a model).
+  const onCollection = (id: string, collection: unknown) => writeFileSync(join(out, "scenarios", `${id}.json`), JSON.stringify(collection, null, 2) + "\n");
+  const report = await runHarness({ store: loadKnowledge(), scenarios: loadScenarios(), asOf: args.asOf, conceptWriter, outfitWriter, gitCommit: gitCommit(), onCollection });
   writeFileSync(join(out, "report.json"), JSON.stringify(report, null, 2) + "\n");
   const md = renderHarnessMarkdown(report);
   writeFileSync(join(out, "report.md"), md);

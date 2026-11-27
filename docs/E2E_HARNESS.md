@@ -20,8 +20,10 @@ npm run e2e -- --as-of 2026-10-18 --out <dir>
 GEMINI_API_KEY=… npm run e2e -- --writer gemini     # phases 2–3 on a real model
 ```
 
-Output goes to `baselines/local/e2e-<writer>-<timestamp>/report.json` and
-`report.md` (git-ignored). `tests/unit/e2e-harness.test.ts` runs the full
+Output goes to `baselines/local/e2e-<writer>-<timestamp>/` (git-ignored):
+`report.json`, `report.md`, and `scenarios/<id>.json` with the collection
+each scenario's checks ran on, so the outfits a person is asked to read are
+the ones the report describes (a second model run would differ). `tests/unit/e2e-harness.test.ts` runs the full
 template harness on every `npm test`. It also proves the harness fails when
 an outfit stage is broken.
 

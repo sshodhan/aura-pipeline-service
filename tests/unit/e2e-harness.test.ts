@@ -94,5 +94,9 @@ describe("harness building blocks", () => {
     const report = JSON.parse(readFileSync(join(out, "report.json"), "utf8"));
     expect(report.totals.fail).toBe(0);
     expect(readFileSync(join(out, "report.md"), "utf8")).toMatch(/End-to-end validation report/);
+    // The collections the checks ran on are saved for the manual review the report asks for.
+    const saved = readdirSync(join(out, "scenarios"));
+    expect(saved).toHaveLength(20);
+    expect(JSON.parse(readFileSync(join(out, "scenarios", "chicago-work-snow.json"), "utf8")).recommendations).toHaveLength(3);
   }, 60_000);
 });
