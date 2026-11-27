@@ -1,5 +1,5 @@
 {
-  "knowledgeVersion": "fashion-2026-10.2",
+  "knowledgeVersion": "fashion-2026-10.3",
   "releases": [
     {
       "version": "fashion-2026-10.1",
@@ -12,6 +12,12 @@
       "contentHash": "f3e40dd9f207b0cede86cee2fea00f141fea4b3af32286cd80a7897c60795739",
       "releasedAt": "2026-10-14",
       "notes": "Adds planning profiles (formality range, climate bands, expressiveness, palette, preference terms) to all 11 aesthetic references for Phase 2 direction planning. relaxed-coastal now applies in any season, governed by its warm/hot climate profile. Aura editorial, provisional."
+    },
+    {
+      "version": "fashion-2026-10.3",
+      "contentHash": "76ee0aa69417e0aa67b01c4d6f55abb1e448e7f372cc98fbbb9f616e875f3cf0",
+      "releasedAt": "2026-10-18",
+      "notes": "Adds garment vocabularies (193 options: category, type, material, fit, layer, climates, formality, weather protection) to the 11 aesthetic profiles for Phase 3 outfit composition. Every aesthetic meets the coverage rule for the climates and formality levels it claims. Aura editorial, provisional."
     }
   ],
   "counts": {

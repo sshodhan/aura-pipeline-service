@@ -46,3 +46,20 @@ export class ScriptedModel implements TextGenerationModel {
     };
   }
 }
+
+/** Template outfits for a scenario as a model would return them (no ids or versions), plus the collection. */
+export async function templateOutfitJson(s: Scenario) {
+  const { recommend } = await import("../../src/engine/recommend");
+  const { TemplateOutfitWriter } = await import("../../src/engine/outfit-writer");
+  const c = await recommend(s.context, store, {
+    conceptWriter: new TemplateConceptWriter(),
+    outfitWriter: new TemplateOutfitWriter(),
+    asOf: AS_OF,
+    region: regionForScenario(s),
+  });
+  const outfits = c.recommendations.map(({ outfit }) => {
+    const { id: _id, conceptId: _c, knowledgeVersion: _v, garments, ...rest } = outfit;
+    return { ...rest, garments: garments.map(({ id: _g, ...g }) => g) };
+  });
+  return { json: JSON.stringify({ outfits }), outfits, collection: c };
+}

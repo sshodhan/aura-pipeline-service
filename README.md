@@ -841,6 +841,7 @@ aura-pipeline-service/
 - [Phase 0 baseline](./docs/PHASE_0_BASELINE.md)
 - [Fashion knowledge store (Phase 1)](./docs/FASHION_KNOWLEDGE.md)
 - [Style direction engine (Phase 2)](./docs/STYLE_DIRECTIONS.md)
+- [Outfit composition (Phase 3)](./docs/OUTFIT_COMPOSITION.md)
 
 - [SIGNAL_CONTRACT.md](./SIGNAL_CONTRACT.md) - Client-service signal agreement
 - [SIGNAL_ARCHITECTURE_ROADMAP.md](./SIGNAL_ARCHITECTURE_ROADMAP.md) - Full architecture vision

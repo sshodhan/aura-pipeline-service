@@ -490,6 +490,37 @@ whenever the same recommendation is fetched again.
 - **`_prompt`.** No UI reads it, and the design requires that prompts are
   never exposed (see the design doc §6).
 
+#### A8.5 Mapping from the service's outfits (Planned, consumer-owned)
+
+Phase 3 (`docs/OUTFIT_COMPOSITION.md`) produces `OutfitSpec` garments with
+category, layer, color, material, fit, a display `name` and a per-garment
+`why`. A consumer adapter could fill `OutfitSuggestion` without another
+garment call, as follows. This adapter is **Planned** and owned by the
+consumer; the service does not implement it.
+
+| `OutfitSuggestion` field | Source in the service's `OutfitSpec` |
+|---|---|
+| `baseLayer`, `baseLayerWhy` | The base-layer `top` (or the `dress`): `name`, `why` |
+| `lowerBody`, `lowerBodyWhy` | The `bottom`: `name`, `why` (see A9: dress-only looks) |
+| `outerwear`, `outerwearWhy` | The `outer` layer, else the `mid` layer (see A9: looks with no layer) |
+| `footwear`, `footwearWhy` | The `footwear`: `name`, `why` |
+| `hat` / `sunglasses` / `bracelet` (+ `*Why`) | Accessories whose type matches; other accessories have no consumer slot |
+| `styleReasoning` | `stylingRationale` |
+| `proTip` | `proTip` |
+| `weatherStory` | `weatherNotes` |
+| `lookTitle` | `title` |
+| `activity`, `coffeeSpot`, `storeType` | Not produced (see A9) |
+
+**What the service guarantees, and tests (`tests/unit/outfit-compose.test.ts`):**
+
+- every garment `name` contains its color word and has no `.`;
+- every garment has a `why`;
+- every outfit has footwear, plus a top or a dress;
+- every pair of outfits differs in at least two core garments (the Aisle rule
+  in A6).
+
+Byte-identical strings on refetch (A8.1) need storage and are Phase 5.
+
 ### A9. Open questions (Assumptions to resolve before any integration)
 
 | Question | Current assumption |
@@ -498,4 +529,7 @@ whenever the same recommendation is fetched again.
 | Should the service accept the consumer's teen categories? | No. They map to a lifestyle plus an age constraint at the adapter. |
 | How do Aisle directions map to collection roles? | Default slot → `best_bet`; alternative slots → `adjacent` and `exploration`. Fixed per-persona directions are replaced by the service's planner. |
 | Is `gemini-2.0-flash` still served? | Unknown. Phase 0 verifies this. |
+| How should a dress-only look fill `lowerBody`, which the consumer requires? | Undecided. The keyless template never produces dresses; a model writer may. Options: the adapter states the dress covers both slots, or consumer requests exclude dresses. |
+| How should a look with no outer layer (warm, dry weather) fill `outerwear`? | Undecided. Options: use the mid layer or an accessory, or agree a "no outer layer needed" string. |
+| Where do accessories without a consumer slot go (scarf, beanie, cap)? | Undecided; today they would be dropped by the adapter. |
 | Are color-energy palettes equivalent across the two repos? | Not compared. Resolve when the knowledge store defines the aesthetic vocabulary. |

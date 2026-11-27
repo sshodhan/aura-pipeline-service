@@ -333,6 +333,8 @@ needs a Gemini run and a human read of its 60 concepts.
 
 ## 9. What Phase 3 can consume
 
+Phase 3 now uses these; see [`OUTFIT_COMPOSITION.md`](./OUTFIT_COMPOSITION.md).
+
 All of the following is **Implemented**:
 
 | Use | API |

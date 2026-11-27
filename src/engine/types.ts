@@ -222,7 +222,8 @@ export interface WriterAttempt {
   latencyMs: number;
   outcome: "ok" | "provider_error" | "parse_error" | "schema_error" | "validation_failed";
   error?: string;
-  issueCodes?: IssueCode[];
+  /** Validation issue codes (concept or outfit stage). */
+  issueCodes?: string[];
   usage?: { promptTokens?: number; outputTokens?: number; totalTokens?: number };
 }
 

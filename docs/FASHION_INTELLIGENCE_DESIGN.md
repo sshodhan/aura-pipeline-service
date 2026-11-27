@@ -82,6 +82,10 @@ These interfaces come from the original design brief.
   - `InterpretedContext` and `StyleConcept`: Phase 2, in
     `src/engine/types.ts`, with additions in
     [`STYLE_DIRECTIONS.md`](./STYLE_DIRECTIONS.md) §2.
+  - The garment specification and recommendation collection (`GarmentSpec`,
+    `OutfitSpec`, `RecommendationCollection`): Phase 3, in
+    `src/engine/outfit-types.ts`; see
+    [`OUTFIT_COMPOSITION.md`](./OUTFIT_COMPOSITION.md) §2.
 - **Planned:** the rest. Later phases should implement them, or document any
   deviation.
 
