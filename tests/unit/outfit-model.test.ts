@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { buildOutfitPrompt } from "../../src/engine/outfit-prompt";
+import { outfitDraftSchema } from "../../src/engine/outfit-types";
 import { ModelOutfitWriter, TemplateOutfitWriter } from "../../src/engine/outfit-writer";
 import { recommend } from "../../src/engine/recommend";
 import { ModelConceptWriter, TemplateConceptWriter } from "../../src/engine/writer";
@@ -89,6 +90,54 @@ describe("outfit stage with a model writer", () => {
     });
     expect(c.status).toBe("ok");
     expect(c.diagnostics.totalModelCalls).toBe(2);
+  });
+});
+
+describe("template outfits from model-written concepts", () => {
+  it("stay within the outfit schema when concept text is as long as its own schema allows", async () => {
+    const s = scenario("paris-dinner-mild");
+    const { concepts } = JSON.parse(await templateDraftJson(s)) as { concepts: Record<string, unknown>[] };
+    const long = (seed: string, max: number) => {
+      let t = seed;
+      while (t.length + seed.length + 1 <= max) t += ` ${seed}`;
+      return t;
+    };
+    const stretched = concepts.map((c) => ({
+      ...c,
+      title: long("Soft structure and considered layers", 80),
+      proportionDirection: long("A longer jacket over a straight trouser keeps the line unbroken from shoulder to hem.", 400),
+    }));
+    const conceptModel = new ScriptedModel([JSON.stringify({ concepts: stretched })]);
+    const c = await recommend(s.context, store, {
+      conceptWriter: new ModelConceptWriter(conceptModel, "m"),
+      outfitWriter: new TemplateOutfitWriter(),
+      asOf: AS_OF,
+      region: regionForScenario(s),
+      sleep: noSleep,
+    });
+    expect(c.diagnostics.concepts.generationMode).toBe("model");
+    expect(c.status, c.errors.join("; ")).toBe("ok");
+    for (const { outfit } of c.recommendations) {
+      expect(outfit.title.length).toBeLessThanOrEqual(80);
+      expect(outfit.proportionStrategy.length).toBeLessThanOrEqual(400);
+      const { id: _i, conceptId: _c, knowledgeVersion: _k, garments, ...rest } = outfit;
+      expect(outfitDraftSchema.safeParse({ ...rest, garments: garments.map(({ id: _g, ...g }) => g) }).success).toBe(true);
+    }
+  });
+});
+
+describe("hard constraints the template cannot meet", () => {
+  it("are reported as constraints_unmet with their issues, never as ok", async () => {
+    const s = scenario("chicago-work-snow");
+    const context = { ...s.context, preferences: { ...s.context.preferences, preferredAesthetics: ["romantic"] } };
+    const c = await recommend(context, store, { conceptWriter: new TemplateConceptWriter(), outfitWriter: new TemplateOutfitWriter(), asOf: AS_OF, region: regionForScenario(s) });
+    expect(c.recommendations[0]?.concept.aesthetic).toBe("romantic");
+    expect(c.validation.outfits?.passed).toBe(false);
+    expect(c.status).toBe("constraints_unmet");
+    expect(c.recommendations).toHaveLength(3);
+    expect(c.errors.join("\n")).toMatch(/best_bet: missing_constraint \(rain_protection\)/);
+    // The benchmark fixtures are unaffected.
+    expect((await recommend(s.context, store, { conceptWriter: new TemplateConceptWriter(), outfitWriter: new TemplateOutfitWriter(), asOf: AS_OF, region: regionForScenario(s) })).status).toBe("ok");
   });
 });
 

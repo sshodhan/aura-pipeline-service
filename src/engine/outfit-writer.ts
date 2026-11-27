@@ -11,6 +11,8 @@
  *   (src/engine/outfit-prompt.ts). composeOutfits owns the budget.
  */
 
+import { z } from "zod";
+
 import type { RecommendationContext } from "../baseline/fixtures";
 import type { TextGenerationModel } from "../pipeline/core/generate-outfits";
 import type { GarmentOption, GarmentProtection } from "../knowledge/schema";
@@ -18,7 +20,7 @@ import type { KnowledgeHit, KnowledgeStore } from "../knowledge/store";
 import { GARMENT_PATTERNS as P, climateDistance, templateUsable } from "./garments";
 import { OCCASION_LABEL, capitalize, composePalette, list, mentionsAny } from "./palette";
 import { buildOutfitPrompt, parseOutfitResponse } from "./outfit-prompt";
-import type { GarmentDraft, OutfitDraft, OutfitIssue } from "./outfit-types";
+import { garmentDraftSchema, outfitDraftSchema, type GarmentDraft, type OutfitDraft, type OutfitIssue } from "./outfit-types";
 import type { ConceptRole, InterpretedContext, StyleConcept, WriterAttempt } from "./types";
 
 export interface OutfitWriteRequest {
@@ -49,6 +51,33 @@ export interface OutfitWriter {
 // Template writer
 // =============================================================================
 
+/** The schema's maximum length for a text field (unwrapping optional fields). */
+const maxLength = (field: z.ZodTypeAny): number => {
+  const inner = field instanceof z.ZodOptional ? field.unwrap() : field;
+  return (inner as z.ZodString).maxLength ?? Number.MAX_SAFE_INTEGER;
+};
+
+/** Cuts text to `max` characters at a word boundary, without trailing punctuation. */
+function clamp(text: string, max: number): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const space = cut.lastIndexOf(" ");
+  return (space > max * 0.6 ? cut.slice(0, space) : cut).replace(/[\s,;:—-]+$/, "");
+}
+
+/** `base` plus `suffix` when both fit; otherwise `base` alone, clamped. */
+const within = (base: string, suffix: string, max: number) => (base.length + suffix.length <= max ? base + suffix : clamp(base, max));
+
+/**
+ * Template text is built from concept text, which a model may have written up to its own schema's limits, so
+ * every text field is held to the outfit schema's limits rather than trusted to fit.
+ */
+function fitToSchema(draft: OutfitDraft): OutfitDraft {
+  const fit = <T extends Record<string, unknown>>(obj: T, shape: Record<string, z.ZodTypeAny>): T =>
+    Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, typeof v === "string" && shape[k] ? clamp(v, maxLength(shape[k]!)) : v])) as T;
+  return { ...fit(draft, outfitDraftSchema.shape), garments: draft.garments.map((g) => fit(g, garmentDraftSchema.shape)) };
+}
+
 type Slot = "top" | "mid" | "outer" | "bottom" | "footwear" | "accessory";
 
 const ROLE_NOTE: Record<ConceptRole, string> = {
@@ -78,7 +107,7 @@ export class TemplateOutfitWriter implements OutfitWriter {
   async write(request: OutfitWriteRequest): Promise<OutfitWriteResult> {
     const startedAt = Date.now();
     const used = new Map<string, Set<string>>(); // category → garment types used by earlier outfits
-    const drafts = request.concepts.map((c) => this.outfit(c, request, used));
+    const drafts = request.concepts.map((c) => fitToSchema(this.outfit(c, request, used)));
     return { drafts, outcome: "ok", latencyMs: Date.now() - startedAt };
   }
 
@@ -172,10 +201,14 @@ export class TemplateOutfitWriter implements OutfitWriter {
     return {
       role: concept.role,
       aesthetic: concept.aesthetic,
-      title: `${concept.title} for ${OCCASION_LABEL[s.occasionKind]}`,
+      title: within(concept.title, ` for ${OCCASION_LABEL[s.occasionKind]}`, maxLength(outfitDraftSchema.shape.title)),
       garments,
       layering: this.layering(find),
-      proportionStrategy: `${concept.proportionDirection} Here the ${find("bottom")?.option.type ?? "bottom"} and the ${find("top")?.option.type ?? "top"} carry it.`,
+      proportionStrategy: within(
+        concept.proportionDirection,
+        ` Here the ${find("bottom")?.option.type ?? "bottom"} and the ${find("top")?.option.type ?? "top"} carry it.`,
+        maxLength(outfitDraftSchema.shape.proportionStrategy)
+      ),
       colorStrategy: this.colorStrategy(find),
       textureStrategy: `${capitalize(list([...new Set(choices.map((c) => c.option.material))]))}: different surfaces keep a ${base.length > 0 ? "restrained" : "tonal"} palette from looking flat.`,
       stylingRationale:

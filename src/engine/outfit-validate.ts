@@ -15,7 +15,7 @@
 import { GARMENT_PATTERNS as P, NOT_FORMAL, TOO_CASUAL, garmentText } from "./garments";
 import { escapeRegex } from "./palette";
 import { HOLLOW, MINOR_UNSAFE, TREND_CLAIM, makesLocalClaim, words } from "./validate";
-import { MAX_GARMENTS, MIN_GARMENTS, type GarmentDraft, type OutfitDraft, type OutfitIssue, type OutfitValidation } from "./outfit-types";
+import { MAX_GARMENTS, MIN_GARMENTS, outfitDraftSchema, type GarmentDraft, type OutfitDraft, type OutfitIssue, type OutfitValidation } from "./outfit-types";
 import { ROLES, type ConceptRole, type InterpretedContext, type StyleConcept } from "./types";
 
 export interface OutfitValidationInput {
@@ -66,6 +66,14 @@ export function validateOutfits(drafts: OutfitDraft[], input: OutfitValidationIn
   for (const role of ROLES) {
     const count = drafts.filter((d) => d.role === role).length;
     if (count !== 1) add({ code: "outfit_coverage", role, message: `expected one ${role} outfit, found ${count}` });
+  }
+
+  // The published contract: lengths, enums and required fields (template output is not parsed anywhere else).
+  for (const o of drafts) {
+    const parsed = outfitDraftSchema.safeParse(o);
+    if (!parsed.success) {
+      for (const i of parsed.error.issues.slice(0, 3)) add({ code: "outfit_schema", role: o.role, message: `${i.path.join(".")}: ${i.message}` });
+    }
   }
 
   for (const o of drafts) {

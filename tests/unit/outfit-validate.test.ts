@@ -51,6 +51,7 @@ describe("outfit validator: negative cases", () => {
       [editOutfit(outfits, "exploration", { stylingRationale: "Velvet is trending this season, so this is the look of the moment for the office." }), "unsupported_claim"],
       [editOutfit(outfits, "exploration", { proTip: "Dress like Chicago style insiders: a bold coat over everything." }), "unsupported_claim"],
       [[outfits[0]!, outfits[1]!, { ...outfits[0]!, role: "exploration", aesthetic: outfits[2]!.aesthetic }], "not_distinct_garments"],
+      [editOutfit(outfits, "best_bet", { title: `${outfits[0]!.title} ${"and more ".repeat(10)}` }), "outfit_schema"],
     ];
     for (const [drafts, code] of cases) expect(codes(check(drafts)), code).toContain(code);
   });
