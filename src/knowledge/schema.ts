@@ -89,7 +89,14 @@ const plainText = (min: number, max: number) =>
     .refine((t) => findInstructionLikeText(t) === null, "Instruction-like text is not allowed in evidence");
 
 const slug = z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, "lowercase-hyphenated slug");
-const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "YYYY-MM-DD");
+/** A real calendar date: "2026-13-01" and "2026-02-30" are rejected (Date.parse yields NaN or rolls over). */
+const isoDate = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, "YYYY-MM-DD")
+  .refine((d) => {
+    const t = Date.parse(`${d}T00:00:00Z`);
+    return !Number.isNaN(t) && new Date(t).toISOString().slice(0, 10) === d;
+  }, "not a real calendar date");
 const term = z.string().min(1).max(60).regex(/^[a-z0-9][a-z0-9 '&/-]*$/, "lowercase term");
 
 // =============================================================================

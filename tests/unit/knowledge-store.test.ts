@@ -102,6 +102,21 @@ describe("release discipline", () => {
     expect(() => prepareRelease(readKnowledge(bad), VERSION, "2026-10-09", "bad")).toThrow(/fix content problems/);
   });
 
+  it("refuses to release over an existing snapshot it cannot read, keeping its history", () => {
+    for (const corrupt of ["{ not json", JSON.stringify({ knowledgeVersion: VERSION, releases: "oops" })]) {
+      const dir = released({ "x.json": [a] });
+      writeFileSync(join(dir, "evidence", "x.json"), JSON.stringify([{ ...a, title: "Edited" }]));
+      writeFileSync(join(dir, "snapshot.json"), corrupt);
+      const read = readKnowledge(dir);
+      expect(read.snapshotStatus).toBe("invalid");
+      expect(() => prepareRelease(read, "fashion-2026-10.2", "2026-10-10", "edit")).toThrow(/snapshot\.json exists but is invalid/);
+    }
+    // A genuinely missing snapshot is still a first release.
+    const fresh = writeCorpus({ "x.json": [a] });
+    expect(readKnowledge(fresh).snapshotStatus).toBe("missing");
+    expect(prepareRelease(readKnowledge(fresh), VERSION, "2026-10-09", "first").releases).toHaveLength(1);
+  });
+
   it("requires every record to cite a released version", () => {
     const dir = released({ "x.json": [a] });
     writeFileSync(join(dir, "evidence", "x.json"), JSON.stringify([{ ...a, knowledgeVersion: "fashion-2099-01.1" }]));

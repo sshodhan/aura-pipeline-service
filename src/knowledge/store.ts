@@ -84,6 +84,8 @@ export function countByType(evidence: FashionEvidence[]): Record<EvidenceType, n
 
 export interface KnowledgeReadResult {
   snapshot: KnowledgeSnapshot | null;
+  /** "invalid" means snapshot.json exists but could not be read or validated; its release history must not be replaced. */
+  snapshotStatus: "valid" | "missing" | "invalid";
   sources: KnowledgeSource[];
   evidence: FashionEvidence[];
   /** Canonical hash of the parsed content on disk. */
@@ -113,11 +115,13 @@ export function readKnowledge(dir: string = DEFAULT_KNOWLEDGE_DIR): KnowledgeRea
   const releaseIssues: string[] = [];
 
   let snapshot: KnowledgeSnapshot | null = null;
+  let snapshotStatus: KnowledgeReadResult["snapshotStatus"] = "missing";
   const snapshotPath = join(dir, "snapshot.json");
   if (!existsSync(snapshotPath)) releaseIssues.push("snapshot.json is missing; run npm run knowledge:release");
   else {
     const raw = readJson(snapshotPath, releaseIssues);
     const parsed = snapshotSchema.safeParse(raw);
+    snapshotStatus = parsed.success ? "valid" : "invalid";
     if (parsed.success) snapshot = parsed.data;
     else if (raw !== undefined) releaseIssues.push(...formatZod("snapshot", parsed.error));
   }
@@ -155,7 +159,7 @@ export function readKnowledge(dir: string = DEFAULT_KNOWLEDGE_DIR): KnowledgeRea
   issues.push(...checkIntegrity(sources, evidence));
   const contentHash = computeContentHash(sources, evidence);
   if (snapshot) releaseIssues.push(...checkReleaseDiscipline(snapshot, evidence, contentHash));
-  return { snapshot, sources, evidence, contentHash, issues, releaseIssues };
+  return { snapshot, snapshotStatus, sources, evidence, contentHash, issues, releaseIssues };
 }
 
 function checkIntegrity(sources: KnowledgeSource[], evidence: FashionEvidence[]): string[] {
@@ -235,7 +239,8 @@ function checkReleaseDiscipline(snapshot: KnowledgeSnapshot, evidence: FashionEv
 
 /**
  * Builds the next snapshot for a release. Refuses to reuse a version, to
- * release over content problems, or to release unchanged content.
+ * release over content problems or an unreadable snapshot (which would drop
+ * its release history), or to release unchanged content.
  */
 export function prepareRelease(
   read: KnowledgeReadResult,
@@ -244,6 +249,9 @@ export function prepareRelease(
   notes: string
 ): KnowledgeSnapshot {
   if (read.issues.length > 0) throw new Error(`Cannot release: fix content problems first:\n- ${read.issues.join("\n- ")}`);
+  if (read.snapshotStatus === "invalid") {
+    throw new Error("Cannot release: snapshot.json exists but is invalid; fix or restore it (e.g. from git) so its release history is kept");
+  }
   const release = releaseSchema.parse({ version, contentHash: read.contentHash, releasedAt, notes });
   const previous = read.snapshot?.releases ?? [];
   if (previous.some((r) => r.version === version)) throw new Error(`Version ${version} was already released; choose a new version`);

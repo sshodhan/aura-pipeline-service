@@ -73,6 +73,14 @@ describe("evidence schema: time sensitivity", () => {
     );
   });
 
+  it("rejects dates that are not on the calendar, so a typo cannot defeat expiry", () => {
+    for (const validUntil of ["2026-13-01", "2027-02-30", "2027-00-10"]) {
+      expect(errors(observedRecord({ validUntil }))).toContain("not a real calendar date");
+    }
+    expect(errors(observedRecord({ validUntil: "2027-02-28" }))).toEqual([]);
+    expect(errors(observedRecord({ validFrom: "2024-02-29", validUntil: "2025-02-28" }))).toEqual([]);
+  });
+
   it("regional influences must name a region; aesthetic references define one aesthetic", () => {
     expect(errors(editorialRecord({ type: "regional_influence", regions: ["global"] }))).toContain(
       "regional influences must name specific regions"
