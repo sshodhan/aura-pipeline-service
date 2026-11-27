@@ -105,16 +105,20 @@ export async function recommend(input: unknown, store: KnowledgeStore, options: 
         );
   const outfits = curated?.outfits ?? composed.outfits;
 
+  // A template that cannot cover a hard constraint (e.g. a stated aesthetic with no water-resistant coat in the rain)
+  // still returns outfits, but never as "ok": the unmet checks of the final outfits are reported instead.
+  const validation = curated?.validation ?? composed.validation;
+  const unmet = validation.issues.map((i) => `${i.role ?? "collection"}: ${i.code}${i.constraint ? ` (${i.constraint})` : ""}: ${i.message}`);
   return {
     ...base,
-    status: plan.status === "fallback" || composed.fellBack ? "fallback" : "ok",
+    status: !validation.passed ? "constraints_unmet" : plan.status === "fallback" || composed.fellBack ? "fallback" : "ok",
     recommendations: plan.concepts.map((concept) => {
       const quality = curated?.quality.assessments.find((a) => a.role === concept.role);
       return { role: concept.role, concept, outfit: outfits.find((o) => o.role === concept.role)!, ...(quality ? { quality } : {}) };
     }),
-    validation: { concepts: plan.validation, outfits: curated?.validation ?? composed.validation },
+    validation: { concepts: plan.validation, outfits: validation },
     quality: curated?.quality ?? null,
-    errors: [],
+    errors: unmet,
     diagnostics: {
       concepts: plan.diagnostics,
       outfits: composed.diagnostics,

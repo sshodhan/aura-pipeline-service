@@ -71,8 +71,14 @@ prompts, as they are in the consumer app today.
 
 - `schemaVersion`, `engineVersion`, `conceptEngineVersion`,
   `knowledgeVersion`;
-- `status`: `ok` | `fallback` | `invalid_request` | `insufficient_knowledge`;
-  `fallback` if either stage fell back;
+- `status`: `ok` | `fallback` | `constraints_unmet` | `invalid_request` |
+  `insufficient_knowledge`. `fallback` if either stage fell back.
+  `constraints_unmet` if the final outfits still fail a hard check: they are
+  returned, with each unmet check in `errors`, and must not be shown as valid.
+  The usual cause is a stated aesthetic whose garment vocabulary cannot cover
+  the weather (for example a romantic best bet in snow with no water-resistant
+  coat): 11 of 220 benchmark scenario × preferred-aesthetic pairs today. The
+  20 fixtures are unaffected;
 - `requestId`, `contextFingerprint`, `asOf`, `interpreted`, `selection`;
 - `recommendations[3]`;
 - `validation: {concepts, outfits}`, `errors`;
@@ -168,6 +174,7 @@ The checks are deterministic and structural:
 | `fit_not_honored` | A requested fit appears on a main garment |
 | `not_distinct_garments` | Every pair of outfits differs by garment type in at least **2 core slots** (top or dress, bottom, outer layer, footwear). This is the consumer Aisle gate's rule. |
 | `evidence_not_provided` / `unsupported_claim` / `minor_safety` | As in Phase 2: cited ids were provided; no city or trend claims without evidence; age-appropriate for minors |
+| `outfit_schema` | Every outfit conforms to the published draft schema (lengths, enums, required fields). Model output is parsed against it already; this also covers template output, whose text is built from concept text and is held to the schema's limits |
 
 **What this does not judge.**
 

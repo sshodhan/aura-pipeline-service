@@ -99,6 +99,7 @@ export const OUTFIT_ISSUE_CODES = [
   "evidence_not_provided",
   "unsupported_claim",
   "minor_safety",
+  "outfit_schema",
 ] as const;
 export type OutfitIssueCode = (typeof OUTFIT_ISSUE_CODES)[number];
 
@@ -131,7 +132,11 @@ export interface Recommendation {
   quality?: QualityAssessment;
 }
 
-export type RecommendationStatus = "ok" | "fallback" | "invalid_request" | "insufficient_knowledge";
+/**
+ * constraints_unmet: outfits were composed but at least one fails a hard check (usually the weather: a stated
+ * aesthetic whose garments cannot cover it). They are returned with the issues in `errors`; never present them as ok.
+ */
+export type RecommendationStatus = "ok" | "fallback" | "constraints_unmet" | "invalid_request" | "insufficient_knowledge";
 
 export interface RecommendationCollection {
   schemaVersion: typeof RECOMMENDATION_SCHEMA_VERSION;

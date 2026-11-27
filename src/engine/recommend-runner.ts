@@ -81,7 +81,7 @@ const percentile = (values: number[], p: number) => {
 };
 
 export function summarizeRecommendRun(results: RecommendScenarioResult[]): RecommendRunSummary {
-  const byStatus = { ok: 0, fallback: 0, invalid_request: 0, insufficient_knowledge: 0 };
+  const byStatus = { ok: 0, fallback: 0, constraints_unmet: 0, invalid_request: 0, insufficient_knowledge: 0 };
   const issueCounts: Record<string, number> = {};
   const modelCalls = { concepts: 0, outfits: 0, curation: 0, total: 0 };
   const fallbacks = { concepts: 0, outfits: 0 };
