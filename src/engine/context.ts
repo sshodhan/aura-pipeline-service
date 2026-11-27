@@ -91,10 +91,11 @@ interface OccasionRule {
 /** First match wins, so the more specific occasions come first ("running errands" is errands, not athletic). */
 const OCCASION_RULES: OccasionRule[] = [
   { kind: "errands", pattern: /\b(errand|errands|groceries|grocery|shopping)\b/, band: [1, 2], target: 2, strict: false },
-  { kind: "athletic", pattern: /\b(run|running|jog|jogging|gym|workout|work out|training|hike|hiking|yoga|cycling|climb|climbing)\b/, band: [1, 1], target: 1, strict: true },
+  // "active" and "home" are also the consumer's literal occasion values (CONSUMER_INTEGRATION_CONTRACT.md); matched only as the whole value.
+  { kind: "athletic", pattern: /^active$|\b(run|running|jog|jogging|gym|workout|work out|training|hike|hiking|yoga|cycling|climb|climbing)\b/, band: [1, 1], target: 1, strict: true },
   { kind: "formal_event", pattern: /\b(gala|black[- ]tie|wedding|ball|opera|formal|ceremony)\b/, band: [4, 5], target: 5, strict: true },
   { kind: "business", pattern: /\b(client|clients|interview|board|presentation|pitch|conference)\b/, band: [4, 4], target: 4, strict: true },
-  { kind: "home", pattern: /\b(from home|wfh|at home|lounging|lounge)\b/, band: [1, 2], target: 2, strict: false },
+  { kind: "home", pattern: /^home$|\b(from home|wfh|at home|lounging|lounge)\b/, band: [1, 2], target: 2, strict: false },
   { kind: "office", pattern: /\b(office|workday|work day|work|meeting|meetings)\b/, band: [3, 4], target: 3, strict: false },
   { kind: "date", pattern: /\bdate\b/, band: [2, 4], target: 3, strict: false },
   { kind: "dinner", pattern: /\b(dinner|restaurant|drinks|cocktails?|brunch|supper)\b/, band: [2, 4], target: 3, strict: false },

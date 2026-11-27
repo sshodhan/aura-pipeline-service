@@ -90,10 +90,10 @@ listed in code):
 | Kind | Band | Strict | Notes |
 |---|---|---|---|
 | errands | 1–2 | no | Listed first, so "running errands" is not a run |
-| athletic | 1 | yes | |
+| athletic | 1 | yes | Also the consumer's literal value `active` (whole value only) |
 | formal_event | 4–5 | yes | |
 | business | 4 | yes | |
-| home | 1–2 | no | |
+| home | 1–2 | no | Also the literal value `home` (whole value only), so "dinner at a friend's home" stays dinner |
 | office | 3–4 | no | |
 | date | 2–4 | no | |
 | dinner | 2–4 | no | |
