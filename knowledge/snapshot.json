@@ -1,0 +1,17 @@
+{
+  "knowledgeVersion": "fashion-2026-10.1",
+  "releases": [
+    {
+      "version": "fashion-2026-10.1",
+      "contentHash": "3328f0a83829876bac92ac91d70790fd552946de7b039d6b97d56c6312482716",
+      "releasedAt": "2026-10-09",
+      "notes": "Initial corpus: 13 timeless principles and 11 aesthetic references (Aura editorial, provisional). No contemporary or regional records: sources could not be read from this environment."
+    }
+  ],
+  "counts": {
+    "timeless_principle": 13,
+    "contemporary_observation": 0,
+    "regional_influence": 0,
+    "aesthetic_reference": 11
+  }
+}
