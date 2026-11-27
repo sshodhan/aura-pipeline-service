@@ -26,6 +26,10 @@ caching or API shapes:
 6. [`docs/FASHION_KNOWLEDGE.md`](docs/FASHION_KNOWLEDGE.md): the versioned fashion
    knowledge store (Phase 1): record model, freshness, release ledger, editorial
    workflow, and the APIs Phase 2 consumes.
+7. [`docs/STYLE_DIRECTIONS.md`](docs/STYLE_DIRECTIONS.md): the style direction
+   engine (Phase 2): context interpretation, deterministic direction
+   selection, the concept writers and their trust boundary, validation, the
+   call budget, and what Phase 3 consumes.
 
 Core principle: **Aura should be a compelling stylist before it becomes a
 personalized stylist.** Optimize for first-session recommendation quality, not
@@ -84,10 +88,15 @@ Run these from the repo root. No API keys, Redis or network are needed:
 | `npm run knowledge:status` | Validates the fashion knowledge corpus and release ledger; exit 1 on any problem |
 | `npm run knowledge:coverage` | Knowledge available to each benchmark scenario (reports gaps; no thresholds) |
 | `npm run knowledge:release -- --version V --notes N` | The only way to release a knowledge change (append-only ledger) |
+| `npm run concepts` | Runs the 20 fixtures through the style direction engine with the template writer and writes to `baselines/local/`. `--writer gemini` needs `GEMINI_API_KEY`. |
 | `npm run lint` | Fails: there is no ESLint config in the repo |
 | `cd ml-service && pytest` | Python tests for the ML service (`ml-service/tests/`) |
 
 `src/utils/config.ts` exits the process when `GEMINI_API_KEY` or
 `WEATHER_API_KEY` is unset. Code meant to run without keys belongs in
-`src/pipeline/core/`, `src/baseline/` or `src/knowledge/` and must not import `config`, directly
-or indirectly. `src/utils/logger.ts` is safe to import.
+`src/pipeline/core/`, `src/baseline/`, `src/knowledge/` or `src/engine/` and must not import
+`config`, directly or indirectly (`tests/unit/engine-plan.test.ts` checks this for the engine).
+`src/utils/logger.ts` is safe to import.
+
+User text is untrusted too. Pass request fields to a model only inside a data block
+(`renderRequestAsData`, `src/engine/prompt.ts`), and keep revision feedback to issue codes.
