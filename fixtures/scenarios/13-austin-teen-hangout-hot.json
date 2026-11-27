@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "austin-teen-hangout-hot",
+  "title": "Teen (15-18), creative hangout in Austin heat",
+  "context": {
+    "requestId": "austin-teen-hangout-hot",
+    "city": "Austin",
+    "occasion": "hanging out after school",
+    "lifestyle": "casual",
+    "weather": {
+      "temperatureC": 36,
+      "condition": "Clear",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "female",
+      "ageRange": "15-18"
+    },
+    "preferences": {
+      "preferredAesthetics": [
+        "creative"
+      ]
+    }
+  },
+  "weatherFixture": {
+    "humidity": 35,
+    "windKph": 10
+  },
+  "baselineMapping": {
+    "cityId": "austin-tx",
+    "persona": "casual",
+    "occasion": "hangout",
+    "vibe": "creative",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "clear",
+    "notes": "Preferred aesthetic 'creative' maps to the creative vibe; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Age-appropriate for a teenager",
+    "Heat-appropriate for 36°C",
+    "Creative, expressive styling",
+    "Garments consistent with the stated gender expression (female) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "No age guardrails exist in the pipeline (the consumer applies a strict teen guardrail)",
+    "Gender expression and age range are not passed to generation",
+    "Retrieved only through the fuzzy KEYS scan"
+  ]
+}

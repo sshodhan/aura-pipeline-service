@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "sf-work-fog",
+  "title": "Non-binary, 26-35, foggy office day in San Francisco, relaxed fit",
+  "context": {
+    "requestId": "sf-work-fog",
+    "city": "San Francisco",
+    "occasion": "office workday",
+    "lifestyle": "elevated casual",
+    "weather": {
+      "temperatureC": 13,
+      "condition": "Foggy",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "non-binary",
+      "ageRange": "26-35"
+    },
+    "preferences": {
+      "fit": "relaxed"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 90,
+    "windKph": 18,
+    "morningTempC": 11,
+    "afternoonTempC": 16
+  },
+  "baselineMapping": {
+    "cityId": "san-francisco-ca",
+    "persona": "elevated-casual",
+    "occasion": "work",
+    "vibe": "minimal",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "fog",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Layers for 13°C fog",
+    "Relaxed fit honored",
+    "Office-appropriate",
+    "Garments consistent with the stated gender expression (non-binary) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Fit preference is dropped",
+    "Gender expression and age range are not passed to generation",
+    "Retrieved only through the fuzzy KEYS scan"
+  ]
+}

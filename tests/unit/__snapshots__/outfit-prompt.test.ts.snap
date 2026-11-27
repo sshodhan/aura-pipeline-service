@@ -1,0 +1,79 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`buildOutfitPrompt (moved verbatim from services/gemini.ts) > produces the same prompt as before the move 1`] = `
+"You are an expert fashion stylist creating outfit recommendations.
+
+## CONTEXT
+
+**Location:** New York City
+- Style DNA: classic, edgy, minimalist
+- Formality Baseline: 75/100
+- Pace of Life: fast
+
+**Weather:**
+- Temperature: 37°F (feels like 30°F)
+- Condition: light_rain
+- Humidity: 85%
+
+- ⚠️ Rain protection needed
+- Recommended fabrics: wool, fleece, down, cashmere, water-resistant, quick-dry
+
+## USER SIGNALS
+
+**Persona (Layer 1 - Identity):** professional
+- Office/business context
+
+**Occasion (Layer 2 - Context):** work
+- Formality: Professional, polished
+- Activities: Office, meetings, presentations
+- Dress Code: Business or business casual
+
+**Vibe (Layer 3 - Aesthetics):** minimal
+- Clean lines, monochromatic palette, understated elegance
+
+**Color Energy:** cool_calm
+- Palette: #87ceeb, #b0c4de, #778899
+
+## INSTRUCTIONS
+
+Generate 3 distinct outfit recommendations that:
+1. Are appropriate for the weather conditions
+2. Match the occasion's formality level
+3. Express the requested style vibe
+4. Use colors aligned with the color energy
+5. Consider the city's regional style preferences
+
+For each outfit, provide:
+- A complete outfit with 4-6 items (top, bottom, footwear, and optional outerwear/accessories)
+- Specific color descriptions
+- Brief styling rationale
+
+## OUTPUT FORMAT
+
+Return a valid JSON array with exactly 3 outfits in this format:
+\`\`\`json
+[
+  {
+    "items": [
+      {
+        "category": "top",
+        "name": "Item name",
+        "description": "Brief description",
+        "color": "Color name",
+        "colorHex": "#hexcode",
+        "fabric": "Fabric type"
+      }
+    ],
+    "styling": {
+      "overallVibe": "2-3 word vibe summary",
+      "colorStory": "Brief color palette description",
+      "silhouetteProfile": "Fit description (e.g., 'Relaxed Top + Fitted Bottom')",
+      "occasionFit": "How well it fits the occasion"
+    },
+    "rationale": "1-2 sentence explanation of why this outfit works"
+  }
+]
+\`\`\`
+
+Return ONLY the JSON array, no additional text."
+`;

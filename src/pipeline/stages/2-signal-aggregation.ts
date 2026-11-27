@@ -74,7 +74,7 @@ export async function runSignalAggregation(
 // Signal Aggregation Logic
 // =============================================================================
 
-function aggregateSignals(
+export function aggregateSignals(
   cityProfile: CityStyleProfile,
   weather: WeatherContext,
   trends: CollectedData["trends"]

@@ -12,6 +12,7 @@ import { getWeatherForCities } from "../../services/weather";
 import { cacheWeatherContext } from "../../services/redis";
 import { PRIORITY_CITIES, getCityById, type CityStyleProfile } from "../../models/city";
 import type { WeatherContext } from "../../models/outfit";
+import { getSeasonalTrendDefaults } from "../core/trend-defaults";
 
 // =============================================================================
 // Types
@@ -113,42 +114,8 @@ async function collectCityProfiles(
 async function collectTrendSignals(): Promise<TrendSignals> {
   // TODO: Integrate with trend APIs (Pinterest, Instagram, fashion blogs)
   // For now, return seasonal defaults
-
-  const currentMonth = new Date().getMonth();
-  const season = getSeason(currentMonth);
-
-  const trendsBySeasons: Record<string, TrendSignals> = {
-    winter: {
-      hotColors: ["burgundy", "forest green", "navy", "cream"],
-      emergingStyles: ["quiet luxury", "layered knits", "statement coats"],
-      seasonalThemes: ["cozy elegance", "holiday glam", "winter whites"],
-    },
-    spring: {
-      hotColors: ["sage green", "lavender", "butter yellow", "soft pink"],
-      emergingStyles: ["light layers", "transitional dressing", "floral prints"],
-      seasonalThemes: ["fresh starts", "garden party", "pastel minimalism"],
-    },
-    summer: {
-      hotColors: ["coral", "turquoise", "white", "sunshine yellow"],
-      emergingStyles: ["linen everything", "vacation mode", "bold prints"],
-      seasonalThemes: ["coastal chic", "effortless summer", "tropical vibes"],
-    },
-    fall: {
-      hotColors: ["rust", "olive", "camel", "chocolate brown"],
-      emergingStyles: ["oversized blazers", "leather accents", "rich textures"],
-      seasonalThemes: ["cozy layers", "earthy tones", "sophisticated casual"],
-    },
-  };
-
-  const trends = trendsBySeasons[season] || trendsBySeasons.fall!;
+  const { season, trends } = getSeasonalTrendDefaults(new Date().getMonth());
   logger.info({ season, trends }, "Trend signals collected");
 
   return trends;
-}
-
-function getSeason(month: number): string {
-  if (month >= 2 && month <= 4) return "spring";
-  if (month >= 5 && month <= 7) return "summer";
-  if (month >= 8 && month <= 10) return "fall";
-  return "winter";
 }

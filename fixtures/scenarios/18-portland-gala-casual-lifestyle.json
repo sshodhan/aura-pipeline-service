@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "portland-gala-casual-lifestyle",
+  "title": "Woman, 36-45, museum gala with a casual everyday lifestyle in Portland",
+  "context": {
+    "requestId": "portland-gala-casual-lifestyle",
+    "city": "Portland",
+    "occasion": "museum gala",
+    "lifestyle": "casual",
+    "weather": {
+      "temperatureC": 8,
+      "condition": "Light Rain",
+      "precipitationLikely": true
+    },
+    "demographics": {
+      "genderExpression": "female",
+      "ageRange": "36-45"
+    },
+    "preferences": {
+      "preferredAesthetics": [
+        "minimal"
+      ]
+    }
+  },
+  "weatherFixture": {
+    "humidity": 85,
+    "windKph": 14
+  },
+  "baselineMapping": {
+    "cityId": "portland-or",
+    "persona": "casual",
+    "occasion": "formal",
+    "vibe": "minimal",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "light_rain",
+    "notes": "Preferred aesthetic 'minimal' maps to the minimal vibe; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Formal attire for a gala (the occasion outranks the everyday lifestyle)",
+    "Rain-ready outer layer",
+    "Minimal aesthetic",
+    "Garments consistent with the stated gender expression (female) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "casual + formal is excluded by PERSONA_OCCASION_COMPATIBILITY, so the pipeline never generates it (the consumer resolves this conflict by occasion priority)",
+    "No city's matrix includes the formal occasion",
+    "Gender expression and age range are not passed to generation"
+  ]
+}

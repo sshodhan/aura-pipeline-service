@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "la-dinner-mild",
+  "title": "Man, 56+, dinner out in Los Angeles",
+  "context": {
+    "requestId": "la-dinner-mild",
+    "city": "Los Angeles",
+    "occasion": "dinner out",
+    "lifestyle": "elevated casual",
+    "weather": {
+      "temperatureC": 18,
+      "condition": "Partly Cloudy",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "male",
+      "ageRange": "56+"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 55,
+    "windKph": 9,
+    "eveningTempC": 15
+  },
+  "baselineMapping": {
+    "cityId": "los-angeles-ca",
+    "persona": "elevated-casual",
+    "occasion": "dinner",
+    "vibe": "polished",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "partly_cloudy",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Evening-appropriate polish",
+    "Light layer for a cooling evening",
+    "Garments consistent with the stated gender expression (male) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Los Angeles' matrix has no dinner occasion, so this request is never cached",
+    "Gender expression and age range are not passed to generation"
+  ]
+}

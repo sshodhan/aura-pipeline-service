@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "la-errands-warm",
+  "title": "Woman, 46-55, warm-weather errands in Los Angeles",
+  "context": {
+    "requestId": "la-errands-warm",
+    "city": "Los Angeles",
+    "occasion": "running errands",
+    "lifestyle": "athleisure",
+    "weather": {
+      "temperatureC": 27,
+      "condition": "Clear",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "female",
+      "ageRange": "46-55"
+    },
+    "preferences": {
+      "avoidedColors": [
+        "neon green"
+      ]
+    }
+  },
+  "weatherFixture": {
+    "humidity": 40,
+    "windKph": 10
+  },
+  "baselineMapping": {
+    "cityId": "los-angeles-ca",
+    "persona": "athleisure",
+    "occasion": "errands",
+    "vibe": "laid_back",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "clear",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Breathable fabrics for 27°C",
+    "Practical footwear for walking",
+    "No neon green",
+    "Garments consistent with the stated gender expression (female) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Avoided colors never reach the prompt",
+    "Gender expression and age range are not passed to generation",
+    "Retrieved only through the fuzzy KEYS scan (warm, not mild)"
+  ]
+}

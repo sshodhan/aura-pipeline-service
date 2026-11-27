@@ -57,7 +57,7 @@ export async function runStyleMatrixGeneration(
 // Matrix Generation Logic
 // =============================================================================
 
-function generateMatrixForCity(citySignal: CitySignalBundle): StyleMatrix {
+export function generateMatrixForCity(citySignal: CitySignalBundle): StyleMatrix {
   const entries: StyleMatrixEntry[] = [];
   const { prioritySignals, weather, cityProfile } = citySignal;
 
@@ -152,7 +152,7 @@ function generateMatrixForCity(citySignal: CitySignalBundle): StyleMatrix {
   };
 }
 
-function buildMatrixKey(signals: SignalCombination): string {
+export function buildMatrixKey(signals: SignalCombination): string {
   return [
     signals.persona,
     signals.occasion,

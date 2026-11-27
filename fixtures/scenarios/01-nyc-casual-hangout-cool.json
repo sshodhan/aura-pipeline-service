@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "nyc-casual-hangout-cool",
+  "title": "Woman, 36-45, casual afternoon hangout in New York (design brief example)",
+  "context": {
+    "requestId": "nyc-casual-hangout-cool",
+    "city": "New York City",
+    "occasion": "hanging out on a casual afternoon",
+    "lifestyle": "casual",
+    "weather": {
+      "temperatureC": 14,
+      "condition": "Cloudy",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "female",
+      "ageRange": "36-45"
+    },
+    "preferences": {
+      "comfortPriority": "comfort first"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 60,
+    "windKph": 12
+  },
+  "baselineMapping": {
+    "cityId": "new-york-ny",
+    "persona": "casual",
+    "occasion": "hangout",
+    "vibe": "laid_back",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "cloudy",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Layering suited to 14°C and cloudy, dry conditions",
+    "Casual formality appropriate for an afternoon hangout",
+    "Comfortable enough to wear for several hours",
+    "Three meaningfully different style directions",
+    "Garments consistent with the stated gender expression (female) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "New York's nightly matrix has neither the casual persona nor the hangout occasion, so this request is never cached and GET /outfits returns 404",
+    "Gender expression and age range are not passed to generation",
+    "Comfort priority is dropped",
+    "Vibe and color energy must be invented"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "chicago-work-snow",
+  "title": "Woman, 36-45, snowy office day in Chicago, avoiding white and cream",
+  "context": {
+    "requestId": "chicago-work-snow",
+    "city": "Chicago",
+    "occasion": "office workday",
+    "lifestyle": "business casual",
+    "weather": {
+      "temperatureC": -6,
+      "condition": "Snow",
+      "precipitationLikely": true
+    },
+    "demographics": {
+      "genderExpression": "female",
+      "ageRange": "36-45"
+    },
+    "preferences": {
+      "avoidedColors": [
+        "white",
+        "cream"
+      ]
+    }
+  },
+  "weatherFixture": {
+    "humidity": 80,
+    "windKph": 25,
+    "feelsLikeC": -12,
+    "morningTempC": -9,
+    "afternoonTempC": -4
+  },
+  "baselineMapping": {
+    "cityId": "chicago-il",
+    "persona": "business-casual",
+    "occasion": "work",
+    "vibe": "minimal",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "snow",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Insulated outerwear for -6°C (feels like -12°C)",
+    "Footwear suitable for snow",
+    "Office-appropriate formality",
+    "No white or cream garments",
+    "Garments consistent with the stated gender expression (female) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "Avoided colors never reach the prompt",
+    "Gender expression and age range are not passed to generation",
+    "Retrieved only through the fuzzy KEYS scan"
+  ]
+}

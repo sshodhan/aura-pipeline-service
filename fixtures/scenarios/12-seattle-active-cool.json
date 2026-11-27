@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "seattle-active-cool",
+  "title": "Unspecified demographics, trail run in Seattle",
+  "context": {
+    "requestId": "seattle-active-cool",
+    "city": "Seattle",
+    "occasion": "trail run",
+    "lifestyle": "athletic",
+    "weather": {
+      "temperatureC": 9,
+      "condition": "Overcast",
+      "precipitationLikely": false
+    }
+  },
+  "weatherFixture": {
+    "humidity": 75,
+    "windKph": 10
+  },
+  "baselineMapping": {
+    "cityId": "seattle-wa",
+    "persona": "athletic",
+    "occasion": "active",
+    "vibe": "laid_back",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "overcast",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Technical layers for running at 9°C",
+    "Performance footwear",
+    "No gendered assumptions; the request gives no gender expression"
+  ],
+  "knownFailureCases": [
+    "Seattle's matrix has no athletic persona (only athleisure), so this request is never cached",
+    "Vibe and color energy must be invented"
+  ]
+}

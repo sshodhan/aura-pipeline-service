@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "miami-formal-warm",
+  "title": "Man, 36-45, evening wedding guest in Miami heat",
+  "context": {
+    "requestId": "miami-formal-warm",
+    "city": "Miami",
+    "occasion": "evening wedding guest",
+    "lifestyle": "professional",
+    "weather": {
+      "temperatureC": 29,
+      "condition": "Partly Cloudy",
+      "precipitationLikely": false
+    },
+    "demographics": {
+      "genderExpression": "male",
+      "ageRange": "36-45"
+    }
+  },
+  "weatherFixture": {
+    "humidity": 70,
+    "windKph": 12
+  },
+  "baselineMapping": {
+    "cityId": "miami-fl",
+    "persona": "professional",
+    "occasion": "formal",
+    "vibe": "polished",
+    "colorEnergy": "cool_calm",
+    "weatherCondition": "partly_cloudy",
+    "notes": "No aesthetic preference given, so vibe is the first vibe the pipeline allows for this occasion; colorEnergy has no context equivalent and defaults to cool_calm."
+  },
+  "expectedConstraints": [
+    "Formal attire appropriate for a wedding guest",
+    "Lightweight construction for 29°C",
+    "Garments consistent with the stated gender expression (male) without stereotyped defaults"
+  ],
+  "knownFailureCases": [
+    "No city's matrix includes the formal occasion, so formal requests are never cached",
+    "Gender expression and age range are not passed to generation"
+  ]
+}

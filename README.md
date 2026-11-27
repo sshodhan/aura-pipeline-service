@@ -834,13 +834,19 @@ aura-pipeline-service/
 
 ## Related Documents
 
+- [Aura product context](./docs/AURA_PRODUCT_CONTEXT.md)
+- [Consumer integration contract](./docs/CONSUMER_INTEGRATION_CONTRACT.md)
+- [Recommendation ownership](./docs/RECOMMENDATION_OWNERSHIP.md)
+- [Fashion intelligence design](./docs/FASHION_INTELLIGENCE_DESIGN.md)
+- [Phase 0 baseline](./docs/PHASE_0_BASELINE.md)
+
 - [SIGNAL_CONTRACT.md](./SIGNAL_CONTRACT.md) - Client-service signal agreement
 - [SIGNAL_ARCHITECTURE_ROADMAP.md](./SIGNAL_ARCHITECTURE_ROADMAP.md) - Full architecture vision
 - [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) - GCP deployment instructions
 
 ## Related Repositories
 
-- [v0-aura-stylist-agent](https://github.com/your-org/v0-aura-stylist-agent) - Frontend application
+- [v0-aura-stylist-agent](https://github.com/sshodhan/v0-aura-stylist-agent) - Frontend application
 
 ---
 
