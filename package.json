@@ -19,6 +19,7 @@
     "knowledge:coverage": "tsx src/scripts/knowledge.ts coverage",
     "concepts": "tsx src/scripts/run-concepts.ts",
     "recommend": "tsx src/scripts/run-recommend.ts",
+    "e2e": "tsx src/scripts/e2e.ts",
     "test": "vitest",
     "test:unit": "vitest run --dir tests/unit",
     "test:integration": "vitest run --dir tests/integration",
