@@ -146,7 +146,11 @@ change the hash.
   `{version, contentHash, releasedAt, notes}`.
 - `npm run knowledge:release -- --version fashion-YYYY-MM.N --notes "…"` is
   the only supported way to add a release. It refuses a reused version, an
-  unchanged content hash, and content with validation problems.
+  unchanged content hash, content with validation problems, and an existing
+  `snapshot.json` it cannot read or validate (releasing over it would drop the
+  ledger; fix or restore the file first).
+- Every date field must be a real calendar date: `2026-13-01` or `2026-02-30`
+  fails validation, so a typo cannot silently disable a record's expiry.
 - Validation fails when the current content no longer matches the latest
   release ("content changed since release …"), when two consecutive releases
   have the same hash, or when a record cites a version that was never
