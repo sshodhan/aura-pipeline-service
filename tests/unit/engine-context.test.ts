@@ -37,6 +37,23 @@ describe("context interpreter: hard constraints", () => {
     expect(codes("seattle-active-cool")).toContain("performance");
   });
 
+  it("recognizes every consumer occasion value, matching 'active' and 'home' only as the whole value", () => {
+    const base = scenario("seattle-active-cool");
+    const kind = (occasion: string) =>
+      interpretContext({ ...base.context, occasion }, store, { asOf: AS_OF, region: "seattle-wa" }).signals.occasionKind;
+    const expected: Record<string, string> = {
+      work: "office", hangout: "hangout", active: "athletic", dinner: "dinner",
+      errands: "errands", home: "home", date: "date", formal: "formal_event", other: "unrecognized",
+    };
+    for (const [occasion, k] of Object.entries(expected)) expect(kind(occasion), occasion).toBe(k);
+    expect(kind(" Active ")).toBe("athletic");
+    const active = interpretContext({ ...base.context, occasion: "active" }, store, { asOf: AS_OF, region: "seattle-wa" });
+    expect(active.signals.strictFormality).toBe(true);
+    expect(active.constraints.map((c) => c.code)).toContain("performance");
+    expect(kind("dinner at a friend's home")).toBe("dinner");
+    expect(kind("an active day out")).not.toBe("athletic");
+  });
+
   it("'running errands' is errands, not a run", () => {
     expect(interpret(scenario("la-errands-warm")).signals.occasionKind).toBe("errands");
   });
