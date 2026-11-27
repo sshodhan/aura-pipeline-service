@@ -80,12 +80,15 @@ export async function recommend(input: unknown, store: KnowledgeStore, options: 
     }
   );
 
+  // A template that cannot cover a hard constraint (e.g. a stated aesthetic with no water-resistant coat in the rain)
+  // still returns outfits, but never as "ok": the unmet checks are reported instead.
+  const unmet = composed.validation.issues.map((i) => `${i.role ?? "collection"}: ${i.code}${i.constraint ? ` (${i.constraint})` : ""}: ${i.message}`);
   return {
     ...base,
-    status: plan.status === "fallback" || composed.fellBack ? "fallback" : "ok",
+    status: !composed.validation.passed ? "constraints_unmet" : plan.status === "fallback" || composed.fellBack ? "fallback" : "ok",
     recommendations: plan.concepts.map((concept) => ({ role: concept.role, concept, outfit: composed.outfits.find((o) => o.role === concept.role)! })),
     validation: { concepts: plan.validation, outfits: composed.validation },
-    errors: [],
+    errors: unmet,
     diagnostics: {
       concepts: plan.diagnostics,
       outfits: composed.diagnostics,
