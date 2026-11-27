@@ -17,7 +17,8 @@ import type { RecommendationContext } from "../baseline/fixtures";
 import { renderEvidenceAsData } from "../knowledge/boundary";
 import type { KnowledgeHit, KnowledgeStore } from "../knowledge/store";
 import { renderRequestAsData } from "./prompt";
-import { outfitDraftsSchema, type OutfitDraft, type OutfitIssue } from "./outfit-types";
+import { outfitDraftsSchema, type OutfitDraft } from "./outfit-types";
+import type { FeedbackIssue } from "./outfit-writer";
 import type { InterpretedContext, StyleConcept } from "./types";
 
 export interface ConceptDataBlock {
@@ -67,7 +68,7 @@ export function buildOutfitPrompt(input: {
   concepts: StyleConcept[];
   evidence: KnowledgeHit[];
   store: KnowledgeStore;
-  feedback?: OutfitIssue[];
+  feedback?: FeedbackIssue[];
   nonces?: { request?: string; concepts?: string; evidence?: string };
 }): OutfitPrompt {
   const request = renderRequestAsData(input.context, input.interpreted, input.nonces?.request);
@@ -130,7 +131,7 @@ export function buildOutfitPrompt(input: {
 }
 
 /** Issue codes, roles, fields, categories and constraint codes only: never quoted request or model text. */
-export function outfitFeedbackLines(issues: OutfitIssue[]): string[] {
+export function outfitFeedbackLines(issues: FeedbackIssue[]): string[] {
   const lines = issues.map((i) => [i.code, i.role ?? "collection", i.field ?? i.category ?? "", i.constraint ?? ""].filter(Boolean).join(" · "));
   return [...new Set(lines)];
 }

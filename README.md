@@ -843,6 +843,7 @@ aura-pipeline-service/
 - [Style direction engine (Phase 2)](./docs/STYLE_DIRECTIONS.md)
 - [Outfit composition (Phase 3)](./docs/OUTFIT_COMPOSITION.md)
 - [End-to-end validation harness](./docs/E2E_HARNESS.md)
+- [Quality and curation (Phase 4)](./docs/QUALITY_CURATION.md)
 
 - [SIGNAL_CONTRACT.md](./SIGNAL_CONTRACT.md) - Client-service signal agreement
 - [SIGNAL_ARCHITECTURE_ROADMAP.md](./SIGNAL_ARCHITECTURE_ROADMAP.md) - Full architecture vision

@@ -96,7 +96,7 @@ describe("template outfits over the 20 benchmark scenarios", () => {
   it("is deterministic apart from latency", async () => {
     const strip = (c: Awaited<ReturnType<typeof run>>) => ({
       ...c,
-      diagnostics: { ...c.diagnostics, latencyMs: 0, concepts: { ...c.diagnostics.concepts, latencyMs: 0 }, outfits: { ...c.diagnostics.outfits!, latencyMs: 0 } },
+      diagnostics: { ...c.diagnostics, latencyMs: 0, concepts: { ...c.diagnostics.concepts, latencyMs: 0 }, outfits: { ...c.diagnostics.outfits!, latencyMs: 0 }, curation: { ...c.diagnostics.curation!, latencyMs: 0 } },
     });
     expect(strip(await run("boston-dinner-cold"))).toEqual(strip(await run("boston-dinner-cold")));
   });
@@ -128,7 +128,7 @@ describe("recommendation runner and CLI", () => {
       await runRecommendScenarios(scenarios, { store, conceptWriter: new TemplateConceptWriter(), outfitWriter: new TemplateOutfitWriter(), asOf: AS_OF })
     );
     expect(summary).toMatchObject({ scenarios: 20, validCollections: 20, modelCalls: { total: 0 }, fallbacks: { concepts: 0, outfits: 0 } });
-    const md = renderRecommendSummaryMarkdown(summary, { writer: "template", modelId: null, asOf: AS_OF, knowledgeVersion: store.knowledgeVersion, engineVersion: "recommend-0.1", gitCommit: null });
+    const md = renderRecommendSummaryMarkdown(summary, { writer: "template", modelId: null, asOf: AS_OF, knowledgeVersion: store.knowledgeVersion, engineVersion: "recommend-0.2", gitCommit: null });
     expect(md).toMatch(/not editorial quality/);
     expect(md).toMatch(/\| Scenario \| Status \| Modes \|/);
   });

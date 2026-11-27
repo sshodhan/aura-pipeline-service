@@ -34,7 +34,11 @@ caching or API shapes:
    (Phase 3): garment contracts, garment vocabularies, the template and model
    writers, outfit validation, the `recommend()` entry point and its budget.
 9. [`docs/E2E_HARNESS.md`](docs/E2E_HARNESS.md): the end-to-end validation
-   harness: what `npm run e2e` checks across Phases 0–3 and how to read a failure.
+   harness: what `npm run e2e` checks across Phases 0–4 and how to read a failure.
+10. [`docs/QUALITY_CURATION.md`](docs/QUALITY_CURATION.md): quality and curation
+    (Phase 4): the deterministic rubric and what it does not judge, decisions and
+    thresholds (uncalibrated), bounded revision, the 5-call budget and the
+    calibration sheets.
 
 Core principle: **Aura should be a compelling stylist before it becomes a
 personalized stylist.** Optimize for first-session recommendation quality, not
@@ -94,7 +98,7 @@ Run these from the repo root. No API keys, Redis or network are needed:
 | `npm run knowledge:coverage` | Knowledge available to each benchmark scenario (reports gaps; no thresholds) |
 | `npm run knowledge:release -- --version V --notes N` | The only way to release a knowledge change (append-only ledger) |
 | `npm run concepts` | Runs the 20 fixtures through the style direction engine with the template writer and writes to `baselines/local/`. `--writer gemini` needs `GEMINI_API_KEY`. |
-| `npm run recommend` | Runs the 20 fixtures through `recommend()` (concepts then outfits) with the template writers and writes to `baselines/local/`. `--writer gemini` needs `GEMINI_API_KEY`. |
+| `npm run recommend` | Runs the 20 fixtures through `recommend()` (concepts, outfits, then curation) with the template writers and writes collections, a summary and the blind calibration CSVs to `baselines/local/`. `--revise-below N` exercises revision; `--no-curate` gives Phase 3 output. `--writer gemini` needs `GEMINI_API_KEY`. |
 | `npm run e2e` | End-to-end harness: every phase, fixture expectations, adversarial input and the consumer contract on the 20 fixtures; exits 1 on any failure. Run it before pushing engine changes. `--writer gemini` needs `GEMINI_API_KEY`. |
 | `npm run lint` | Fails: there is no ESLint config in the repo |
 | `cd ml-service && pytest` | Python tests for the ML service (`ml-service/tests/`) |
@@ -108,4 +112,6 @@ Run these from the repo root. No API keys, Redis or network are needed:
 User text is untrusted too, and so is anything a model wrote. Pass request fields to a model only
 inside a data block (`renderRequestAsData`, `src/engine/prompt.ts`), pass concepts to the outfit
 stage only through `renderConceptsAsData` (`src/engine/outfit-prompt.ts`), and keep revision
-feedback to issue codes.
+feedback to issue codes (Phase 3 validation and Phase 4 rubric revisions alike). The Phase 4
+rubric (`src/engine/quality.ts`) reads garment attributes only, never an outfit's prose; keep it
+that way so praise words cannot raise a score.
