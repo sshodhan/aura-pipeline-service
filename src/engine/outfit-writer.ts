@@ -223,17 +223,18 @@ export class TemplateOutfitWriter implements OutfitWriter {
     };
     const choices: Choice[] = picks.map((p) => ({ ...p, color: colorFor[p.slot] }));
     if (hint?.maxAccents !== undefined) {
-      // Recolor surplus accents to neutrals, keeping the accent on the accessory, then the top.
+      // Keep at most maxAccents distinct accent colors (the accessory's first, then the top's); recolor the rest to neutrals.
       const neutrals = [...base, ...FALLBACK_NEUTRALS, ...FOOTWEAR_NEUTRALS].filter((c) => notAvoided(c) && classifyColor(c).role === "neutral");
       const priority: Slot[] = ["outer", "mid", "bottom", "footwear", "top", "accessory"];
-      let accents = choices.filter((c) => classifyColor(c.color).role === "accent").length;
-      for (const slot of priority) {
-        if (accents <= hint.maxAccents) break;
+      const isAccent = (c: Choice) => classifyColor(c.color).role === "accent";
+      const kept = new Set<string>();
+      for (const slot of [...priority].reverse()) {
         const c = choices.find((x) => x.slot === slot);
-        if (c && classifyColor(c.color).role === "accent" && neutrals.length > 0) {
-          c.color = neutrals[priority.indexOf(slot) % neutrals.length]!;
-          accents--;
-        }
+        if (c && isAccent(c) && kept.size < hint.maxAccents) kept.add(c.color.toLowerCase());
+      }
+      for (const slot of priority) {
+        const c = choices.find((x) => x.slot === slot);
+        if (c && isAccent(c) && !kept.has(c.color.toLowerCase()) && neutrals.length > 0) c.color = neutrals[priority.indexOf(slot) % neutrals.length]!;
       }
     }
 

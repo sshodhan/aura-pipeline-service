@@ -122,7 +122,8 @@ function scoreOutfit(o: OutfitDraft, input: RubricInput, vocab: Map<string, Garm
   // --- Composition: color, proportion, texture -------------------------------
   let composition = 5;
   const classes = o.garments.map((g) => ({ g, c: classifyColor(g.color) }));
-  const accents = classes.filter((x) => x.c.role === "accent");
+  // Distinct accent colors: one accent repeated in a second place (a rust knit and a rust bag) is still one accent.
+  const accents = [...new Set(classes.filter((x) => x.c.role === "accent").map((x) => x.g.color.toLowerCase().trim()))];
   const allowed = expressiveness <= 2 ? 1 : expressiveness === 3 ? 2 : 4;
   if (accents.length > allowed) {
     composition -= Math.min(2, accents.length - allowed);

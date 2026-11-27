@@ -93,7 +93,7 @@ describe("template hints", () => {
     const hinted = (await new TemplateOutfitWriter().write({ ...request, templateHints: { exploration: { avoidTypes: [avoid], maxAccents: 1 } } })).drafts!;
     const after = hinted.find((d) => d.role === "exploration")!;
     expect(after.garments.some((g) => g.type === avoid)).toBe(false);
-    expect(after.garments.filter((g) => classifyColor(g.color).role === "accent").length).toBeLessThanOrEqual(1);
+    expect(new Set(after.garments.filter((g) => classifyColor(g.color).role === "accent").map((g) => g.color)).size).toBeLessThanOrEqual(1);
     // Other roles are untouched.
     expect(hinted.find((d) => d.role === "best_bet")).toEqual(plain.find((d) => d.role === "best_bet"));
 

@@ -60,6 +60,15 @@ describe("composition", () => {
     expect(codes(x!)).not.toContain("too_many_accents");
   });
 
+  it("counts distinct accent colors, so one accent repeated in a second place is still one", async () => {
+    const { drafts, interpreted } = await fixture();
+    const [repeated] = score(replace(drafts, 0, (d) => recolor({ ...d, aesthetic: "quiet-luxury" }, ["rust", "navy", "grey", "rust"])), interpreted);
+    expect(codes(repeated!)).not.toContain("too_many_accents");
+    expect(repeated!.reasons.composition.join(" ")).toMatch(/1 accent color/);
+    const [two] = score(replace(drafts, 0, (d) => recolor({ ...d, aesthetic: "quiet-luxury" }, ["rust", "navy", "grey", "cobalt"])), interpreted);
+    expect(codes(two!)).toContain("too_many_accents");
+  });
+
   it("flags warm and cool neutrals competing with neither leading", async () => {
     const { drafts, interpreted } = await fixture();
     const [clash] = score(replace(drafts, 0, (d) => recolor(d, ["cream", "grey", "camel", "navy"])), interpreted);

@@ -96,7 +96,7 @@ Each dimension starts at 5 and loses points per finding, clamped to 1–5.
 
 | Dimension | Rule | Penalty | Principle |
 |---|---|---|---|
-| `composition` | More accent colors than the aesthetic carries. The limit depends on the aesthetic's expressiveness: 1 accent for expressiveness ≤2, 2 for 3, 4 for 4 or more. | −1 per extra accent, at most −2 | `tp-neutral-base-one-accent` |
+| `composition` | More distinct accent colors than the aesthetic carries (one accent repeated in a second place, such as a rust knit and a rust bag, counts once). The limit depends on the aesthetic's expressiveness: 1 accent for expressiveness ≤2, 2 for 3, 4 for 4 or more. | −1 per extra accent, at most −2 | `tp-neutral-base-one-accent` |
 | | Warm and cool neutrals, at least 2 of each, with neither twice the other | −1 | `tp-color-temperature` |
 | | Top and bottom both full (oversized, loose, boxy), unless the aesthetic's silhouettes include "oversized" (streetwear) | −1 | `tp-volume-balance` |
 | | Fewer than 2 material families among the clothes (footwear and accessories excluded) | −1 | `tp-texture-contrast` |
@@ -155,7 +155,7 @@ the flagged roles with hints derived from the issue codes:
 
 | Issue code | Hint |
 |---|---|
-| `too_many_accents` | Keep 1 accent; surplus accents become palette neutrals (outer layer first, then mid, bottom, footwear, top, accessory) |
+| `too_many_accents` | Keep 1 accent color (it may repeat); garments in other accent colors become palette neutrals (outer layer first, then mid, bottom, footwear, top, accessory) |
 | `neutral_temperature_clash` | Use neutrals of the dominant temperature, if the palette keeps at least 2 |
 | `single_texture` | Steer away from the current top and mid-layer types |
 | `proportion_unbalanced` | Steer away from the current bottom type |
