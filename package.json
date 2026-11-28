@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "tsx watch src/api/server.ts",
     "build": "tsc",
+    "bug:id": "node -e \"console.log('BUG-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + require('crypto').randomBytes(2).toString('hex'))\"",
+    "lesson:id": "node -e \"console.log('LESSON-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + require('crypto').randomBytes(2).toString('hex'))\"",
     "start": "node dist/api/server.js",
     "start:api": "node dist/api/server.js",
     "pipeline:daily": "node dist/pipeline/orchestrator.js",

@@ -44,6 +44,48 @@ Core principle: **Aura should be a compelling stylist before it becomes a
 personalized stylist.** Optimize for first-session recommendation quality, not
 outfit volume or cache-hit rate.
 
+## Institutional memory: read before, write after
+
+Before changing code, read what this repository already learned. After fixing
+a bug or hitting a gotcha, write it back.
+
+| File | What it holds |
+|---|---|
+| [`BUG_REPORTS.md`](BUG_REPORTS.md) | Every bug: an open-bug index ranked by impact (P0 trust-breakers to P3 hygiene), then a permanent entry per bug |
+| [`SESSION_LEARNINGS_AND_REGRESSIONS.md`](SESSION_LEARNINGS_AND_REGRESSIONS.md) | General lessons (the pattern, what to check next time, which files share the risk), with Key Takeaways at the top |
+| [`ENGINEERING_GUIDELINES.md`](ENGINEERING_GUIDELINES.md) | Canonical patterns new code must follow, and known debt it must not copy. When code and this file disagree, this file wins |
+| [`.github/claude-review.md`](.github/claude-review.md) | The pre-PR secondary review. Run it in full before opening, or marking ready, a PR; its §7 summary is the required output |
+| [`changelogs/unreleased.md`](changelogs/unreleased.md) | An entry for every behavior, contract, knowledge or command change |
+| [`REGRESSION_TESTING_CHECKLIST.md`](REGRESSION_TESTING_CHECKLIST.md) | Checks only a person, or a real-model key, can run |
+
+- **IDs.** `npm run bug:id` and `npm run lesson:id` mint IDs from the date
+  and a random suffix, so parallel PRs never collide.
+- **Format test.** `tests/unit/memory-docs.test.ts` fails if an open bug is
+  missing from the index, a lesson is missing its parts, or a cited ID doesn't
+  exist.
+- **Every bug fix leaves three traces:**
+  - a `BUG_REPORTS.md` entry;
+  - a regression test that fails before the fix;
+  - a lesson, if the mistake could recur elsewhere.
+
+**Design decisions: make the component contract explicit.** For each design
+decision, say where it lives:
+
+1. **Components.** The components involved, and each one's single
+   responsibility.
+2. **Boundaries.** What each component owns and what it delegates, and to
+   whom. If two components could own the concern, name the owner and why.
+3. **Evolution.** How the change extends an existing responsibility rather than
+   duplicating one. Prefer the component whose job this already is, at the root
+   mechanism or a shared helper.
+4. **Overlap.** Any overlap, hidden coupling or second definition of the same
+   rule it introduces, and how you avoid it. A change you'd copy into a second
+   place should be extracted instead.
+
+**Scope creep on finished PRs.** When asked for an add-on to a PR that has
+already met its goals, say it goes beyond the PR's scope and suggest a new
+branch and PR. The owner can choose to proceed on the current PR anyway.
+
 ## Architectural rules
 
 - **Stay independent of the consumer app.** Never import, copy or vendor React
@@ -100,6 +142,7 @@ Run these from the repo root. No API keys, Redis or network are needed:
 | `npm run concepts` | Runs the 20 fixtures through the style direction engine with the template writer and writes to `baselines/local/`. `--writer gemini` needs `GEMINI_API_KEY`. |
 | `npm run recommend` | Runs the 20 fixtures through `recommend()` (concepts, outfits, then curation) with the template writers and writes collections, a summary and the blind calibration CSVs to `baselines/local/`. `--revise-below N` exercises revision; `--no-curate` gives Phase 3 output. `--writer gemini` needs `GEMINI_API_KEY`. |
 | `npm run e2e` | End-to-end harness: every phase, fixture expectations, adversarial input and the consumer contract on the 20 fixtures; exits 1 on any failure. Run it before pushing engine changes. `--writer gemini` needs `GEMINI_API_KEY`. |
+| `npm run bug:id` / `npm run lesson:id` | Print a new collision-free ID for `BUG_REPORTS.md` or `SESSION_LEARNINGS_AND_REGRESSIONS.md` |
 | `npm run lint` | Fails: there is no ESLint config in the repo |
 | `cd ml-service && pytest` | Python tests for the ML service (`ml-service/tests/`) |
 
